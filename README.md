@@ -1,2 +1,2 @@
-# lpgp-new
-The same LPGP project, be rebooted with a new structure and features
+# lpgp-server
+The server side of the database of LPGP, running on a web site also

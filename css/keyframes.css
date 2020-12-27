@@ -1,0 +1,36 @@
+/* File only for keyframes*/
+
+
+@keyframes correctSignature-background {
+    from {background-color: inherit; }
+    to{background-color: green; }
+}
+
+@keyframes invalidSignature-background {
+    from {background-color: inherit; }
+    to{background-color: red; }
+}
+
+@keyframes auth-valid{
+    fom{ background-color: inherit;}
+    to{ background-color: green;}
+}
+
+@keyframes auth-invalid{
+    from{ background-color: inherit;}
+    to{ background-color: red; }
+}
+
+@keyframes auth-content-lg{
+    from{ font-size: inherit; }
+    to{ font-size: 125px; }
+}
+@keyframes auth-content {
+    from{ font-size: inherit; }
+    to{ font-size: 35px; }
+}
+
+@keyframes auth-content-sm {
+    from{ font-size: inherit; }
+    to{ font-size: 7px; }
+}

@@ -1,0 +1,98 @@
+.signature-card{
+	padding: 10px 20px;
+	border: 1px solid black;
+}
+
+.signature-card .card-header{
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.signature-card .card-header i{
+	font-size: 20px;
+}
+
+.signature-card .card-footer{
+	margin-top: 10px;
+	text-align: center;
+}
+
+.signature-card .card-footer *{
+	font-family: Cantarell;
+}
+
+.signature-card .card-body *{
+	margin-left: 10px;
+	font-size: 20px;
+}
+
+.signature-card h4{padding: 15px 22px;
+	margin-left: 10px;
+}
+
+
+.sig-card{
+	border: 1px solid black;
+}
+
+.sig-card .card-body a{
+	font-size: 20px;
+	color: black;
+	padding: 4px 6px;
+	margin-bottom: 5px !important;
+	margin-top: 5px !important;
+
+}
+
+.sig-card .card-body a:hover{
+	background-color: #ddd;
+}
+
+.client-card h6{ color: #aaa;}
+
+
+.account-separator .content{
+    padding: 10px 10px;
+    font-family: sans-serif;
+    text-align: left;
+	width: auto;
+	height: 70px;
+	border-bottom: 1px solid black;
+	transition: border 1.2s ease-in-out, background-color 1.2s ease-out;
+}
+
+.account-separator .content h2{
+    color: initial;
+    font-family: sans-serif;
+}
+
+.account-separator .content:hover,
+.selected-separator{
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+	border-bottom: none !important;
+}
+
+.account-separator .selected-separator h2{ color: #fdff00 !important;}
+.account-separator .selected-separator h2::after{ content: "\f0d8" !important; }
+.account-separator .selected-separator{ background-color: black; }
+
+.account-separator .content h2::after{
+    content: "\f0d7";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    padding-right: 20px;
+    float: right;
+	transition: content 1.3s ease-in-out;
+}
+
+.account-separator h2:focus{
+    padding: 22px 24px;
+}
+
+
+.section{
+    padding: 10px 12px;
+    border: 1px solid black;
+}

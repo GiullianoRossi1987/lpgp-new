@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LPGP-Email</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+<style media="screen">
+
+    .main-container{
+        background-color: black;
+        margin-top: 10%;
+        border-radius: 20px;
+        padding: 20px 21px;
+    }
+
+    .main-container > .title-row > h1{
+        color: #fdff00;
+        text-align: center !important;
+        margin-left: 35%;
+        padding: 10px 11px;
+    }
+
+    .main-container > .title-row > h1::after{
+        content: "©";
+        font-size: 25px;
+        color: inherit;
+        margin-top: -13px;
+        padding: 3px 4px;
+    }
+
+    .content-container{
+        background-color: white;
+        border: 15px black solid;
+        font-size: 20px;
+        border-radius: 20px;
+        padding: 10px 11px;
+        margin-bottom: 100px;
+    }
+
+    #code{
+        display: flex;
+        border: 1px black solid;
+        width: 240px;
+        padding: 10px 11px;
+        cursor: pointer;
+        background-color: black;
+        color: #fdff00;
+        border-radius: 15px;
+    }
+</style>
+<body>
+    <div class="container container-fluid main-container">
+        <div class="row title-row">
+            <h1 id="title">LPGP OFFICIAL</h1>
+        </div>
+        <br>
+        <div class="row content-row">
+            <div class="container content-container">
+                <div class="main-row row">
+                    <div class="col-12">
+                        <p>
+                            Welcome to the LPGP %user% !
+                            Please to continue your account, insert that code
+                            next time you log in the LPGP Official site.
+                        </p>
+                        <br>
+                        <div class="code" id="code" data-toggle="tooltip" title="Click to copy the code" onclick="clickCopy(this);">
+                            %key%
+                        </div>
+                        <br>
+                        <p>
+                            If you aren't %user% or don't created a LPGP account ,
+                            then just ignore this e-mail.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function clickCopy(sender){
+            let content = document.querySelector("#code").innerText;
+            navigator.clipboard.writeText(content);
+            sender.title = "Copied to the clipboard";
+        }
+    </script>
+</body>
+</html>

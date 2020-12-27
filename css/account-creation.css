@@ -1,0 +1,132 @@
+input{
+	background-color: white;
+	border: none !important;
+	border-bottom: 1px solid black !important;
+}
+
+.type-opt{
+	border: 1px solid black;
+	width: 300px !important;
+	height: 500px !important;
+	box-sizing: border-box;
+	float: left;
+	border-radius: 5%;
+	margin-left: 30px;
+}
+
+.type-opt .opt-lb{
+	margin-left: 5% !important	;
+	margin-top: 3%;
+	border: 1px solid black;
+	margin-right: 3%;
+}
+
+.type-opt input:hover + .opt-lb + .type-opt{
+    padding: 10px 11px;
+}
+
+.type-opt input:checked + .opt-lb{
+    outline: 5px solid green !important;
+    opacity: 1;
+}
+
+.prop{
+	background-image: url("../media/new-prop.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+
+.types-opts{
+	max-height: 400px !important;
+	height: 200px !important;
+	position: relative !important;
+
+}
+
+.opt-types{
+	height: 200px !important;
+	position: relative;
+	margin-bottom: 50%;
+}
+
+.img-radio-default{
+	max-width: 200px;
+	width: 200px;
+}
+
+input[type="file"]{
+	border: none !important;
+
+}
+
+#prop-rd::after{
+	content: "Proprietary Account";
+	font-size: 24px;
+}
+
+.img-radio-default input:checked + #default-img{
+    outline: green solid 2px;
+    transition: outline 1s linear;
+	opacity: 1;
+}
+
+.img-radio-default{
+    margin-bottom: 40px;
+    padding: 10px 14px;
+}
+
+.img-radio-default input:checked ~ .img-radio-default{
+	background-color: green;
+}
+
+.img-radio-default input:hover + #default-img{
+    outline: green dotted 2px;
+}
+
+.img-radio-default input{
+	display: none;
+}
+
+.img-rado-default label{
+	opacity: .78;
+}
+
+.img-chooser{
+	margin-bottom: 50px;
+	display: inline-flex;
+}
+
+.img-opt{
+	width: 200px;
+	height: 350px;
+	display: inline-flex !important;
+	margin-right: 30px;
+	transition: opacity 1.3s ease-in;
+	transition: outline 1.3s ease-out;
+}
+
+.dft-img-opt .card-footer .form-check input{ display: none; }
+.dft-img-opt{
+	outline: green 2px solid;
+}
+
+.dft-ignored{
+	outline: none;
+	opacity: .67;
+}
+
+.upl-img-opt{
+	opacity: .67;
+}
+
+.upl-img-opt:hover,
+.upl-img-checked,
+.dft-ignored:hover{opacity: 1;}
+
+.upl-img-checked{ outline: 2px green solid;}
+
+.upl-img-opt:hover ~ .dft-img-opt,
+.dft-ignored:hover ~ .upl-img-opt{
+	opacity: .67;
+}

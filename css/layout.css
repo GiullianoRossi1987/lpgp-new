@@ -1,0 +1,102 @@
+.side-bar{ 
+    background-color: rgb(51, 173, 177);
+    height: 100px;
+    position: fixed !important;
+}
+
+.dft-title{
+    font-size: 50px;
+    color: white;
+    font-style: oblique;
+}
+
+.side-bar::after{
+    content: "Copyright © Giulliano Rossi 2020";
+    color: white;
+}
+
+.link-item{
+    background-color: darkorchid;
+    width: 100%;
+    padding: 10px 11px;
+    border: 1px #ffffff solid;
+    margin-bottom: 10px;
+}
+
+.link-item:hover{
+    padding: 11px 13px;
+}
+
+.link-item .item-handler{
+    color: white;
+    font-family: Helvetica;
+}
+
+.content-container{
+    position: relative;
+    left: 25%;
+    top: 0;
+}
+
+.item-option{
+    padding: 10px 11px;
+}
+
+.item-option a{ color: black;}
+
+.item-option:hover{
+    padding: 12px 14px;
+}
+
+.side-bar{ 
+    background-color: purple;
+    height: 1000px;
+}
+.side-bar *{
+    color: white;
+    font-family: Cantarell;
+}
+
+.dft-title{
+    font-size: 50px;
+    color: white;
+    font-style: oblique;
+}
+
+.side-bar::after{
+    content: "Copyright © Giulliano Rossi 2020";
+    color: white;
+}
+
+.link-item{
+    background-color: darkorchid;
+    width: 100%;
+    padding: 10px 11px;
+    border: 1px #ffffff solid;
+    margin-bottom: 10px;
+}
+
+.link-item:hover{
+    padding: 11px 13px;
+}
+
+.link-item .item-handler{
+    color: white;
+    font-family: Helvetica;
+}
+
+.content-container{
+    position: relative;
+    left: 25%;
+    top: 0;
+}
+
+.item-option{
+    padding: 10px 11px;
+}
+
+.item-option a{ color: black;}
+
+.item-option:hover{
+    padding: 12px 14px;
+}

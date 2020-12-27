@@ -1,0 +1,86 @@
+#notification-container{
+    position: fixed;
+    top: 80px;
+    left: 73%;
+    padding: 10px 11px;
+    float: left;
+    max-width: 500px !important;
+    max-height: 600px !important;
+    width: 500px;
+}
+
+.notification-container{
+    position: absolute;
+    top: 80px;
+    left: 90%;
+    padding: 10px 11px;
+    float: left;
+    max-width: 50%;
+}
+
+.notification{
+    opacity: .71;
+    max-width: 500px !important;
+    max-height: 170px !important;
+    border-radius: 10px;
+    padding: 10px 11px;
+    height: 70px !important;
+    margin-bottom: 80px;
+    transition: opacity 1s linear;
+}
+
+.notification:hover{
+    opacity: 1;
+}
+
+.notification > p{
+    margin-top: 4px;
+    padding: 10px 11px;
+}
+
+.notification-normal{
+    background-color: blue;
+    border: 1px solid blue;
+}
+
+.notification-normal > p{
+    color: white;
+}
+
+.notification > .dismiss-container{
+    position: relative;
+    margin-left: 89.50%;
+    margin-top: -25px;
+    padding: 10px 11px;
+    background-color: inherit;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 1px solid inherit;
+    border-top: none;
+    width: 60px;
+}
+
+.notification > .dismiss-container:hover ~ button{
+    padding: 10px 11px;
+}
+
+.notification > .dismiss-container > button{
+    background-color: white;
+    border-radius: 50px;
+    border: 1px solid black;
+    color: black;
+}
+
+.notification-success{
+    background-color: green;
+    border: 1px solid green;
+}
+
+.notification-success p{ color: white; }
+
+.notification-warning {
+    background-color: red;
+    border: 1px solid red;
+}
+
+.notification-warning p{ color: white; }

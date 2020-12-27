@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Feedback</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    </head>
+    <style media="screen">
+        .header-col{
+            border: 1px solid blue;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            padding: 10px 10px;
+            background-color: blue;
+            text-align: center;
+        }
+
+        .header-col h1{ color: white; }
+
+        .content-col{
+            padding: 10px 10px;
+            border: 1px solid black;
+            text-align: justify;
+        }
+
+        .footer-col{
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            border: 1px solid gray;
+            text-align: center;
+            background-color: grey;
+            padding: 10px 10px;
+        }
+    </style>
+    <body>
+        <div class="main-container container container-fluid">
+            <div class="main-row row">
+                <div class="col-md-12 main-col">
+                    <div class="container header">
+                        <div class="row header-row">
+                            <div class="col-md-12 header-col">
+                                <h1>
+                                    Feedback from %user% <%email%>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container content">
+                        <div class="content-row row">
+                            <div class="content-col col-md-12">
+                                %content%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container footer">
+                        <div class="footer-row row">
+                            <div class="footer-col col-md-12">
+                                Sent in %tms%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
