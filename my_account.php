@@ -29,18 +29,18 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LPGP Oficial Server</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/new-layout.css">
-    <script src="../js/main-script.js"></script>
+    <link rel="stylesheet" href="css/new-layout.css">
+    <script src="js/main-script.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <link rel="shortcut icon" href="../media/new-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-    <script src="../js/actions.js"></script>
-    <link rel="stylesheet" href="../css/account.css">
-    <script src="../js/requester.js" charset="utf-8"></script>
-    <script src="../js/autoload.js" charset="utf-8"></script>
+    <script src="js/actions.js"></script>
+    <link rel="stylesheet" href="css/account.css">
+    <script src="js/requester.js" charset="utf-8"></script>
+    <script src="js/autoload.js" charset="utf-8"></script>
     <script src="../jquery/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
     <script src="../jquery/lib/bootstrap/js/bootstrap.js" charset="utf-8"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
@@ -116,7 +116,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                         <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
                         <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
                         <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
-                        <a href="https://www.lpgpofficial.com/cgi-actions/report-trouble.html"></a>
+                        <a href="https://www.lpgpofficial.com/report-trouble.html"></a>
                     </div>
                 </div>
             </div>

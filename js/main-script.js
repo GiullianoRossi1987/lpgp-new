@@ -73,9 +73,9 @@ function setAccountOpts(ext_fls = false){
         var logoff_opt = document.createElement("a");
         var config_opt = document.createElement("a");
 
-        config_opt.href = "https://" + window.location.hostname + "/cgi-actions/ch_my_data.php";
-        logoff_opt.href = "https://" + window.location.hostname + "/cgi-actions/logoff.php";
-        account_opt.href = "https://"+ window.location.hostname + "/cgi-actions/my_account.php";
+        config_opt.href = "https://" + window.location.hostname + "/ch_my_data.php";
+        logoff_opt.href = "https://" + window.location.hostname + "/logoff.php";
+        account_opt.href = "https://"+ window.location.hostname + "/my_account.php";
 
         // classes
         config_opt.classList.add("dropdown-item");
@@ -153,7 +153,7 @@ function setSignatureOpts(){
 
         my_sign.innerText = "My Signatures";
         che_sig.innerText = "Check a Signature";
-        my_sign.href = "https://" + window.location.hostname +"/cgi-actions/my_signatures.php";
+        my_sign.href = "https://" + window.location.hostname +"/my_signatures.php";
         che_sig.href = "https://" + window.location.hostname +"/check_signature.php";
         my_sign.classList.add("dropdown-item");
         che_sig.classList.add("dropdown-item");
@@ -192,15 +192,15 @@ function setClientsDrop(){
         optMy.classList.add("dropdown-item");
         optCh.classList.add("dropdown-item");
 
-        optAdd.href = "https://" + window.location.hostname + "/cgi-actions/create-client.php";
+        optAdd.href = "https://" + window.location.hostname + "/create-client.php";
         optAdd.innerText = "Create a Client";
         optAdd.id = "add-client";
 
-        optMy.href = "https://" + window.location.hostname + "/cgi-actions/my-clients.php";
+        optMy.href = "https://" + window.location.hostname + "/my-clients.php";
         optMy.innerText = "My clients";
         optMy.id = "my-clients";
 
-        optCh.href = "https://" + window.location.hostname + "/cgi-actions/check-client.php";
+        optCh.href = "https://" + window.location.hostname + "/check-client.php";
         optCh.innerText = "Check client authentication";
         optCh.id = "check-client";
 
@@ -212,7 +212,7 @@ function setClientsDrop(){
         var localTo = document.querySelector(".login-dropdown .dropdown-menu");
         var optCh = document.createElement("a");
 
-        optCh.href = "https://" + window.location.hostname + "/cgi-actions/check-client.php";
+        optCh.href = "https://" + window.location.hostname + "/check-client.php";
         optCh.classList.add("dropdown-item");
         optCh.innerText = "Check client authentication";
         optCh.id = "check-client";

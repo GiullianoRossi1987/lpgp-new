@@ -34,8 +34,8 @@ if(isset($_GET['sig_id'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LPGP Oficial Server</title>
-    <link rel="stylesheet" href="../css/new-layout.css">
-    <link rel="stylesheet" href="../css/content-style.css">
+    <link rel="stylesheet" href="css/new-layout.css">
+    <link rel="stylesheet" href="css/content-style.css">
     <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -133,9 +133,9 @@ if(isset($_GET['sig_id'])){
     <script src="../jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="../bootstrap/dist/js/bootstrap.js"></script>
-    <script src="../js/autoload.js" charset="utf-8"></script>
-    <script src="../js/main-script.js"></script>
-    <script src="../js/actions.js"></script>
+    <script src="js/autoload.js" charset="utf-8"></script>
+    <script src="js/main-script.js"></script>
+    <script src="js/actions.js"></script>
     <script>
         $(document).ready(function(){
             setAccountOpts(true);

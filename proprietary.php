@@ -2,15 +2,18 @@
 if(session_status() == PHP_SESSION_NONE) session_start();
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
 
 use Core\ProprietariesData;
+use function JSHandler\lsExtSignatures;
+use function JSHandler\getImgPath;
+use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
 
+sendUserLogged();  // Just for fixing a error that i don't know why is going on.
 $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-$id = $prp->getPropID($_SESSION['user']);
-$inpt = "<input type=\"hidden\" name=\"prop-id\" value=\"$id\">";
+if(isset($_GET['id'])) $data = $prp->getPropDataByID(base64_decode($_GET['id']));
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +23,13 @@ $inpt = "<input type=\"hidden\" name=\"prop-id\" value=\"$id\">";
     <title>LPGP Oficial Server</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/new-layout.css">
-    <script src="../js/main-script.js"></script>
+    <link rel="stylesheet" href="css/new-layout.css">
+    <script src="js/main-script.js"></script>
     <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../bootstrap/font-awesome.min.css">
     <script src="../bootstrap/jquery-3.3.1.slim.min.js"></script>
     <script src="../bootstrap/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -42,15 +45,6 @@ $inpt = "<input type=\"hidden\" name=\"prop-id\" value=\"$id\">";
             setAccountOpts(true);
             setSignatureOpts();
         });
-
-        var pas2 = "text";
-
-        $(document).on("click", "#show-passcode", function(){
-            $("#passcode").attr("type", pas2);
-            if(pas2 == "text") pas2 = "password";
-            else pas2 = "text";
-        });
-
 
         $(document).scroll(function(){
             $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
@@ -77,9 +71,9 @@ $inpt = "<input type=\"hidden\" name=\"prop-id\" value=\"$id\">";
                     Help
                 </button>
                 <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                    <a href="./docs/index.php" class="dropdown-item">Documentation</a>
-                    <a href="./about.html" class="dropdown-item">About Us</a>
-                    <a href="./contact-us.html" class="dropdown-item">Contact Us</a>
+                    <a href="../docs/index.php" class="dropdown-item">Documentation</a>
+                    <a href="../about.html" class="dropdown-item">About Us</a>
+                    <a href="../contact-us.html" class="dropdown-item">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -90,30 +84,52 @@ $inpt = "<input type=\"hidden\" name=\"prop-id\" value=\"$id\">";
     <div class="container-fluid container-content" style="position: relative;">
         <div class="row-main row">
             <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
-                <form action="./creating-signature.php" method="POST">
-                    <label for="passcode" class="form-label">Type the code</label>
-                    <input type="password" id="passcode" name="password" class="form-control">
-                    <label for="passcode" class="form-label">
-                        <button class="btn btn-secondary" id="show-passcode" type="button">Show code</button>
-                    </label>
-                    <br>
-                    <select name="encoding" id="encoding-opts" class="form-control">
-                        <option value="main">Select a type of encoding</option>
-                        <option value="0">MD5</option>
-                        <option value="1">SHA1</option>
-                        <option value="2">SHA256</option>
-                    </select>
-                    <br>
-                    <?php echo $inpt; ?>
-                    <button type="submit" class="btn btn-block btn-success" name="log">Create signature</button>
-                </form>
+                <div class="prop-main-data-container container">
+					<div class="data-row row">
+						<div class="col-12 prop-data">
+                        <div class="container data-container">
+                                <div class="main-row row">
+                                    <div class="img-cont">
+                                        <?php
+                                        $img_src = getImgPath($data['vl_img'], true);
+                                        echo "<img src=\"$img_src\" alt=\"\" width=\"200px\" height=\"200px\">";
+                                        ?>
+                                    </div>
+                                    <div class="col-6 data">
+                                        <?php
+
+                                        echo "<h1 class=\"user-name\"> " . $data['nm_proprietary'] . "</h1>\n";
+                                        echo "<h4 class=\"mode\">Proprietary</h4>\n";
+                                        echo "<h4 class=\"email\">Email: " . $data['vl_email'] . "</h3>\n";
+                                        echo "<h5 class=\"date-creation\">Date of creation: " . $data['dt_creation'] . "</h3>\n";
+                                        ?>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="others-col col-12">
+                        <?php
+                            // Signatures
+                            ////////////////////////////////////////////////////////////////////////////////////////////////
+                            $nm = $data['nm_proprietary'];
+                            echo "<h1 class=\"section-title\">Signatures of $nm</h1><br>";
+                            $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+                            echo lsExtSignatures($_GET['id']);
+                        ?>
+                        </div>
+						</div>
+					</div>
+				</div>
+        </div>
             </div>
         </div>
     </div>
     <br>
     <div class="footer-container container">
         <div class="footer-row row">
-            <div class="footer col-12" style="height: 150px; background-color: black; top: 190%; position: relative; max-width: 100%; left: 0;">
+            <div class="footer col-12"  style="height: 150px; background-color: black; margin-top: 100%; position: relative; max-width: 100%; left: 0;">
                 <div class="social-options-grp">
                     <div class="social-option">
                         <a href="https://github.com/GiullianoRossi1987" target="_blanck" id="github" class="social-option-footer">

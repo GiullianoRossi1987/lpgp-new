@@ -1,9 +1,138 @@
-<?php 
+<?php
 if(session_status() == PHP_SESSION_NONE) session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
-use function JSHandler\sendUserLogged;
+require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
 
-sendUserLogged(); // preventing bugs
+
+use Core\SignaturesData;
+use function JSHandler\sendUserLogged;
+use function JSHandler\createSignatureCardAuth;
+use Core\PropCheckHistory;
+use Core\UsersCheckHistory;
+use Core\ProprietariesData;
+use Core\UsersData;
+
+use const LPGP_CONF;
+
+use SignaturesExceptions\InvalidSignatureFile;
+use SignaturesExceptions\SignatureAuthError;
+use SignaturesExceptions\SignatureFileNotFound;
+use SignaturesExceptions\SignatureNotFound;
+use SignaturesExceptions\VersionError;
+
+sendUserLogged();   // Just preventing any error in the localStorage.
+$signature_img = "<img src=\"%path%\" alt=\"%alt%\">";
+$signature_msg = "";
+$prp_obj = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+$usr_obj = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+$domAdd = "";
+
+// uploads the file
+move_uploaded_file($_FILES['signature-ext']['tmp_name'][0], "../usignatures.d/" . $_FILES['signature-ext']['name'][0]);
+
+
+if($_SESSION['mode'] == 'prop'){
+	$prp_c = new PropCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+	$sig = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+	$prop_id = $prp_obj->getPropID($_SESSION['user']);
+	$data = $sig->getSignatureFData("../usignatures.d/".$_FILES['signature-ext']['name'][0]);
+	$rp1 = "";
+	$vl = false;
+	try{
+		if($sig->checkSignatureFile("../usignatures.d/".$_FILES['signature-ext']['name'][0])){
+			$data = $sig->getSignatureFData("../usignatures.d/".$_FILES['signature-ext']['name'][0]);
+			$rp = str_replace("%path%", "src1", $signature_img);
+			$rp1 = str_replace("%alt%", "valid signature", $rp);
+			$signature_msg = "The signature is valid!";
+			$rel_id = $prp_c->addReg($prop_id, $data['ID'], 1, null);
+			$vl = true;
+		}
+		else{
+			$rel_id = $prp_c->addReg($prop_id, $data['ID'], 0, 2);
+		}
+	}
+	catch(InvalidSignatureFile $e){
+		$rel_id = $prp_c->addReg($prop_id, $data['ID'], 0, 1);
+		$rp = str_replace("%path%", "src2", $signature_img);
+		$rp1 = str_replace("%alt%", "invalid signature", $rp);
+		$signature_msg = "The signature is invalid!";
+	}
+	catch(SignatureNotFound $e){
+		$rel_id = $prp_c->addReg($prop_id, $data['ID'], 0, 2);
+		$rp = str_replace("%path%", "src2", $signature_img);
+		$rp1 = str_replace("%alt%", "invalid signature", $rp);
+		$signature_msg = "The signature is invalid!";
+	}
+	catch(SignatureFileNotFound $e) {
+		$rel_id = $prp_c->addReg($prop_id, $data['ID'], 0, 1);
+		$rp = str_replace("%path%", "src2", $signature_img);
+		$rp1 = str_replace("%alt%", "invalid signature", $rp);
+		$signature_msg = "The signature is invalid!";
+	}
+	catch(SignatureAuthError $e){
+		$rel_id = $prp_c->addReg($prop_id, $data['ID'], 0, 3);
+		$rp = str_replace("%path%", "src2", $signature_img);
+		$rp1 = str_replace("%alt%", "invalid signature", $rp);
+		$signature_msg = "The signature is invalid!";
+	}
+	finally{
+		$signature_img = $rp1;
+		unset($rp);
+		unset($rp1);
+		$rr = base64_encode($rel_id);
+		$domAdd .= createSignatureCardAuth($data['ID'], $vl) . "<a href=\"relatory.php?rel=$rr\" role=\"button\" class=\"btn btn-block btn-primary\">See relatory</a><br><hr>";
+	}
+}
+else{
+	$usr_c = new UsersCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+	$sig = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+	$usr_id = $usr_obj->getUserData($_SESSION['user'])['cd_user'];
+	$vl = false;
+	try{
+		if($sig->checkSignatureFile("../usignatures.d/".$_FILES['signature-ext']['name'][0])){
+			$data = $sig->getSignatureFData("../usignatures.d/".$_FILES['signature-ext']['name'][0]);
+			$rp = str_replace("%path%", "src1", $signature_img);
+			$rp1 = str_replace("%alt%", "valid signature", $rp);
+			$signature_msg = "Valid signature";
+			$rel_id = $usr_c->addReg($usr_id, $data['ID']);
+			$vl = true;
+		}
+	}
+	catch(InvalidSignatureFile $e){
+		$data = $sig->getSignatureFData("../usignatures.d/".$_FILES['signature-ext']['name'][0]);
+		$rel_id = $usr_c->addReg($usr_id, $data['ID'], 0, 1);
+		$rp = str_replace("%path%", "src2", $signature_img);
+		$rp1 = str_replace("%alt%", "invalid signature", $rp);
+		$signature_msg = "The signature is invalid!";
+	}
+	catch(SignatureNotFound $e){
+		$rel_id = $usr_c->addReg($usr_id, $data['ID'], 0, 2);
+		$rp = str_replace("%path%", "src2", $signature_img);
+		$rp1 = str_replace("%alt%", "invalid signature", $rp);
+		$signature_msg = "The signature is invalid!";
+	}
+	catch(SignatureFileNotFound $e){
+		$rel_id = $usr_c->addReg($usr_id, $data['ID'], 0, 1);
+		$rp = str_replace("%path%", "src2", $signature_img);
+		$rp1 = str_replace("%alt%", "invalid signature", $rp);
+		$signature_msg = "The signature is invalid!";
+	}
+	catch(SignatureAuthError $e){
+		$data = $sig->getSignatureFData("../usignatures.d/".$_FILES['signature-ext']['name'][0]);
+		die(var_dump($data));
+		$rp = str_replace("%path%", "src2", $signature_img);
+		$rp1 = str_replace("%alt%", "invalid signature", $rp);
+		$rel_id = $usr_c->addReg($usr_id, $data['ID'], 0, 3);
+	}
+	finally{
+        $signature_img = $rp1;
+		unset($rp);
+		unset($rp1);
+		$rr = base64_encode($rel_id);
+		$domAdd .= createSignatureCardAuth($data['ID'], $vl) ."\n<a href=\"relatory.php?rel=$rr\" role=\"button\" class=\"btn btn-sm btn-primary\">See relatory</a><br>";
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,93 +141,17 @@ sendUserLogged(); // preventing bugs
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LPGP Oficial Server</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./css/new-layout.css">
-    <script src="./js/main-script.js"></script>
-    <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="./bootstrap/font-awesome.min.css">
-    <script src="./bootstrap/jquery-3.3.1.slim.min.js"></script>
-    <script src="./bootstrap/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="./media/new-logo.png" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.2/popper.min.js"></script>
+    <link rel="stylesheet" href="css/new-layout.css">
+    <link rel="stylesheet" href="css/content-style.css">
+    <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <style>
 </style>
 <body>
-    <script>
-        $(document).ready(function(){
-            setAccountOpts();
-            setSignatureOpts();
-        });
 
-        var pas1 = "text";
-        var pas2 = "text";
-        var vb = "visible";
-
-        $(document).on("click", "#show-passwd1", function(){
-            $("#password1").attr("type", pas1);
-            if(pas1 == "text") pas1 = "password";
-            else pas1 = "text";
-        });
-
-        $(document).on("click", "#show-passwd2", function(){
-            $("#password2").attr("type", pas1);
-            if(pas2 == "text") pas2 = "password";
-            else pas2 = "text";
-        });
-
-        $(document).on("change", "#password1", function(){
-            var content = $(this).val();
-            if(content.length <= 7){
-                $("#err-lb-passwd1").text("Please choose a password with more then 7 characters.");
-                $("#err-lb-passwd1").show();
-            }
-            else if(content != $("#password2").val()){
-                $("#err-lb-passwd1").text("The passwords doesn't match");
-                $("#err-lb-passwd1").show();
-            }
-            else $("#err-lb-passwd1").hide();
-        });
-
-        $(document).on("change", "#username", function(){
-            var content = $(this).val();
-            if(content.length <= 0){
-                $("#err-lb-username").text("Please choose a username!");
-                $("#err-lb-username").show();
-            }
-            else $("#err-lb-username").hide();
-        });
-
-        $(document).on("change", "#email", function(){
-            var content = $(this).val();
-            if(content.length <= 0){
-                $("#err-lb-email").text("Please choose a e-amil address");
-                $("#err-lb-email").show();
-            }
-            else if(content.search("@") < 0){
-                $("#err-lb-email").text("Please choose a valid e-mail address");
-                $("#err-lb-email").show();
-            }
-            else $("#err-lb-email").hide();
-        });
-
-        $(document).on("click", "#default-img", function(){
-            $("#upload-img-input").hide();
-        });
-
-        $(document).scroll(function(){
-            $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".default-btn-header").toggleClass("default-btn-header-scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".opts").toggleClass("opts-scrolled", $(this).scrollTop() > $(".header-container").height());
-        });
-    </script>
-    <div class="container-fluid header-container" role="banner" style="position: fixed;">
+    <div class="container-fluid header-container" role="banner" style="position: relative;">
         <div class="col-12 header" style="height: 71px; transition: background-color 200ms linear;">
             <div class="opt-dropdown dropdown login-dropdown">
                 <button type="button" class="btn btn-lg default-btn-header dropdown-toggle" data-toggle="dropdown" id="account-opts" aria-haspopup="true" aria-expanded="false">
@@ -117,9 +170,9 @@ sendUserLogged(); // preventing bugs
                     Help
                 </button>
                 <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                    <a href="./docs/index.php" class="dropdown-item">Documentation</a>
-                    <a href="./about.html" class="dropdown-item">About Us</a>
-                    <a href="./contact-us.html" class="dropdown-item">Contact Us</a>
+                    <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
+                    <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
+                    <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -129,13 +182,10 @@ sendUserLogged(); // preventing bugs
     <hr>
     <div class="container-fluid container-content" style="position: relative; margin-top: 10%;">
         <div class="row-main row">
-            <div class="col-7 clear-content" style="position: relative; margin-left: 21%; border: 1px solid black; border-radius: 3%; padding: 5px 7px;">
-				<form action="cgi-actions/check_signature.php" method="post" enctype="multipart/form-data">
-					<label for="uq-input" class="form-label"><h1>Please put here your .lpgp file.</h1></label>
-					<input type="file" name="signature-ext[]" id="uq-input" class="form-control">
-					<br>
-					<button type="submit" class="btn btn-block btn-success">Check the signature</button>
-				</form>
+            <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
+				<?php
+					echo $domAdd;
+				?>
                 <br>
             </div>
         </div>
@@ -161,5 +211,18 @@ sendUserLogged(); // preventing bugs
             </div>
         </div>
     </div>
+    <!-- Scripts -->
+    <script src="../jquery/lib/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/autoload.js" charset="utf-8"></script>
+    <script src="js/main-script.js"></script>
+    <script src="js/actions.js"></script>
+    <script>
+        $(document).ready(function(){
+            setAccountOpts(true);
+            setSignatureOpts();
+        });
+    </script>
 </body>
 </html>

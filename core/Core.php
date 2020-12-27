@@ -1515,7 +1515,7 @@ class UsersCheckHistory extends DatabaseConnection{
             $prop_data = $this->connection->query("SELECT * FROM tb_proprietaries WHERE cd_proprietary = " . $sign_data['id_proprietary'] . ";")->fetch_array();
             $signature_data_html .= "<div class=\"card-header\"><h1 class=\"card-title\">Signature #" . $sig_ref . "</h1>\n";
             $signature_data_html .= "<div class=\"card-body\">";
-            $signature_data_html .= "<div class=\"card-subtitle\"><a href=\"https://localhost/cgi-actions/proprietary.php?id=" . $prop_data['cd_proprietary'] . "\">Proprietary: " . $prop_data['nm_proprietary'] . "</a>\n</div>\n";
+            $signature_data_html .= "<div class=\"card-subtitle\"><a href=\"https://localhost/proprietary.php?id=" . $prop_data['cd_proprietary'] . "\">Proprietary: " . $prop_data['nm_proprietary'] . "</a>\n</div>\n";
             $signature_data_html .= "<div class=\"card-footer text-muted\"> Created at: " . $sign_data['dt_creation'] . "</div>\n</div>\n";
             $data_html .= $signature_data_html;
         }
@@ -1564,7 +1564,7 @@ class UsersCheckHistory extends DatabaseConnection{
             $id = base64_encode($prop_dt['cd_proprietary']);
             $prop_data_html = is_null($prop_dt) ? "<div class=\"prop-nf-err\">(We can't find the proprietary, probabily he deleted him account)</div>\n" : "<a href=\"proprietary.php?id=$id\" target=\"_blanck\" class=\"prop-link\">" . $prop_dt['nm_proprietary'] . "</a>\n";
             $card_main .= "Proprietary: " . $prop_data_html;
-            $card_main .= "<a href=\"https://localhost/cgi-actions/relatory.php?rel=" . base64_encode($dt['cd_reg']) . "\" target=\"__blanck\" role=\"button\" class=\"btn btn-secondary\">Check the relatory</a>\n";
+            $card_main .= "<a href=\"https://localhost/relatory.php?rel=" . base64_encode($dt['cd_reg']) . "\" target=\"__blanck\" role=\"button\" class=\"btn btn-secondary\">Check the relatory</a>\n";
             $card_main .= "<div class=\"card-footer text-muted\">Checked signature at: " . $dt['dt_reg'] . "</div>\n</div>\n<div>\n<div>\n</div>\n</div>\n</div>";
             $main_pg .= $card_main . "<br><br>";
         }
@@ -1711,7 +1711,7 @@ class PropCheckHistory extends DatabaseConnection{
             $card_div .= "<div class=\"card-header\">\n";
             $card_div .= "<h1 class=\"card-title\"> Signature #" . $sig_dt['cd_signature'] . "</h1><span>$i_tag</span>" . "\n<div class=\"message-relatory $extra_cls\">$error_msg</div>";
             $card_div .= "</div>\n<div class=\"card-body\">\n";
-            $card_div .= "<h4 class=\"card-subtitle\"> Proprietary: <a href=\"https://localhost/cgi-actions/proprietary.php?id=$id_prop\" target=\"_blanck\"> " . $prop_dt['nm_proprietary'] . "</a></div>\n";
+            $card_div .= "<h4 class=\"card-subtitle\"> Proprietary: <a href=\"https://localhost/proprietary.php?id=$id_prop\" target=\"_blanck\"> " . $prop_dt['nm_proprietary'] . "</a></div>\n";
             $card_div .= "<div class=\"card-footer\">Created at: " . $sig_dt['dt_creation'] . "</div>\n</div>\n<div>\n</div>";
             $main_data_html .= $card_div;
         }
@@ -1763,9 +1763,9 @@ class PropCheckHistory extends DatabaseConnection{
             $prop_dt = $this->connection->query("SELECT * FROM tb_proprietaries WHERE cd_proprietary = " . $sign_data['id_proprietary'] . ";")->fetch_array();
             $id = $prop_dt['cd_proprietary'];
             $cdId = base64_encode($id);
-            $prop_data_html = is_null($prop_dt) ? "<div class=\"prop-nf-err\">(We can't find the proprietary, probabily he deleted him account)</div>\n" : "<a href=\"https://localhost/cgi-actions/proprietary.php?id=$cdId\" target=\"_blanck\" class=\"prop-link\">" . $prop_dt['nm_proprietary'] . "</a>\n";
+            $prop_data_html = is_null($prop_dt) ? "<div class=\"prop-nf-err\">(We can't find the proprietary, probabily he deleted him account)</div>\n" : "<a href=\"https://localhost/proprietary.php?id=$cdId\" target=\"_blanck\" class=\"prop-link\">" . $prop_dt['nm_proprietary'] . "</a>\n";
             $card_main .= "Proprietary: " . $prop_data_html;
-            $card_main .= "<a href=\"https://localhost/cgi-actions/relatory.php?rel=" . $dt['cd_reg'] . "\" target=\"__blanck\" role=\"button\" class=\"btn btn-secondary\">Check the relatory</a>\n";
+            $card_main .= "<a href=\"https://localhost/relatory.php?rel=" . $dt['cd_reg'] . "\" target=\"__blanck\" role=\"button\" class=\"btn btn-secondary\">Check the relatory</a>\n";
             $card_main .= "<div class=\"card-footer text-muted\">Checked signature at: " . $dt['dt_reg'] . "</div>\n</div>\n</div>\n<div>\n</div>";
             $main_pg .= $card_main . "<br>";
         }

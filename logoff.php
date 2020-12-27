@@ -10,7 +10,7 @@ if($_SESSION['user-logged'] == "false"){
 else{
     session_unset();
     session_destroy();
-    echo "<script src=\"../js/main-script.js\"></script>";
+    echo "<script src=\"js/main-script.js\"></script>";
     echo "<script>resetVals();\n</script>";
 
     header("Location: ../index.php");
@@ -25,8 +25,8 @@ else{
     <title>LPGP Oficial Server</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/layout.css">
-    <script src="../js/main-script.js"></script>
+    <link rel="stylesheet" href="css/layout.css">
+    <script src="js/main-script.js"></script>
     <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../bootstrap/font-awesome.min.css">
     <script src="../bootstrap/jquery-3.3.1.slim.min.js"></script>

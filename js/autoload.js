@@ -14,7 +14,7 @@ function loadSearchButton(){
     mainBtn.classList.add("btn");
     mainBtn.classList.add("btn-lg");
     mainBtn.appendChild(spanI);
-    mainBtn.href = "https://" + window.location.hostname + "/cgi-actions/main-query.php";
+    mainBtn.href = "https://" + window.location.hostname + "/main-query.php";
     mainBtn.role = "button";
 
     document.querySelector(".header-container .header").appendChild(mainBtn);

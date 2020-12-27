@@ -90,9 +90,9 @@ function genSignatureCard(array $signature): string{
                         <h3>Signature #' . $signature['cd_signature'] . '   <small>'. $badgeEncoding .'</small></h3>
                     </div>
                     <div class="card-body">
-                        <a href="https://lpgpofficial.com/cgi-actions/get_my_signature.php?id='. $enc . '">Download <span><i class="fas fa-file-download"></i></span></a>
+                        <a href="https://lpgpofficial.com/get_my_signature.php?id='. $enc . '">Download <span><i class="fas fa-file-download"></i></span></a>
                         <br>
-                        <a href="https://lpgpofficial.com/cgi-actions/ch_signature_data.php?sig_id='. $enc . '">Configurations<span><i class="fas fa-cog"></i></span></a>
+                        <a href="https://lpgpofficial.com/ch_signature_data.php?sig_id='. $enc . '">Configurations<span><i class="fas fa-cog"></i></span></a>
                     </div>
                     <div class="card-footer">
                         <h6><b>Date Created:</b> '. $signature['dt_creation'] . '</h6>
@@ -120,8 +120,8 @@ function lsSignaturesMA(int $proprietary){
         $card .= "<h5 class=\"card-subtitle\">" . $sig_data['dt_creation'] . "</h5>\n";
         $card .= "</div> <div class=\"card-body\">";
         $card .= "<div class=\"card-text\">\n";
-        $card .= "<a href=\"https://www.lpgpofficial.com/cgi-actions/get_my_signature.php?id=" . base64_encode($cd). "\">Download <i class=\"fas fa-file-download\"></i></a>" . "<br><br>".
-                 "<a href=\"https://www.lpgpofficial.com/cgi-actions/ch_signature_data.php?sig_id=" . base64_encode($cd). "\">Configurations<i class=\"fas fa-cog\"></i></a>\n"
+        $card .= "<a href=\"https://www.lpgpofficial.com/get_my_signature.php?id=" . base64_encode($cd). "\">Download <i class=\"fas fa-file-download\"></i></a>" . "<br><br>".
+                 "<a href=\"https://www.lpgpofficial.com/ch_signature_data.php?sig_id=" . base64_encode($cd). "\">Configurations<i class=\"fas fa-cog\"></i></a>\n"
                 . "</div>\n</div>\n</div><br>";
         $all .= "\n$card\n";
     }

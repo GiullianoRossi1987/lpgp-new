@@ -25,7 +25,7 @@ function previewImageTmp(internalPath, imgInput){
     let imgData = new FormData();
     imgData.append("img-auto-load", $(imgInput)[0].files[0]);
     $.post({
-        url: internalPath ? "../cgi-actions/ajx_img_viewer.php" : "cgi-actions/ajx_img_viewer.php",
+        url: internalPath ? "../ajx_img_viewer.php" : "cgi-actions/ajx_img_viewer.php",
         data: imgData,
         processData: false,
         contentType: false,

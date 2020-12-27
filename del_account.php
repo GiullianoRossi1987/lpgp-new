@@ -2,33 +2,35 @@
 if(session_status() == PHP_SESSION_NONE) session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/core/logs-system.php";
 
-use Core\SignaturesData;
+use Core\ProprietariesData;
+use Core\UsersData;
 use function JSHandler\sendUserLogged;
+use LogsSystem\SysLogger;
 use const LPGP_CONF;
-sendUserLogged();
 
-if(isset($_POST['cancel-btn'])) echo "<script>window.location.replace(\"https://localhost/cgi-actions/my_account.php\");</script>";
+$log = new SysLogger($_SERVER['DOCUMENT_ROOT'] . "/logs/accounts.log");
 
-if(isset($_POST['rm-btn'])){
-	if(isset($_POST['sig_id'])){
-		$si = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-		$si->delSignature((int) base64_decode($_POST['sig_id']));
-		echo "<script>window.location.replace(\"https://localhost/cgi-actions/my_account.php\");</script>";
+if(isset($_GET['confirm'])){
+	if($_GET['confirm'] == "y"){
+		if($_SESSION['mode'] == 'prop'){
+            $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+            $tt  = $_SESSION['user'];
+			$prp->delProprietary($_SESSION['user']);
+            $log->addLog("Removed Proprietary $tt");
+		}
+		else{
+			$usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+			$usr->deleteUser($_SESSION['user']);
+        }
+		session_unset();
+		session_destroy();
+        sendUserLogged();
+        echo "<script>resetVals();</script>";
 	}
-}
-
-if(isset($_POST['save-btn'])){
-	if(isset($_POST['sig_id'])){
-		$sig = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-		// checks the password field;
-		if(isset($_POST['passcode']) && strlen($_POST['passcode']) > 0){
-			$sig->chSignaturePassword((int) base64_decode($_POST['sig_id']), (string) $_POST['passcode']);
-		}
-		$sig_code = (int)$sig->getSignatureData((int) base64_decode($_POST['sig_id']))['vl_code'];
-		if(isset($_POST['code']) && $_POST['code'] != $sig_code && isset($_POST['conf-pass'])){
-			$sig->chSignatureCode((int) base64_decode($_POST['sig_id']), (int) $_POST['code'], $_POST['conf-pass']);
-		}
+	else{
+		echo "<script>window.location.replace(\"https://localhost/my_account.php\");</script>";
 	}
 }
 ?>
@@ -42,8 +44,8 @@ if(isset($_POST['save-btn'])){
     <title>LPGP Oficial Server</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/new-layout.css">
-    <script src="../js/main-script.js"></script>
+    <link rel="stylesheet" href="css/new-layout.css">
+    <script src="js/main-script.js"></script>
     <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../bootstrap/font-awesome.min.css">
     <script src="../bootstrap/jquery-3.3.1.slim.min.js"></script>
@@ -94,12 +96,31 @@ if(isset($_POST['save-btn'])){
             else $("#err-lb-passwd1").hide();
         });
 
-		$(document).on("change", "#code-sel", function(){
-			if($("#code-sel").val() != code){
-				$("#confirm-passcode").css("visibility", "visible");
-			}
-			else $("#confirm-passcode").css("visibility", "hidden");
-		});
+        $(document).on("change", "#username", function(){
+            var content = $(this).val();
+            if(content.length <= 0){
+                $("#err-lb-username").text("Please choose a username!");
+                $("#err-lb-username").show();
+            }
+            else $("#err-lb-username").hide();
+        });
+
+        $(document).on("change", "#email", function(){
+            var content = $(this).val();
+            if(content.length <= 0){
+                $("#err-lb-email").text("Please choose a e-amil address");
+                $("#err-lb-email").show();
+            }
+            else if(content.search("@") < 0){
+                $("#err-lb-email").text("Please choose a valid e-mail address");
+                $("#err-lb-email").show();
+            }
+            else $("#err-lb-email").hide();
+        });
+
+        $(document).on("click", "#default-img", function(){
+            $("#upload-img-input").hide();
+        });
 
         $(document).scroll(function(){
             $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
@@ -110,43 +131,47 @@ if(isset($_POST['save-btn'])){
     <div class="container-fluid header-container" role="banner" style="position: fixed;">
         <div class="col-12 header" style="height: 71px; transition: background-color 200ms linear;">
             <div class="opt-dropdown dropdown login-dropdown">
-                        <button type="button" class="btn btn-lg default-btn-header dropdown-toggle" data-toggle="dropdown" id="account-opts" aria-haspopup="true" aria-expanded="false">
-                            <span class="nm-tmp">Account</span>
-                        </button>
-                        <div class="dropdown-menu opts" aria-labelledby="account-opts"></div>
-                    </div>
-                    <div class="opt-dropdown dropdown after-opt signatures-dropdown">
-                        <button class="dropdown-toggle btn btn-lg default-btn-header" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="signature-opts">
-                            Signatures
-                        </button>
-                        <div class="dropdown-menu opts" aria-labelledby="signature-opts"></div>
-                    </div>
-                    <div class="opt-dropdown dropdown after-opt help-dropdown">
-                        <button class="dropdown-toggle btn btn-lg default-btn-header" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="help-opt">
-                            Help
-                        </button>
-                        <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                            <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
-                            <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
-                            <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
-                        </div>
-                    </div>
+                <button type="button" class="btn btn-lg default-btn-header dropdown-toggle" data-toggle="dropdown" id="account-opts" aria-haspopup="true" aria-expanded="false">
+                    <span class="nm-tmp">Account</span>
+                </button>
+                <div class="dropdown-menu opts" aria-labelledby="account-opts"></div>
+            </div>
+            <div class="opt-dropdown dropdown after-opt signatures-dropdown">
+                <button class="dropdown-toggle btn btn-lg default-btn-header" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="signature-opts">
+                    Signatures
+                </button>
+                <div class="dropdown-menu opts" aria-labelledby="signature-opts"></div>
+            </div>
+            <div class="opt-dropdown dropdown after-opt help-dropdown">
+                <button class="dropdown-toggle btn btn-lg default-btn-header" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" id="help-opt">
+                    Help
+                </button>
+                <div class="dropdown-menu opts" aria-labelledby="help-opt">
+                    <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
+                    <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
+                    <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
                 </div>
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+
+    </div>
     <br>
     <hr>
     <div class="container-fluid container-content" style="position: relative;">
         <div class="row-main row">
             <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
+				<h1>Your account was deleted successfully!</h1>
+				<h4>Please make login or create a new account if you want to stay in LPGP site!</h4>
+				<a href="../login_frm.php" role="button" class="btn btn-lg btn-primary">Make Login</a>
+				<a href="../create_account_frm.php" role="button" class="btn btn-lg btn-success">Create a new account</a>
+                <br>
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
     <br>
     <div class="footer-container container">
         <div class="footer-row row">
-            <div class="footer col-12" style="height: 150px; background-color: black; margin-top: 190%; position: relative !important; max-width: 100%; left: 0;">
+            <div class="footer col-12" style="height: 150px; background-color: black; top: 190%; position: relative; max-width: 100%; left: 0;">
                 <div class="social-options-grp">
                     <div class="social-option">
                         <a href="https://github.com/GiullianoRossi1987" target="_blanck" id="github" class="social-option-footer">
