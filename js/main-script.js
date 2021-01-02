@@ -240,8 +240,8 @@ function hideError(){
 }
 
 function getLinkedUserIcon(){
-    var ls  = localStorage.getItem("user-icon").split("/");
-    return "https://" + window.location.hostname + "/" + ls[ls.length - 2] + "/" + ls[ls.length - 1];
+    var ls  = localStorage.getItem("user-icon");
+    return "https://" + window.location.hostname + "/" + ls;
 }
 
 function setBtnSolutions(locale){
@@ -255,4 +255,34 @@ function setBtnSolutions(locale){
     link.classList.add("btn-lg");
     link.innerText = "Solutions";
     localeNode.appendChild(link);
+}
+
+function parseLogin(){
+    $.post({
+        url: "ajx_logged_request.php",
+        data: "getJSON=t",
+        success: function(json){
+            var brute = $.parseJSON(json);
+            if(brute["Logged"]){
+                localStorage.setItem("logged-user", "true");
+                localStorage.setItem("user_mode", brute["Mode"] == "1" ? "prop" : "normie");
+                localStorage.setItem("checked", brute["Checked"]);
+                localStorage.setItem("user-icon", brute["ImgUrlPath"]);
+                localStorage.setItem('user', brute["Username"]);
+                localStorage.setItem("email", brute["Email"]);
+            }
+            else{
+                localStorage.setItem("logged-user", "false");
+                localStorage.setItem("user_mode", null);
+                localStorage.setItem("checked", null);
+                localStorage.setItem("user-icon", null);
+                localStorage.setItem('user', null);
+                localStorage.setItem("email", null);
+            }
+
+        },
+        error: function(xhr, status, error){ console.log(error); }
+    });
+    // $("#img-user").css("background-image", "url(" + getLinkedUserIcon() + ")");
+    loadSearchButton();
 }

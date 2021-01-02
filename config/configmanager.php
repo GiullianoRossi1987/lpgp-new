@@ -2,7 +2,7 @@
 
 namespace Configurations{
     use Exception;
-    if(!defined("CONFIG_FILE")) define("CONFIG_FILE", "config/mainvars.json");
+    if(!defined("CONFIG_FILE")) define("CONFIG_FILE", "mainvars.json");
 
     /**
      * <Exception> Thrown when the configurations manager class try to load a configurations file

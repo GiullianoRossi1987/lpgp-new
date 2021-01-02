@@ -62,7 +62,7 @@ use Configurations\ConfigManager;
 use Control\ClientsController;
 use Control\SignaturesController;
 
-$gblConfig = new ConfigManager("config/mainvars.json");
+$gblConfig = new ConfigManager($_SERVER["DOCUMENT_ROOT"]. "/config/mainvars.json");
 
 define("DEFAULT_HOST", "127.0.0.1");
 define("DEFAULT_DB", "LPGP_WEB");
@@ -714,7 +714,10 @@ class ProprietariesData extends DatabaseConnection{
     public function chProprietaryImg(string $proprietary, string $img_new){
         $this->checkNotConnected();
         if(!$this->checkProprietaryExists($proprietary)) throw new ProprietaryNotFound("The proprietary '$proprietary' don't exists!", 1);
-        $qr_ch = $this->connection->query("UPDATE tb_proprietaries SET vl_img = \"$img_new\" WHERE nm_proprietary = \"$proprietary\";");
+        $stmt = $this->connection->prepare("UPDATE tb_proprietaries SET vl_img = ? WHERE nm_proprietary = ?;");
+        $stmt->bind_param("ss", $img_new, $proprietary);
+        $rp = $stmt->execute();
+        // $qr_ch = $this->connection->query("UPDATE tb_proprietaries SET vl_img = \"$img_new\" WHERE nm_proprietary = \"$proprietary\";");
 
         return ;
     }

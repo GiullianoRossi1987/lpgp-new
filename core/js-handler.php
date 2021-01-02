@@ -10,7 +10,7 @@ use ProprietariesExceptions\ProprietaryNotFound;
 use Core\ClientsAccessData;
 use Configurations\ConfigManager;
 
-$gblConfig = new ConfigManager("/config/mainvars.json");
+$gblConfig = new ConfigManager($_SERVER["DOCUMENT_ROOT"] . "/config/mainvars.json");
 if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
 if(!defined("MAX_SIGC")) define("MAX_SIGC", 5);   // the max number of the signatures checked card displayed at the my_account.php page
 
@@ -24,7 +24,7 @@ function sendUserLogged(){
     if(session_status() == PHP_SESSION_NONE) session_start();
     if(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED || empty($_SESSION) || !isset($_SESSION['user-logged']) || !$_SESSION['user-logged']){
         // if there's no one logged.
-        echo "<script>\nlocalStorage.setItem(\"logged-user\", \"false\");\nlocalStorage.setItem(\"user_mode\", \"null\");\nlocalStorage.setItem(\"checked\", \"null\");\nlocalStorage.setItem(\"user-icon\", \"null\");</script>";
+        echo "";
         $_SESSION['user-logged']  = true;
         $_SESSION['mode']         = null;
         $_SESSION['checked']      = null;
@@ -35,7 +35,7 @@ function sendUserLogged(){
         $mode = $_SESSION['mode'];
         $checked = $_SESSION['checked'];
         $img = $_SESSION['user-icon'];
-        echo "<script>\nlocalStorage.setItem(\"logged-user\", \"$logged_user\");\nlocalStorage.setItem(\"user_mode\", \"$mode\");\nlocalStorage.setItem(\"checked\", \"$checked\");\nlocalStorage.setItem(\"user-icon\", \"$img\");\n</script>";
+        echo "<script>\n\n</script>";
         unset($logged_user);
         unset($mode);
         unset($checked);

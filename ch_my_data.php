@@ -2,11 +2,12 @@
 if(session_status() == PHP_SESSION_NONE) session_start();
 require_once "core/Core.php";
 require_once "core/js-handler.php";
+require_once "core/Exceptions.php";
 
 use Core\UsersData;
 use Core\ProprietariesData;
 use function JSHandler\sendUserLogged;
-use const LPGP_CONF;
+// use const Core\LPGP_CONF;
 
 sendUserLogged();
 $error_msg = "";
@@ -98,7 +99,7 @@ else{
     <div class="container-fluid container-content" style="position: relative;">
         <div class="row-main row">
             <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
-				<form method="post" class="form-group" enctype="multipart/form-data">
+				<form method="post" class="form-group" enctype="multipart/form-data" id="form">
                     <h1>Your configurations</h1>
                     <h6>If you don't want to change a field just leave it empty</h6>
                     <br>
@@ -113,16 +114,16 @@ else{
 					<br>
                     <label for="username" class="form-label">Change your username</label>
                     <br>
-					<input type="text" name="username" id="username" class="form-control">
+					<input type="text" name="new-name" id="username" class="form-control">
 					<br>
                     <label for="email" class="form-label">Change your email</label>
                     <br>
-					<input type="email" name="email" id="email" class="form-control">
+					<input type="email" name="new-email" id="email" class="form-control">
 					<br>
                     <label for="passwd1" class="form-label">Change your password</label>
                     <br>
 					<div class="input-group input-group-inline pass1-grp">
-						<input type="password" id="passwd1" name="passwd" class="form-control">
+						<input type="password" id="passwd1" name="new-passwd" class="form-control">
 						<div class="input-group-append">
 							<button type="button" class="btn btn-md btn-secondary" id="spass1">
 								<span><i class="fas fa-eye"></i></span>
@@ -250,15 +251,14 @@ else{
 			let files = new FormData();
 			files.append("img-auto-load", $("#new-img")[0].files[0]);
 			// testing
-			files.append("teste", "aaa");
+			console.log(files);
 			$.post({
 				url: "ajx_img_viewer.php",
 				data: files,
 				processData: false,
 				contentType: false,
 				success: function(response){
-					$("#avatar-ep").css("background-image", "url(../" + response + ")");
-
+					$("#avatar-ep").css("background-image", "url(" + response + ")");
 				},
 				error: function(xhr, status, error){ console.log(error); }
 			});
@@ -266,9 +266,9 @@ else{
 
 		// send the data using ajx
 		$(document).on("click", "#save", function(){
-			let newData = new FormData();
-			if($("#new-img")[0].files[0] !== undefined && $("#new-img")[0].files[0] !== null)
-				newData.append("new-img", $("#new-img")[0].files[0]);
+			var newData = new FormData();
+			if($("#new-img")[0].files[0] !== undefined)
+				newData.append("new-img", "/media/tmp/" + $("#new-img")[0].files[0]["name"]);
 			if(dp_tmp) newData.append("dp_tmp_media", true);
 			if($("#username").val().length > 0)
 				newData.append("new-name", $("#username").val());
@@ -276,6 +276,28 @@ else{
 				newData.append("new-email", $("#email").val());
 			if($("#passwd1").val().length > 0 && $("#passwd2").val().length > 0)
 				newData.append("new-passwd", $("passwd1").val());
+            for(var i of newData) console.log(i);
+            // AJAX part
+            // var teste = new FormData($("#form")[0]);
+            // for(var i of teste) console.log(i);
+            $.post({
+                url: "ajx_ch_account.php",
+                data: newData,
+                processData: false,
+                contentType: false,
+                success: function(response){
+                    console.log(response)
+                    if(response == "success"){
+                        parseLogin();
+                        alert("Account data changed");
+                        window.location.replace("my_account.php");
+                    }
+                    else console.error("ERROR: " + response);
+                },
+                error: function(error){
+                    conole.error(error);
+                }
+            });
 		});
 
 		$(document).on("click", "#avatar-container", function(){ $("#opt-avatar").collapse("toggle");})

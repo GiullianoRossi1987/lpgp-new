@@ -32,6 +32,7 @@ if(isset($_POST['getJSON'])){
             $mainArr['Email'] = $bruteData['vl_email'];
             $mainArr['Password'] = $bruteData['vl_password']; // already encoded at the database
             $mainArr['ImgUrlPath'] = $bruteData['vl_img'];
+            $mainArr["Checked"] = $bruteData["vl_checked"];
         }
         else{
             // proprietary then
@@ -41,6 +42,7 @@ if(isset($_POST['getJSON'])){
             $mainArr['Email'] = $bruteData['vl_email'];
             $mainArr['Password'] = $bruteData['vl_password']; // already encoded at the database
             $mainArr['ImgUrlPath'] = $bruteData['vl_img'];
+            $mainArr["Checked"] = $bruteData["vl_checked"];
         }
         echo json_encode($mainArr);
     }
