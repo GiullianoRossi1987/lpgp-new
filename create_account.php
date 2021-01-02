@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
+require_once "core/Core.php";
+require_once "core/js-handler.php";
 
 use Core\ProprietariesData;
 use Core\UsersData;
@@ -9,26 +9,26 @@ use const LPGP_CONF;
 if($_POST['account-mode'] == "normal"){
     // setting up the image to the server
     if(isset($_FILES)){
-        move_uploaded_file($_FILES['img-user']['tmp_name'][0], $_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['img-user']['name'][0]);
+        move_uploaded_file($_FILES['img-user']['tmp_name'][0], "/u.images/" . $_FILES['img-user']['name'][0]);
 
         $usr_obj = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        $usr_obj->addUser($_POST['username'], $_POST['password1'], $_POST['email'], true,$_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['img-user']['name'][0]);
+        $usr_obj->addUser($_POST['username'], $_POST['password1'], $_POST['email'], true,"/u.images/" . $_FILES['img-user']['name'][0]);
     }
     else{
         $usr_obj = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        $usr_obj->addUser($_POST['username'], $_POST['password1'], $_POST['email'], true,$_SERVER['DOCUMENT_ROOT'] . "/media/usr-icon.png");
+        $usr_obj->addUser($_POST['username'], $_POST['password1'], $_POST['email'], true,"/media/usr-icon.png");
     }
     $usr_obj->sendCheckEmail($_POST['username']);
 }
 else if($_POST['account-mode'] == "proprietary"){
     if(isset($_FILES)){
-        move_uploaded_file($_FILES['img-user']['tmp_name'][0], $_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['img-user']['name'][0]);
+        move_uploaded_file($_FILES['img-user']['tmp_name'][0], "/u.images/" . $_FILES['img-user']['name'][0]);
         $prop_obj = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        $prop_obj->addProprietary($_POST['username'], $_POST['password1'], $_POST['email'], true, $_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['img-user']['name'][0]);
+        $prop_obj->addProprietary($_POST['username'], $_POST['password1'], $_POST['email'], true, "/u.images/" . $_FILES['img-user']['name'][0]);
     }
     else{
         $prop_obj = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        $prop_obj->addProprietary($_POST['username'], $_POST['password1'], $_POST['email'], true, $_SERVER['DOCUMENT_ROOT'] . "/media/usr-icon.png");
+        $prop_obj->addProprietary($_POST['username'], $_POST['password1'], $_POST['email'], true, "/media/usr-icon.png");
     }
     $prop_obj->sendCheckEmail($_POST['username']);
 }
@@ -44,10 +44,10 @@ else if($_POST['account-mode'] == "proprietary"){
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/new-layout.css">
     <script src="js/main-script.js"></script>
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../bootstrap/font-awesome.min.css">
-    <script src="../bootstrap/jquery-3.3.1.slim.min.js"></script>
-    <script src="../bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/font-awesome.min.css">
+    <script src="bootstrap/jquery-3.3.1.slim.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

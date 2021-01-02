@@ -93,7 +93,7 @@ namespace SignaturesExceptions{
 
     class SignatureFileNotFound extends Exception{
         public function showMessage(string $file_name) {
-            $dft_path = $_SERVER['DOCUMENT_ROOT'] . "/usignatures.d";
+            $dft_path = "/usignatures.d";
             return "The signature file '$file_name' don't exists at \"$dft_path\"";
         }
     }

@@ -1,7 +1,7 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
+require_once "core/Core.php";
+require_once "core/js-handler.php";
 
 use Core\UsersData;
 use Core\ProprietariesData;
@@ -25,9 +25,9 @@ if($_SESSION['mode'] == "prop"){
 		"<script>window.location.replace(\"./check-email-stp1.php\");</script>";
 	}
 	if(isset($_FILES['new-img'])){
-		move_uploaded_file($_FILES['new-img']['tmp_name'][0], $_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['new-img']['name'][0]);
-		$prp->chProprietaryImg($_SESSION['user'], $_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['new-img']['name'][0]);
-		$_SESSION['user-icon'] = $_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['new-img']['name'][0];
+		move_uploaded_file($_FILES['new-img']['tmp_name'][0], "/u.images/" . $_FILES['new-img']['name'][0]);
+		$prp->chProprietaryImg($_SESSION['user'], "/u.images/" . $_FILES['new-img']['name'][0]);
+		$_SESSION['user-icon'] = "/u.images/" . $_FILES['new-img']['name'][0];
 	}
 }
 else{
@@ -44,9 +44,9 @@ else{
 		"<script>window.location.replace(\"./check-email-stp1.php\");</script>";
 	}
 	if(isset($_FILES['new-img']) && strlen($_FILES['new-img']['name'][0]) > 0){
-		move_uploaded_file($_FILES['new-img']['tmp_name'][0], $_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['new-img']['name'][0]);
-		$usr->chImage($_SESSION['user'], $_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['new-img']['name'][0]);
-		$_SESSION['user-icon'] = $_SERVER['DOCUMENT_ROOT'] . "/u.images/" . $_FILES['new-img']['name'][0];
+		move_uploaded_file($_FILES['new-img']['tmp_name'][0], "/u.images/" . $_FILES['new-img']['name'][0]);
+		$usr->chImage($_SESSION['user'], "/u.images/" . $_FILES['new-img']['name'][0]);
+		$_SESSION['user-icon'] = "/u.images/" . $_FILES['new-img']['name'][0];
 	}
 }
 sendUserLogged();

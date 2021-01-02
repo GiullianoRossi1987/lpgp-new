@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
+require_once "core/Core.php";
 
 use Core\ClientsData;
 use const LPGP_CONF;
@@ -38,7 +38,7 @@ if(isset($_GET['client'])){
     <link rel="stylesheet" href="css/content-style.css">
     <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
 	<?php
@@ -181,9 +181,9 @@ if(isset($_GET['client'])){
         </div>
     </div>
     <!-- Scripts -->
-    <script src="../jquery/lib/jquery-3.4.1.min.js"></script>
+    <script src="jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="../bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
     <script src="js/autoload.js" charset="utf-8"></script>
     <script src="js/main-script.js"></script>
     <script src="js/actions.js"></script>

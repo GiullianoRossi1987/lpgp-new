@@ -7,7 +7,7 @@ use function JSHandler\sendUserLogged;
 use function JSHandler\setCon1Links;
 use Configurations\ConfigManager;
 
-$gblConfig = new ConfigManager($_SERVER['DOCUMENT_ROOT'] . "/config/mainvars.json");
+$gblConfig = new ConfigManager("/config/mainvars.json");
 if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
 
 sendUserLogged();
@@ -23,9 +23,9 @@ sendUserLogged();
     <link rel="stylesheet" href="css/new-layout.css">
     <script src="js/main-script.js"></script>
     <script src="js/actions.js"></script>
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../bootstrap/font-awesome.min.css">
-    <script src="../bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/font-awesome.min.css">
+    <script src="bootstrap/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -34,7 +34,7 @@ sendUserLogged();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <script src="js/autoload.js" charset="utf-8"></script>
     <script src="js/requester.js" charset="utf-8"></script>
-    <script src="../jquery/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="jquery/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
 </head>
 <style>
     .main-container{

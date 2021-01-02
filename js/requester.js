@@ -5,9 +5,9 @@ function loadJquery(internalPath){
     let scriptJ_E = document.createElement("script");
 
     if(internalPath){
-        linkB_E.href = "../jquery/lib/bootstrap/css/bootstrap.css";
-        scriptB_E.src = "../jquery/lib/bootstrap/js/bootstrap.js";
-        scriptJ_E.src = "../jquery/lib/jquery-3.4.1.min.js";
+        linkB_E.href = "jquery/lib/bootstrap/css/bootstrap.css";
+        scriptB_E.src = "jquery/lib/bootstrap/js/bootstrap.js";
+        scriptJ_E.src = "jquery/lib/jquery-3.4.1.min.js";
     }
     else{
         linkB_E.href = "jquery/lib/bootstrap/css/bootstrap.css";

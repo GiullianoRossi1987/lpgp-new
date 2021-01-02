@@ -1,7 +1,7 @@
 <?php
 /** NOT IMPLEMENTED YET! WARNING, ON TESTS*/
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
+require_once "core/Core.php";
+require_once "core/Exceptions.php";
 
 use Core\UsersData;
 use Core\ProprietariesData;

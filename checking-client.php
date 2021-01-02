@@ -1,8 +1,8 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
+require_once "core/Core.php";
+require_once "core/js-handler.php";
+require_once "core/Exceptions.php";
 
 use Core\ClientsData;
 use ClientsExceptions\AuthenticationError;
@@ -33,7 +33,7 @@ $bruteDataCon .= '<li><b>Date Creation</b>: ' . $brute['Dt'] . '</li>' . "\n";
     <link rel="stylesheet" href="css/content-style.css">
     <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid header-container" role="banner" style="position: fixed;">
@@ -113,9 +113,9 @@ $bruteDataCon .= '<li><b>Date Creation</b>: ' . $brute['Dt'] . '</li>' . "\n";
         </div>
     </div>
     <!-- Scripts -->
-    <script src="../jquery/lib/jquery-3.4.1.min.js"></script>
+    <script src="jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="../bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
     <script src="js/autoload.js" charset="utf-8"></script>
     <script src="js/main-script.js"></script>
     <script src="js/actions.js"></script>

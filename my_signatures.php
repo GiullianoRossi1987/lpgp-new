@@ -1,7 +1,7 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
+require_once "core/Core.php";
+require_once "core/js-handler.php";
 
 use const LPGP_CONF;
 use Core\ProprietariesData;
@@ -20,18 +20,18 @@ $id = $prp->getPropID($_SESSION['user']);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/new-layout.css">
     <script src="js/main-script.js"></script>
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../bootstrap/font-awesome.min.css">
-    <script src="../bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/font-awesome.min.css">
+    <script src="bootstrap/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="../media/new-logo.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.2/popper.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <script src="../jquery/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="jquery/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
     <script src="js/requester.js" charset="utf-8"></script>
     <script src="js/autoload.js" charset="utf-8"></script>
-    <script src="../jquery/lib/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+    <script src="jquery/lib/bootstrap/js/bootstrap.js" charset="utf-8"></script>
 </head>
 <style>
     #qr-btn{ margin-top: -70px !important; }

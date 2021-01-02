@@ -1,7 +1,7 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
+require_once "core/Core.php";
+require_once "core/js-handler.php";
 
 use Core\UsersData;
 use Core\ProprietariesData;

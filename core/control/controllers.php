@@ -1,8 +1,8 @@
 <?php
 namespace Control{
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/core/control/exceptions.php";
+    require_once "core/Core.php";
+    require_once "core/Exceptions.php";
+    require_once "core/control/exceptions.php";
 
     use Core\SignaturesData;
     use Core\UsersData;
@@ -248,7 +248,7 @@ namespace Control{
         public function authDownloadFile(string $fileName): bool{
             if(!$this->gotControl) throw new ControlFileNotFound();
             // decode the main file encoding
-            $content = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/usignatures.d/$fileName");
+            $content = file_get_contents("/usignatures.d/$fileName");
             $exp = explode(SignaturesData::DELIMITER, $content);
             $asciiNone = "";
             foreach($exp as $char) $asciiNone .= chr((int)$char);
@@ -615,7 +615,7 @@ namespace Control{
         public function authDownloadFile(string $filename): bool{
             if(!$this->gotControl) throw new ControlFileNotFound();
             // decodes the file
-            $raw_content = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/u.clients/$filename");
+            $raw_content = file_get_contents("/u.clients/$filename");
             $exp = explode(SignaturesData::DELIMITER, $raw_content);
             $notnum_content = "";
             foreach($exp as $aschar) $notnum_content .= chr((int)$aschar);

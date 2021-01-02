@@ -1,7 +1,7 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
+require_once "core/Core.php";
+require_once "core/js-handler.php";
 
 use Core\ClientsData;
 use const LPGP_CONF;
@@ -13,47 +13,19 @@ $obj_main = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['p
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LPGP Oficial Server</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/new-layout.css">
-    <script src="js/main-script.js"></script>
-    <script src="js/actions.js"></script>
     <link rel="stylesheet" href="css/content-style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="../media/new-logo.png" type="image/x-icon">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.2/popper.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
-<style>
-    #home-link{
-        top: 0px !important;
-    }
-</style>
 <body>
-    <script>
-        var show = false;
-        $(document).ready(function(){
-            setAccountOpts();
-            setSignatureOpts();
-            applyToA();
-            if(show){
-                $("#modelId").modal("show");
-                show = false;
-            }
-        });
-
-        $(document).ready(function(){
-            $(".contitle").css("opacity", "1");
-            $(".headtitle").css("opacity", "1");
-        });
-    </script>
-<?php    if(isset($_POST['submit'])){
+<?php
+if(isset($_POST['submit'])){
 	$isroot = $_POST['root_permissions'] == "root";
 	$obj_main->addClient($_POST['client-name'], $_SESSION['user'], $isroot);
     echo '<script>show = true</script>';
@@ -78,9 +50,9 @@ $obj_main = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['p
                     Help
                 </button>
                 <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                    <a href="./docs/index.php" class="dropdown-item">Documentation</a>
-                    <a href="./about.html" class="dropdown-item">About Us</a>
-                    <a href="./contact-us.html" class="dropdown-item">Contact Us</a>
+                    <a href="docs/index.php" class="dropdown-item">Documentation</a>
+                    <a href="about.html" class="dropdown-item">About Us</a>
+                    <a href="contact-us.html" class="dropdown-item">Contact Us</a>
                 </div>
             </div>
             <br>
@@ -173,5 +145,30 @@ $obj_main = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['p
             </div>
         </div>
     </div>
+    <!-- Scripts -->
+    <script src="jquery/lib/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/autoload.js" charset="utf-8"></script>
+    <script src="js/main-script.js"></script>
+    <script src="js/actions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        var show = false;
+        $(document).ready(function(){
+            setAccountOpts();
+            setSignatureOpts();
+            applyToA();
+            if(show){
+                $("#modelId").modal("show");
+                show = false;
+            }
+        });
+
+        $(document).ready(function(){
+            $(".contitle").css("opacity", "1");
+            $(".headtitle").css("opacity", "1");
+        });
+    </script>
 </body>
 </html>

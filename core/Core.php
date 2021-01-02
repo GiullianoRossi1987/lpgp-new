@@ -2,12 +2,12 @@
 namespace Core;
 use Exception;
 try{
-    require_once  $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
-    require_once  $_SERVER['DOCUMENT_ROOT'] . "/config/configmanager.php";
-    require_once  $_SERVER['DOCUMENT_ROOT'] . "/core/control/controllers.php";
+    require_once  "core/Exceptions.php";
+    require_once  "config/configmanager.php";
+    require_once  "core/control/controllers.php";
 }
 catch(Exception $e){
-    require_once "core/Exceptions.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
 }
 // add the logs manager after.
 
@@ -62,23 +62,23 @@ use Configurations\ConfigManager;
 use Control\ClientsController;
 use Control\SignaturesController;
 
-$gblConfig = new ConfigManager($_SERVER['DOCUMENT_ROOT'] . "/config/mainvars.json");
+$gblConfig = new ConfigManager("config/mainvars.json");
 
 define("DEFAULT_HOST", "127.0.0.1");
 define("DEFAULT_DB", "LPGP_WEB");
 define("ROOT_VAR", $_SERVER['DOCUMENT_ROOT']);
 define("EMAIL_USING", "lpgp@gmail.com");
-define("DEFAULT_USER_ICON", $_SERVER['DOCUMENT_ROOT'] . "/media/user-icon.png");
+define("DEFAULT_USER_ICON", "/media/user-icon.png");
 define("DEFAULT_DATETIME_F", "Y-m-d H:i:s");
 define("LPGP_CONF", $gblConfig->getConfig());
-define("CONTROL_FILE", $_SERVER['DOCUMENT_ROOT'] . "/core/control/control.json");
+define("CONTROL_FILE", "core/control/control.json");
 
 
 // Clients constants
-if(!defined("U_CLIENTS_CONF")) define("U_CLIENTS_CONF", $_SERVER['DOCUMENT_ROOT'] . "/u.clients/");
-if(!defined("G_CLIENTS_CONF")) define("G_CLIENTS_CONF", $_SERVER['DOCUMENT_ROOT'] . "/g.clients/");
-if(!defined("TMP_GCLIENTS")) define("TMP_GCLIENTS", $_SERVER['DOCUMENT_ROOT'] . "/g.clients/tmp/");
-if(!defined("TMP_UCLIENTS")) define("TMP_UCLIENTS", $_SERVER['DOCUMENT_ROOT'] . "/u.clients/tmp/");
+if(!defined("U_CLIENTS_CONF")) define("U_CLIENTS_CONF", "/u.clients/");
+if(!defined("G_CLIENTS_CONF")) define("G_CLIENTS_CONF", "/g.clients/");
+if(!defined("TMP_GCLIENTS")) define("TMP_GCLIENTS", "/g.clients/tmp/");
+if(!defined("TMP_UCLIENTS")) define("TMP_UCLIENTS", "/u.clients/tmp/");
 
 /**
  * That class contains the main connection to the database and him universal actions,
@@ -407,7 +407,7 @@ class UsersData extends DatabaseConnection{
      * @return string
      */
     public function fetchTemplateEmail(string $user, string $key){
-        $raw_content = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/core/templates/template-email.html");
+        $raw_content = file_get_contents("/core/templates/template-email.html");
         $cont1 = str_replace("%user%", $user, $raw_content);
         return str_replace("%key%", $key, $cont1);
     }
@@ -808,7 +808,7 @@ class ProprietariesData extends DatabaseConnection{
         $this->checkNotConnected();
         if(!$this->checkProprietaryExists($proprietary)) throw new ProprietaryNotFound("There's no proprietary account '$proprietary'", 1);
         $prop_dt = $this->connection->query("SELECT vl_key, checked, vl_email FROM tb_proprietaries WHERE nm_proprietary = \"$proprietary\";")->fetch_array();
-        $content = $this->parseHTMLTemplateEmailK($proprietary, $prop_dt['vl_key'], $_SERVER['DOCUMENT_ROOT'] . "/core/templates/template-email.html");
+        $content = $this->parseHTMLTemplateEmailK($proprietary, $prop_dt['vl_key'], "/core/templates/template-email.html");
         $headers = "MIME-Version: 1.0\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1\n";
         $headers .= "From: " . self::EMAIL_USING . "\n";
@@ -967,7 +967,7 @@ class SignaturesData extends DatabaseConnection{
     public static function generateFileNm(int $initial_counter = 0){
         $local_counter = $initial_counter;
         while(true){
-            if(!file_exists($_SERVER['DOCUMENT_ROOT'] . "/signatures.d/signature-file-". $local_counter . ".lpgp"))
+            if(!file_exists("/signatures.d/signature-file-". $local_counter . ".lpgp"))
                 break;
             else $local_counter++;
         }
@@ -1000,7 +1000,7 @@ class SignaturesData extends DatabaseConnection{
         for($char = 0; $char < strlen($to_json); $char++) array_push($arr_ord, "" . ord($to_json[$char]));
         $content_file = implode(self::DELIMITER, $arr_ord);
         $root = $_SERVER['DOCUMENT_ROOT'];
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/signatures.d/" . $file_name, $content_file);
+        file_put_contents("/signatures.d/" . $file_name, $content_file);
         $controller->addDownloadRecord($signature_id, $dtk, $content['Date-Creation']);
         unset($controller);
         return $HTML_mode ? "<a href=\"https://lpgpofficial.com/signatures.d/$file_name\" download=\"$file_name\" role=\"button\" class=\"btn btn-lg downloads-btn btn-primary\">Get your signature #$signature_id here!</a>" : "$root/signatures.d/$file_name";
@@ -1032,8 +1032,8 @@ class SignaturesData extends DatabaseConnection{
     public function checkSignatureFile(string $file_name){
         $this->checkNotConnected();
         if(!$this->checkFileValid($file_name)) throw new InvalidSignatureFile("", 1);
-        if(!file_exists($_SERVER['DOCUMENT_ROOT'] . "/usignatures.d/$file_name")) throw new SignatureFileNotFound("There's no file '$file_name' on the uploaded signatures folder.", 1);
-        $content_file = utf8_encode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/signatures.d/" . $file_name));
+        if(!file_exists("/usignatures.d/$file_name")) throw new SignatureFileNotFound("There's no file '$file_name' on the uploaded signatures folder.", 1);
+        $content_file = utf8_encode(file_get_contents("/signatures.d/" . $file_name));
         $controller = new SignaturesController(CONTROL_FILE);
         if(!$controller->authDownloadFile($file_name)) return false;
         $sp_content = explode(self::DELIMITER, $content_file);
@@ -1223,7 +1223,7 @@ class SignaturesData extends DatabaseConnection{
     public function getSignatureFData(string $file_name){
         $this->checkNotConnected();
 
-        $content_file = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/usignatures.d/" . $file_name);
+        $content_file = file_get_contents("/usignatures.d/" . $file_name);
         $exp_content = explode(self::DELIMITER, $content_file);
         $ascii_pr = array();
         for($i = 0; $i < count($exp_content); $i++) $ascii_pr[] = chr((int) $exp_content[$i]);
@@ -2510,7 +2510,7 @@ class ClientsAccessData extends DatabaseConnection{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace templateSystem;
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
+require_once "core/Exceptions.php";
 
 use ExctemplateSystem\AlreadyLoadedFile;
 use ExctemplateSystem\InvalidFileType;

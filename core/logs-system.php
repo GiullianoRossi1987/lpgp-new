@@ -2,7 +2,7 @@
 namespace LogsSystem;
 use Exception;
 try{
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
+    require_once "core/Exceptions.php";
 }
 catch(Exception $e){
     require_once "core/Exceptions.php";
@@ -12,9 +12,9 @@ use LogsErrors\InvalidFile;
 use LogsErrors\LogsFileNotLoaded;
 use LogsErrors\LogsFileAlreadyLoaded;
 
-if(!defined("DEFAULT_DB_LOGS"))    define("DEFAULT_DB_LOGS", $_SERVER['DOCUMENT_ROOT'] . "/logs/database.log");
-if(!defined("DEFAULT_ERROR_LOGS")) define("DEFAULT_ERROR_LOGS", $_SERVER['DOCUMENT_ROOT'] . "/logs/error.log");
-if(!defined("DEFAULT_FILES_LOG"))  define("DEFAULT_FILES_LOG", $_SERVER['DOCUMENT_ROOT'] . "/logs/files.log");
+if(!defined("DEFAULT_DB_LOGS"))    define("DEFAULT_DB_LOGS", "/logs/database.log");
+if(!defined("DEFAULT_ERROR_LOGS")) define("DEFAULT_ERROR_LOGS", "/logs/error.log");
+if(!defined("DEFAULT_FILES_LOG"))  define("DEFAULT_FILES_LOG", "/logs/files.log");
 if(!defined("DTTM_FORMAT"))        define("DTTM_FORMAT", "YYYY-MM-dd HH:mm:ii");
 
 

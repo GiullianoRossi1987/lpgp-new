@@ -1,7 +1,7 @@
 <?php
 namespace Charts_Plots;
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
+require_once "core/Core.php";
+require_once "core/js-handler.php";
 
 // starts with the defined constants
 if(!defined("BAR_CHART"))  define("BAR_CHART", "bar");

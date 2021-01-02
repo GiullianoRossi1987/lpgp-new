@@ -1,10 +1,10 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
+require_once "core/Core.php";
 use templateSystem\ErrorTemplate;
 if(session_status() == PHP_SESSION_NONE) session_start();
 
 if($_SESSION['user-logged'] == "false"){
-    $err = new ErrorTemplate($_SERVER['DOCUMENT_ROOT'] . "/core/templates/500-error-internal.html", "There's no user logged!", __FILE__, 7, "<button class=\"default-btn btn darkble-btn\" onclick=\"window.location.replace('http://localhost/')\">Back to the index</button>");
+    $err = new ErrorTemplate("/core/templates/500-error-internal.html", "There's no user logged!", __FILE__, 7, "<button class=\"default-btn btn darkble-btn\" onclick=\"window.location.replace('http://localhost/')\">Back to the index</button>");
     die($err->parseFile());
 }
 else{
@@ -27,9 +27,9 @@ else{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/layout.css">
     <script src="js/main-script.js"></script>
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../bootstrap/font-awesome.min.css">
-    <script src="../bootstrap/jquery-3.3.1.slim.min.js"></script>
-    <script src="../bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/font-awesome.min.css">
+    <script src="bootstrap/jquery-3.3.1.slim.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
 </head>
 </html>

@@ -7,7 +7,7 @@ use function JSHandler\sendUserLogged;
 use function JSHandler\setCon1Links;
 use Configurations\ConfigManager;
 
-$gblConfig = new ConfigManager($_SERVER['DOCUMENT_ROOT'] . "/config/mainvars.json");
+$gblConfig = new ConfigManager("/config/mainvars.json");
 if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
 
 sendUserLogged();

@@ -1,14 +1,14 @@
 <?php
 if(session_status()  === PHP_SESSION_NONE) session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
+require_once "core/Core.php";
+require_once "core/Exceptions.php";
 
 use Core\UsersData;
 use Core\ProprietariesData;
 
 if(!defined("EMAIL_TO"))          define("EMAIL_TO", "giulliano.scatalon.rossi@gmail.com");
-if(!defined("FEEDBACK_TEMPLATE")) define("FEEDBACK_TEMPLATE", $_SERVER['DOCUMENT_ROOT'] . "/core/templates/feedback.html");
-if(!defined("REPORT_TEMPLATE"))   define("REPORT_TEMPLATE", $_SERVER['DOCUMENT_ROOT'] . "/core/templates/report.html");
+if(!defined("FEEDBACK_TEMPLATE")) define("FEEDBACK_TEMPLATE", "/core/templates/feedback.html");
+if(!defined("REPORT_TEMPLATE"))   define("REPORT_TEMPLATE", "/core/templates/report.html");
 if(!defined("DUMP_REPORT_TYPES")) define("DUMP_REPORT_TYPES", ["Other", "Signature checking",
                                                                "Client Checking", "My Account",
                                                                "Signatures Management", "Clients Management",

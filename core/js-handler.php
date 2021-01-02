@@ -1,8 +1,8 @@
 <?php
 namespace JSHandler;
 if(session_status() == PHP_SESSION_NONE)session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/config/configmanager.php";
+require_once "core/Core.php";
+require_once "config/configmanager.php";
 
 use Core\ProprietariesData;
 use Core\SignaturesData;
@@ -10,7 +10,7 @@ use ProprietariesExceptions\ProprietaryNotFound;
 use Core\ClientsAccessData;
 use Configurations\ConfigManager;
 
-$gblConfig = new ConfigManager($_SERVER['DOCUMENT_ROOT'] . "/config/mainvars.json");
+$gblConfig = new ConfigManager("/config/mainvars.json");
 if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
 if(!defined("MAX_SIGC")) define("MAX_SIGC", 5);   // the max number of the signatures checked card displayed at the my_account.php page
 

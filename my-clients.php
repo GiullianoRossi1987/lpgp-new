@@ -1,7 +1,7 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/js-handler.php";
+require_once "core/Core.php";
+require_once "core/js-handler.php";
 
 use function JSHandler\sendUserLogged;
 use function JSHandler\createClientCard;
@@ -42,8 +42,8 @@ foreach($clients as $client){
     <script src="js/actions.js"></script>
     <link rel="stylesheet" href="css/account.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <script src="../jquery/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
-    <script src="../jquery/lib/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+    <script src="jquery/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="jquery/lib/bootstrap/js/bootstrap.js" charset="utf-8"></script>
     <script src="js/requester.js" charset="utf-8"></script>
     <script src="js/autoload.js" charset="utf-8"></script>
 </head>

@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Core.php";
+require_once "core/Core.php";
 
 use Core\ClientsData;
 use const LPGP_CONF;
