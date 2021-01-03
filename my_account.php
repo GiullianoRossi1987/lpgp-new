@@ -3,6 +3,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 require_once "core/js-handler.php";
 require_once "core/Core.php";
 require_once "core/users-data.php";
+require_once "core/proprietaries-data.php";
 
 use function JSHandler\lsSignaturesMA;
 use function JSHandler\sendUserLogged;
