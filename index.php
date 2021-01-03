@@ -108,6 +108,7 @@ sendUserLogged();
     <script src="./js/actions.js"></script>
     <script>
         $(document).ready(function(){
+            parseLogin();
             setAccountOpts();
             setSignatureOpts();
             applyToA();
