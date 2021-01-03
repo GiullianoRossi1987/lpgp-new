@@ -481,3 +481,4 @@ class SignaturesData extends DatabaseConnection{
         return $results;
     }
 }
+?>
