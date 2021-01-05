@@ -19,99 +19,17 @@ $id = $prp->getPropID($_SESSION['user']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LPGP Oficial Server</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/new-layout.css">
-    <script src="js/main-script.js"></script>
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap/font-awesome.min.css">
-    <script src="bootstrap/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="../media/new-logo.png" type="image/x-icon">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.2/popper.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <script src="jquery/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
-    <script src="js/requester.js" charset="utf-8"></script>
-    <script src="js/autoload.js" charset="utf-8"></script>
-    <script src="jquery/lib/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="css/content-style.css">
+    <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <style>
     #qr-btn{ margin-top: -70px !important; }
 </style>
 <body>
-    <script>
-        $(document).ready(function(){
-            setAccountOpts(true);
-            setSignatureOpts();
-            requestFilter(0, 0, "#dispose-items");
-            loadSearchButton();
-        });
-
-        var pas1 = "text";
-        var pas2 = "text";
-        var vb = "visible";
-
-        $(document).on("click", "#show-passwd1", function(){
-            $("#password1").attr("type", pas1);
-            if(pas1 == "text") pas1 = "password";
-            else pas1 = "text";
-        });
-
-        $(document).on("click", "#show-passwd2", function(){
-            $("#password2").attr("type", pas1);
-            if(pas2 == "text") pas2 = "password";
-            else pas2 = "text";
-        });
-
-        $(document).on("change", "#password1", function(){
-            var content = $(this).val();
-            if(content.length <= 7){
-                $("#err-lb-passwd1").text("Please choose a password with more then 7 characters.");
-                $("#err-lb-passwd1").show();
-            }
-            else if(content != $("#password2").val()){
-                $("#err-lb-passwd1").text("The passwords doesn't match");
-                $("#err-lb-passwd1").show();
-            }
-            else $("#err-lb-passwd1").hide();
-        });
-
-        $(document).on("change", "#username", function(){
-            var content = $(this).val();
-            if(content.length <= 0){
-                $("#err-lb-username").text("Please choose a username!");
-                $("#err-lb-username").show();
-            }
-            else $("#err-lb-username").hide();
-        });
-
-        $(document).on("change", "#email", function(){
-            var content = $(this).val();
-            if(content.length <= 0){
-                $("#err-lb-email").text("Please choose a e-amil address");
-                $("#err-lb-email").show();
-            }
-            else if(content.search("@") < 0){
-                $("#err-lb-email").text("Please choose a valid e-mail address");
-                $("#err-lb-email").show();
-            }
-            else $("#err-lb-email").hide();
-        });
-
-        $(document).on("click", "#default-img", function(){
-            $("#upload-img-input").hide();
-        });
-
-        $(document).scroll(function(){
-            $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".default-btn-header").toggleClass("default-btn-header-scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".opts").toggleClass("opts-scrolled", $(this).scrollTop() > $(".header-container").height());
-        });
-
-        $(document).on("change", "#filter-main", function(){
-            requestFilter(0, $("#filter-main").val(), "#dispose-items");
-        });
-    </script>
     <div class="container-fluid header-container" role="banner" style="position: fixed;">
         <div class="col-12 header" style="height: 71px; transition: background-color 200ms linear;">
             <div class="opt-dropdown dropdown login-dropdown">
@@ -196,5 +114,86 @@ $id = $prp->getPropID($_SESSION['user']);
             </div>
         </div>
     </div>
+    <!-- Scripts -->
+    <script src="jquery/lib/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/autoload.js" charset="utf-8"></script>
+    <script src="js/main-script.js"></script>
+    <script src="js/actions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        $(document).ready(function(){
+            setAccountOpts(true);
+            setSignatureOpts();
+            requestFilter(0, 0, "#dispose-items");
+            loadSearchButton();
+        });
+
+        var pas1 = "text";
+        var pas2 = "text";
+        var vb = "visible";
+
+        $(document).on("click", "#show-passwd1", function(){
+            $("#password1").attr("type", pas1);
+            if(pas1 == "text") pas1 = "password";
+            else pas1 = "text";
+        });
+
+        $(document).on("click", "#show-passwd2", function(){
+            $("#password2").attr("type", pas1);
+            if(pas2 == "text") pas2 = "password";
+            else pas2 = "text";
+        });
+
+        $(document).on("change", "#password1", function(){
+            var content = $(this).val();
+            if(content.length <= 7){
+                $("#err-lb-passwd1").text("Please choose a password with more then 7 characters.");
+                $("#err-lb-passwd1").show();
+            }
+            else if(content != $("#password2").val()){
+                $("#err-lb-passwd1").text("The passwords doesn't match");
+                $("#err-lb-passwd1").show();
+            }
+            else $("#err-lb-passwd1").hide();
+        });
+
+        $(document).on("change", "#username", function(){
+            var content = $(this).val();
+            if(content.length <= 0){
+                $("#err-lb-username").text("Please choose a username!");
+                $("#err-lb-username").show();
+            }
+            else $("#err-lb-username").hide();
+        });
+
+        $(document).on("change", "#email", function(){
+            var content = $(this).val();
+            if(content.length <= 0){
+                $("#err-lb-email").text("Please choose a e-amil address");
+                $("#err-lb-email").show();
+            }
+            else if(content.search("@") < 0){
+                $("#err-lb-email").text("Please choose a valid e-mail address");
+                $("#err-lb-email").show();
+            }
+            else $("#err-lb-email").hide();
+        });
+
+        $(document).on("click", "#default-img", function(){
+            $("#upload-img-input").hide();
+        });
+
+        $(document).scroll(function(){
+            $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
+            $(".default-btn-header").toggleClass("default-btn-header-scrolled", $(this).scrollTop() > $(".header-container").height());
+            $(".opts").toggleClass("opts-scrolled", $(this).scrollTop() > $(".header-container").height());
+        });
+
+        $(document).on("change", "#filter-main", function(){
+            requestFilter(0, $("#filter-main").val(), "#dispose-items");
+        });
+    </script>
 </body>
 </html>

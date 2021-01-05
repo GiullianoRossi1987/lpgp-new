@@ -17,23 +17,13 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LPGP Oficial - Search</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>LPGP Oficial Server</title>
     <link rel="stylesheet" href="css/new-layout.css">
-    <script src="js/main-script.js"></script>
-    <script src="js/actions.js"></script>
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap/font-awesome.min.css">
-    <script src="bootstrap/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="../media/new-logo.png" type="image/x-icon">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.2/popper.min.js"></script>
+    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="css/content-style.css">
+    <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    <script src="js/autoload.js" charset="utf-8"></script>
-    <script src="js/requester.js" charset="utf-8"></script>
-    <script src="jquery/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <style>
     .main-container{
@@ -44,85 +34,6 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     }
 </style>
 <body>
-    <script>
-        $(document).ready(function(){
-            setAccountOpts();
-            setSignatureOpts();
-            applyToA();
-            $.post({
-                url: "ajx_logged_request.php",
-                data: "getJSON=t",
-                success: function(response){
-                    let mainData = $.parseJSON(response);
-                    if(parseInt(mainData['Mode']) != 1 || !mainData['Logged']){
-                        $("#scope-rs").prop("disabled", true);
-                        $("#main-spc-rs").prop("data-toggle", "tooltip");
-                        $("#main-spc-rs").prop("title", "This feature isn't available now");
-                        ////////////////////////////////////////////////////////////////////
-                        $("#md-c-ch").prop("disabled", true);
-                        $(".cli-rb").prop("data-toggle", "tooltip");
-                        $(".cli-rb").prop("title", "This feature isn't available for you now");
-                    }
-                    else{
-                        $("#scope-rs").prop("disabled", false);
-                        $("#md-c-ch").prop("disabled", false);
-
-                        $(".cli-rb").prop("data-toggle", null);
-                        $(".cli-rb").prop("title", null);
-
-                        $("#main-spc-rs").prop("data-toggle", null);
-                        $("#main-spc-rs").prop("title", null);
-                    }
-                },
-                error: function(xhr, status, error){ console.error(error); }
-            });
-        });
-
-        $(document).ready(function(){
-            $(".contitle").css("opacity", "1");
-            $(".headtitle").css("opacity", "1");
-            dpOptionsScope();
-        });
-
-        $(document).on("click", "#search-bt", function(){
-            let mode = document.getElementsByName('mode');
-            let scope = document.getElementsByName('scope');
-            requestQuery($('#needle-in').val(), $("input[name='scope']:checked").val(), $("input[name='mode']:checked").val(),  "#results-dispose");
-        });
-
-        function dpOptionsScope(){
-            if($("input[name='scope']:checked").val() != "all"){
-                $("#md-u-ch").prop("disabled", true);
-                $(".usr-rb").prop("data-toggle", "tooltip");
-                $(".usr-rb").prop("title", "This feature isn't available now");
-
-                $("#md-p-ch").prop("disabled", true);
-                $(".prp-rb").prop("data-toggle", "tooltip");
-                $(".prp-rb").prop("title", "This feature isn't available now")
-
-                $("#md-n-ch").prop("disabled", true);
-                $(".nrm-rb").prop("data-toggle", "tooltip");
-                $(".nrm-rb").prop("title", "This feature isn't available now");
-            }
-            else{
-                $("#md-u-ch").prop("disabled", false);
-                $("#md-p-ch").prop("disabled", false);
-                $("#md-n-ch").prop("disabled", false);
-
-                $(".usr-rb").prop("data-toggle", null);
-                $(".usr-rb").prop("title", null);
-
-                $(".prp-rb").prop("data-toggle", null);
-                $(".prp-rb").prop("title", null);
-
-                $(".nrm-rb").prop("data-toggle", null);
-                $(".nrm-rb").prop("title", null);
-            }
-        }
-
-        $(document).on("change", $(".opt-scope"), function(){ dpOptionsScope(); });
-
-    </script>
     <div class="container-fluid header-container" role="banner" style="position: relative;">
         <div class="col-md-12 header col-sm-12" style="height: 71px;">
             <div class="opt-dropdown dropdown login-dropdown">
@@ -240,5 +151,91 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
             </div>
         </div>
     </div>
+    <!-- Scripts -->
+    <script src="jquery/lib/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/autoload.js" charset="utf-8"></script>
+    <script src="js/main-script.js"></script>
+    <script src="js/actions.js"></script>
+    <script>
+        $(document).ready(function(){
+            setAccountOpts();
+            setSignatureOpts();
+            applyToA();
+            $.post({
+                url: "ajx_logged_request.php",
+                data: "getJSON=t",
+                success: function(response){
+                    let mainData = $.parseJSON(response);
+                    if(parseInt(mainData['Mode']) != 1 || !mainData['Logged']){
+                        $("#scope-rs").prop("disabled", true);
+                        $("#main-spc-rs").prop("data-toggle", "tooltip");
+                        $("#main-spc-rs").prop("title", "This feature isn't available now");
+                        ////////////////////////////////////////////////////////////////////
+                        $("#md-c-ch").prop("disabled", true);
+                        $(".cli-rb").prop("data-toggle", "tooltip");
+                        $(".cli-rb").prop("title", "This feature isn't available for you now");
+                    }
+                    else{
+                        $("#scope-rs").prop("disabled", false);
+                        $("#md-c-ch").prop("disabled", false);
+
+                        $(".cli-rb").prop("data-toggle", null);
+                        $(".cli-rb").prop("title", null);
+
+                        $("#main-spc-rs").prop("data-toggle", null);
+                        $("#main-spc-rs").prop("title", null);
+                    }
+                },
+                error: function(xhr, status, error){ console.error(error); }
+            });
+        });
+
+        $(document).ready(function(){
+            $(".contitle").css("opacity", "1");
+            $(".headtitle").css("opacity", "1");
+            dpOptionsScope();
+        });
+
+        $(document).on("click", "#search-bt", function(){
+            let mode = document.getElementsByName('mode');
+            let scope = document.getElementsByName('scope');
+            requestQuery($('#needle-in').val(), $("input[name='scope']:checked").val(), $("input[name='mode']:checked").val(),  "#results-dispose");
+        });
+
+        function dpOptionsScope(){
+            if($("input[name='scope']:checked").val() != "all"){
+                $("#md-u-ch").prop("disabled", true);
+                $(".usr-rb").prop("data-toggle", "tooltip");
+                $(".usr-rb").prop("title", "This feature isn't available now");
+
+                $("#md-p-ch").prop("disabled", true);
+                $(".prp-rb").prop("data-toggle", "tooltip");
+                $(".prp-rb").prop("title", "This feature isn't available now")
+
+                $("#md-n-ch").prop("disabled", true);
+                $(".nrm-rb").prop("data-toggle", "tooltip");
+                $(".nrm-rb").prop("title", "This feature isn't available now");
+            }
+            else{
+                $("#md-u-ch").prop("disabled", false);
+                $("#md-p-ch").prop("disabled", false);
+                $("#md-n-ch").prop("disabled", false);
+
+                $(".usr-rb").prop("data-toggle", null);
+                $(".usr-rb").prop("title", null);
+
+                $(".prp-rb").prop("data-toggle", null);
+                $(".prp-rb").prop("title", null);
+
+                $(".nrm-rb").prop("data-toggle", null);
+                $(".nrm-rb").prop("title", null);
+            }
+        }
+
+        $(document).on("change", $(".opt-scope"), function(){ dpOptionsScope(); });
+
+    </script>
 </body>
 </html>
