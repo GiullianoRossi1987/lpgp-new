@@ -2,13 +2,14 @@
 if(session_status() == PHP_SESSION_NONE) session_start();
 require_once "core/Core.php";
 require_once "core/js-handler.php";
+require_once "core/prop-history.php";
+require_once "core/usr-history.php";
 
 use Core\UsersCheckHistory;
 use Core\PropCheckHistory;
 use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
 
-sendUserLogged();
 $body = "";
 
 if($_SESSION['mode'] == "prop"){

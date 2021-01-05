@@ -2,16 +2,14 @@
 require_once "core/Core.php";
 require_once "core/Exceptions.php";
 require_once "core/js-handler.php";
+require_once "core/users-data.php";
+require_once "core/proprietaries-data.php";
 
 use Core\UsersData;
 use Core\ProprietariesData;
 use function JSHandler\sendUserLogged;
 
-
-// sendUserLogged();
-// die(var_dump($_SESSION));
 $status = "none";
-// die(var_dump($_POST));
 try{
     if($_SESSION['mode'] == "prop"){
     	$prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
@@ -37,11 +35,9 @@ try{
         if(isset($_POST["new-passwd"]))
             $usr->chUserPasswd($data["nm_user"], $_POST["new-passwd"]);
     }
-    // sendUserLogged();
     $status = "success";
 }
 catch(Exception $e){
-    // die($e->getMessage());
     $status = $e->getMessage();
 }
 die($status);

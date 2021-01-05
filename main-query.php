@@ -10,7 +10,6 @@ use Configurations\ConfigManager;
 $gblConfig = new ConfigManager("/config/mainvars.json");
 if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
 
-sendUserLogged();
 ?>
 <!DOCTYPE html>
 <html lang="en">

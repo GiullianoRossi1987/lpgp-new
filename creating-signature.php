@@ -1,5 +1,6 @@
 <?php
 require_once "core/Core.php";
+require_once "core/signatures-data.php";
 
 use Core\SignaturesData;
 use templateSystem\ErrorTemplate;

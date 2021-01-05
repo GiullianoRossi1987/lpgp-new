@@ -5,7 +5,6 @@ require_once "core/js-handler.php";
 
 use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
-sendUserLogged();
 ?>
 
 <!DOCTYPE html>

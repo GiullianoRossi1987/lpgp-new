@@ -4,6 +4,10 @@ require_once "core/js-handler.php";
 require_once "core/Core.php";
 require_once "core/users-data.php";
 require_once "core/proprietaries-data.php";
+require_once "core/clients-data.php";
+require_once "core/prop-history.php";
+require_once "core/clients-access-data.php";
+require_once "core/usr-history.php";
 
 use function JSHandler\lsSignaturesMA;
 use function JSHandler\sendUserLogged;

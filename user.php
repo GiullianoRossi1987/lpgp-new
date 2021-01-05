@@ -3,13 +3,13 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 
 require_once "core/Core.php";
 require_once "core/js-handler.php";
+require_once "core/users-data.php";
 
 use Core\UsersData;
 use function JSHandler\getImgPath;
 use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
 
-sendUserLogged();  // Just for fixing a error that i don't know why is going on.
 $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 if(isset($_GET['id'])) $data = $usr->getUserDataByID(base64_decode($_GET['id']));
 ?>

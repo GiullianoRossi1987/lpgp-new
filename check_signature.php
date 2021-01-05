@@ -3,6 +3,11 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 require_once "core/Core.php";
 require_once "core/js-handler.php";
 require_once "core/Exceptions.php";
+require_once "core/signatures-data.php";
+require_once "core/proprietaries-data.php";
+require_once "core/prop-history.php";
+require_once "core/users-data.php";
+require_once "core/usr-history.php";
 
 
 use Core\SignaturesData;

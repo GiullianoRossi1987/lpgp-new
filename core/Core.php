@@ -9,7 +9,6 @@ try{
 catch(Exception $e){
     require_once $_SERVER['DOCUMENT_ROOT'] . "/core/Exceptions.php";
 }
-// add the logs manager after.
 
 use mysqli;
 use mysqli_result;

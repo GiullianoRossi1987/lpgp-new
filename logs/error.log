@@ -83,3 +83,15 @@
 [Sun Jan 03 15:56:39.457813 2021] [php7:warn] [pid 7208] [client 127.0.0.1:48682] PHP Warning:  file_put_contents(config/mainvars.json): failed to open stream: No such file or directory in /home/giulliano/Projetos/lpgp-new/config/configmanager.php on line 234, referer: https://www.lpgpofficial.com/my_account.php
 [Sun Jan 03 15:56:48.124926 2021] [php7:warn] [pid 7206] [client 127.0.0.1:48696] PHP Warning:  file_put_contents(config/mainvars.json): failed to open stream: No such file or directory in /home/giulliano/Projetos/lpgp-new/config/configmanager.php on line 234, referer: https://www.lpgpofficial.com/my_account.php
 [Sun Jan 03 16:00:04.050882 2021] [php7:warn] [pid 989] [client 127.0.0.1:48722] PHP Warning:  file_put_contents(config/mainvars.json): failed to open stream: No such file or directory in /home/giulliano/Projetos/lpgp-new/config/configmanager.php on line 234, referer: https://www.lpgpofficial.com/my_account.php
+[Mon Jan 04 10:35:59.263574 2021] [ssl:warn] [pid 797] AH01906: www.lpgpofficial.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Mon Jan 04 10:35:59.603695 2021] [ssl:warn] [pid 797] AH01909: www.lpgpofficial.com:443:0 server certificate does NOT include an ID which matches the server name
+[Mon Jan 04 10:36:02.065445 2021] [ssl:warn] [pid 962] AH01906: www.lpgpofficial.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Mon Jan 04 10:36:02.065462 2021] [ssl:warn] [pid 962] AH01909: www.lpgpofficial.com:443:0 server certificate does NOT include an ID which matches the server name
+[Tue Jan 05 09:40:21.308565 2021] [ssl:warn] [pid 767] AH01906: www.lpgpofficial.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Tue Jan 05 09:40:21.693107 2021] [ssl:warn] [pid 767] AH01909: www.lpgpofficial.com:443:0 server certificate does NOT include an ID which matches the server name
+[Tue Jan 05 09:40:23.646938 2021] [ssl:warn] [pid 938] AH01906: www.lpgpofficial.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Tue Jan 05 09:40:23.646988 2021] [ssl:warn] [pid 938] AH01909: www.lpgpofficial.com:443:0 server certificate does NOT include an ID which matches the server name
+[Tue Jan 05 16:44:19.728330 2021] [ssl:warn] [pid 788] AH01906: www.lpgpofficial.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Tue Jan 05 16:44:19.896914 2021] [ssl:warn] [pid 788] AH01909: www.lpgpofficial.com:443:0 server certificate does NOT include an ID which matches the server name
+[Tue Jan 05 16:44:20.971807 2021] [ssl:warn] [pid 923] AH01906: www.lpgpofficial.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Tue Jan 05 16:44:20.971854 2021] [ssl:warn] [pid 923] AH01909: www.lpgpofficial.com:443:0 server certificate does NOT include an ID which matches the server name

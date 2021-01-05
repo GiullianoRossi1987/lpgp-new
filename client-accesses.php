@@ -3,6 +3,8 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 require_once "core/Core.php";
 require_once "core/js-handler.php";
 require_once "core/charts.php";
+require_once "core/clients-data.php";
+require_once "core/clients-access-data.php";
 
 use function JSHandler\sendUserLogged;
 use Core\ClientsData;
@@ -10,7 +12,6 @@ use Core\ClientsAccessData;
 use Charts_Plots\AccessPlot;
 use const LPGP_CONF;
 
-sendUserLogged();  // preventing bugs
 $objClients = new AccessPlot("Client ");
 
 if(isset($_GET['client'])){

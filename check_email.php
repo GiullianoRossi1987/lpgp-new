@@ -1,14 +1,16 @@
 <?php
 require_once "core/Core.php";
 require_once "core/js-handler.php";
-if(session_status() == PHP_SESSION_NONE) session_start();
+require_once "core/users-data.php";
+require_once "core/proprietaries-data.php";
+
 
 use Core\UsersData;
 use Core\ProprietariesData;
 use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
 
-sendUserLogged();
+if(session_status() == PHP_SESSION_NONE) session_start();
 ?>
 
 <!DOCTYPE html>

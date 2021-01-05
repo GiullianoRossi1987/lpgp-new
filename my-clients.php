@@ -2,13 +2,13 @@
 if(session_status() == PHP_SESSION_NONE) session_start();
 require_once "core/Core.php";
 require_once "core/js-handler.php";
+require_once "core/clients-data.php";
 
 use function JSHandler\sendUserLogged;
 use function JSHandler\createClientCard;
 use Core\ClientsData;
 use const LPGP_CONF;
 
-sendUserLogged();  // preventing bugs
 
 $obj = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 $clients = $obj->getClientsByOwner($_SESSION['user']);

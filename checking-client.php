@@ -3,14 +3,13 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 require_once "core/Core.php";
 require_once "core/js-handler.php";
 require_once "core/Exceptions.php";
+require_once "core/clients-data.php";
 
 use Core\ClientsData;
 use ClientsExceptions\AuthenticationError;
 use function JSHandler\sendUserLogged;
 use function JSHandler\createClientAuthCard;
 use const LPGP_CONF;
-
-sendUserLogged();  // preventing bugs
 
 move_uploaded_file($_FILES['to-check']['tmp_name'][0], U_CLIENTS_CONF . $_FILES['to-check']['name'][0]);
 

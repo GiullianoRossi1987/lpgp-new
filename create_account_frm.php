@@ -2,8 +2,6 @@
 if(session_status() == PHP_SESSION_NONE) session_start();
 require_once "core/js-handler.php";
 use function JSHandler\sendUserLogged;
-
-sendUserLogged(); // preventing bugs
 ?>
 <!DOCTYPE html>
 <html lang="en">

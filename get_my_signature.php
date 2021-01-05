@@ -1,12 +1,12 @@
 <?php
 require_once "core/Core.php";
 require_once "core/js-handler.php";
+require_once "core/signatures-data.php";
 
 use Core\SignaturesData;
 use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
 
-sendUserLogged();
 $sign = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 ?>
 

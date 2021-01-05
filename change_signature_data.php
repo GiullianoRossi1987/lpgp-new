@@ -2,11 +2,11 @@
 if(session_status() == PHP_SESSION_NONE) session_start();
 require_once "core/Core.php";
 require_once "core/js-handler.php";
+require_once "core/signatures-data.php";
 
 use Core\SignaturesData;
 use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
-sendUserLogged();
 
 if(isset($_POST['cancel-btn'])) echo "<script>window.location.replace(\"https://localhost/my_account.php\");</script>";
 

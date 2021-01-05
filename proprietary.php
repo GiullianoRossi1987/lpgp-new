@@ -3,6 +3,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 
 require_once "core/Core.php";
 require_once "core/js-handler.php";
+require_once "core/proprietaries-data.php";
 
 use Core\ProprietariesData;
 use function JSHandler\lsExtSignatures;

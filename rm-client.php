@@ -1,5 +1,6 @@
 <?php
 require_once "core/Core.php";
+require_once "core/clients-data.php";
 
 use Core\ClientsData;
 use const LPGP_CONF;
