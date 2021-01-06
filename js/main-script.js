@@ -283,6 +283,4 @@ function parseLogin(){
         },
         error: function(xhr, status, error){ console.log(error); }
     });
-    // $("#img-user").css("background-image", "url(" + getLinkedUserIcon() + ")");
-    loadSearchButton();
 }

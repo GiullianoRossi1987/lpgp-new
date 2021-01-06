@@ -3,7 +3,7 @@ namespace JSHandler;
 if(session_status() == PHP_SESSION_NONE)session_start();
 require_once "core/Core.php";
 require_once "config/configmanager.php";
-require_once "core/proprietaries-data.php":
+require_once "core/proprietaries-data.php";
 require_once "core/signatures-data.php";
 require_once "core/clients-access-data.php";
 require_once "core/Exceptions.php";
