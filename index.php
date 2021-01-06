@@ -105,6 +105,7 @@ sendUserLogged();
     <script src="bootstrap/dist/js/bootstrap.js"></script>
     <script src="js/autoload.js" charset="utf-8"></script>
     <script src="./js/main-script.js"></script>
+    <script src="js/changelogs.js"></script>
     <script src="./js/actions.js"></script>
     <script>
         $(document).ready(function(){

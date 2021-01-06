@@ -37,7 +37,7 @@
     margin-left: 90%;
     margin-top: -40px !important;
     border: 1px solid white;
-    border-radius: 50px;
+    border-radius: 100%;
     transition: background-color 1.1s ease-in;
     transition: border-color: 1.1s ease-in;
 }
