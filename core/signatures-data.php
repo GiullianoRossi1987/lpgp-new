@@ -480,5 +480,32 @@ class SignaturesData extends DatabaseConnection{
         while($row = $sorted->fetch_array()) $results[] = $row;
         return $results;
     }
+
+    /**
+     * Creates a new query based on params received from an array
+     * used normally by the AJAX pages, and mainly by the "ajx_signatures.php" page
+     * @param array $parameters It can be a array ready to be used
+     * @return array The results of the query
+     */
+    public function fastQuery($parameters): array{
+        $this->checkNotConnected();
+        $addedFirst = false; // if one parameter was already used in the query
+        $qr_str = "SELECT * FROM tb_signatures ";
+        if(count($parameters) == 0) $qr_str .= ";";
+        else{
+            $qr_str .= "WHERE ";
+            foreach($parameters as $field => $value){
+                $q_param = $addedFirst ? " AND $field = " : "$field = ";
+                $q_param .= is_numeric($value) && is_string($value) ? "\"$value\"" : "$value";
+                $qr_str .= $q_param;
+                if(!$addedFirst) $addedFirst = true;
+            }
+            $qr_str .= ";";
+        }
+        $results = $this->connection->query($qr_str);
+        $a_results = [];
+        while($row = $results->fetch_array()) $a_results[] = $row;
+        return $a_results;
+    }
 }
 ?>

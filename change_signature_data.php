@@ -157,11 +157,6 @@ if(isset($_POST['save-btn'])){
 			else $("#confirm-passcode").css("visibility", "hidden");
 		});
 
-        $(document).scroll(function(){
-            $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".default-btn-header").toggleClass("default-btn-header-scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".opts").toggleClass("opts-scrolled", $(this).scrollTop() > $(".header-container").height());
-        });
     </script>
 </body>
 </html>
