@@ -208,5 +208,29 @@ class PropCheckHistory extends DatabaseConnection{
         }
         return $main_pg;
     }
+
+    /**
+     * Searches in the database using parameters of a associative array received
+     * and return the results
+     * @param array $parameters The associative array with the parameters
+     * @return array The results of the query
+     */
+    public function fastQuery(array $parameters): array{
+        $this->checkNotConnected();
+        $qr_str = "SELECT * FROM tb_signatures_prop_check_h ";
+        $firstAdded = false;
+        foreach($parameters as $field => $value){
+            if(!$firstAdded){
+                $qr_str .= " WHERE ";
+                $firstAdded = true;
+            }
+            else $qr_str .= ",";
+            $qr_str .= is_numeric($value) ? " $field = $value" : " $field = \"$value\"";
+        }
+        $resp = $this->connection->query($qr_str . ";");
+        $results = [];
+        while($row = $resp->fetch_array()) $results[] = $row;
+        return $results;
+    }
 }
 ?>

@@ -378,4 +378,51 @@ class UsersData extends DatabaseConnection{
         $dt_qr->close();
         return $data;
     }
+
+    /**
+     * Searches in the database using parameters of a associative array received
+     * and return the results
+     * @param array $parameters The associative array with the parameters
+     * @return array The results of the query
+     */
+    public function fastQuery(array $parameters): array{
+        $this->checkNotConnected();
+        $qr_str = "SELECT * FROM tb_users ";
+        $firstAdded = false;
+        foreach($parameters as $field => $value){
+            if(!$firstAdded){
+                $qr_str .= " WHERE ";
+                $firstAdded = true;
+            }
+            else $qr_str .= ",";
+            $qr_str .= is_numeric($value) ? " $field = $value" : " $field = \"$value\"";
+        }
+        $resp = $this->connection->query($qr_str . ";");
+        $results = [];
+        while($row = $resp->fetch_array()) $results[] = $row;
+        return $results;
+    }
+
+    /**
+     * Updates a user account data, using parameters refernce from a associative
+     * array. The array will have the parameters that references what's the new value
+     * of the data specified data as a field. That field name must be the same as the
+     * one in the database.
+     * @param array $parameters The associative array with the parameters
+     * @param integer|string $user The user reference it can be the name or the primary key
+     * @return void
+     */
+    public function fastUpdate(array $parameters, $user): void{
+        $this->checkNotConnected();
+        $firstAdded = false;
+        $qr_str = "UPDATE tb_users SET ";
+        foreach($parameters as $field => $value){
+            if(!$firstAdded) $firstAdded = true;
+            else $qr_str .= ",";
+            $qr_str .= is_numeric($value) ? " $field = $value" : " $field = \"$value\"";
+        }
+        $qr_str .= is_numeric($user) || is_integer($user) ? " WHERE cd_user = $user" : " WHERE nm_user = \"$user\"";
+        $resp = $this->connection->query($qr_str . ";");
+        return;
+    }
 }
