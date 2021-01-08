@@ -20,3 +20,4 @@ else if(isset($_POST["update"])){
     die(json_encode($obj->fastUpdate(json_decode($_POST["update"], true))));
 }
 else die("INVALID OPTION");
+?>
