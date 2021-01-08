@@ -381,4 +381,50 @@ class ProprietariesData extends DatabaseConnection{
           $qr_check->close();
           return $re;
       }
+
+      /**
+       * Searches in the database using parameters to query referred in a associative
+       * array and return the results;
+       * @param array $parameters The parameters received with the same keys as in the database
+       * @return array The content of the query
+       */
+      public function fastQuery(array $parameters): array{
+         $this->checkNotConnected();
+         $firstAdded = false;
+         $qr_str = "SELECT * FROM tb_proprietaries ";
+         foreach($parameters as $field => $value){
+             if(!$firstAdded){
+                 $qr_str .= "WHERE ";
+                 $firstAdded = true;
+             }
+             $qr_str .= is_numeric($value) ? " $field = $value " : " $field = \"$value\" ";
+         }
+         $resp = $this->connection->query($qr_str .= ";");
+         $results = [];
+         while($row = $resp->fetch_array()) $results[] = $row;
+         return $results;
+     }
+
+     /**
+      * Updates a proprietary account data, using the update params from a associative
+      * array
+      * @param array $parameters The parameters witht the same keys as the database
+      * @param integer|string $proprietary The proprietary reference to be updated
+      * @return void
+      */
+     public function fastUpdate(array $parameters, $proprietary): void{
+         $this->checkNotConnected();
+         $firstAdded = false;
+         $qr_str = "UPDATE tb_proprietaries SET ";
+         foreach($parameters as $field => $values){
+             if(!$firstAdded){
+                 $firstAdded = true;
+             }
+             else $qr_str .= ", ";
+             $qr_str .= is_numeric($values) ? " $field = $values" : " $field = \"$values\"";
+         }
+         $qr_str .= is_int($proprietary) || is_numeric($proprietary) ? " WHERE cd_proprietary = $proprietary;" : " WHERE nm_proprietary = \"$proprietary\";";
+         $rep = $this->connection->query($qr_str);
+         return;
+     }
 }

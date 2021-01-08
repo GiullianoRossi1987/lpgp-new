@@ -487,7 +487,7 @@ class SignaturesData extends DatabaseConnection{
      * @param array $parameters It can be a array ready to be used
      * @return array The results of the query
      */
-    public function fastQuery($parameters): array{
+    public function fastQuery(array $parameters): array{
         $this->checkNotConnected();
         $addedFirst = false; // if one parameter was already used in the query
         $qr_str = "SELECT * FROM tb_signatures ";
@@ -506,6 +506,28 @@ class SignaturesData extends DatabaseConnection{
         $a_results = [];
         while($row = $results->fetch_array()) $a_results[] = $row;
         return $a_results;
+    }
+
+    /**
+     * Creates a update query with many parameters specified using a associative
+     * array
+     * @param array $parameters The associative array with the parameters
+     * @param integer $signature The referred signature to UPDATE
+     * @return void
+     */
+    public function fastUpdate(array $parameters, int $signature): void{
+        $this->checkNotConnected();
+        $addedFirst = false;
+        $qr_str = "UPDATE tb_signatures SET ";
+        foreach($parameters as $field => $newVal){
+            if(!$addedFirst){
+                $qr_str .= is_numeric($newVal) ? " $field = $newVal" : " $field = \"$newVal\" ";
+            }
+            else $qr_str .= ", $field = $newVal";
+        }
+        $qr_str .= " WHERE cd_signature = $signature;";
+        $resp = $this->connection->query($qr_str);
+        return;
     }
 }
 ?>

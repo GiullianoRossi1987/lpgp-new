@@ -18,10 +18,12 @@ else if(isset($_POST["add"])){
     die("0");
 }
 else if(isset($_POST["del"]) && isset($_POST["signature"])){
-
+    $obj->delSignature((int)$_POST["signature"]);
+    die("0");
 }
 else if(isset($_POST["change"]) && isset($_POST["signature"]) && isset($_POST["change-params"])){
-
+    $obj->fastUpdate(json_decode($_POST["change-params"]), (int)$_POST["signature"]);
+    die("0");
 }
 else{
     die("INVALID OPERATION");
