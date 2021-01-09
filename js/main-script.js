@@ -6,10 +6,9 @@ function readCookies(){
     var arr_cookies = document.cookie.split(";");
     arr_cookies.forEach((item, i) => {
         arr = item.split("=");
-        swp_cookies[arr[0].trim()] = arr[1].trim();
+        swp_cookies[arr[0].trim()] = decodeURIComponent(arr[1].trim());
     });
 }
-
 
 function include(src){
     var head = document.querySelector("head");
@@ -79,7 +78,7 @@ function setAccountOpts(ext_fls = false){
 
     gbl_opts.appendChild(linkHome);
 
-    if(localStorage.getItem("logged-user") == "true"){
+    if(swp_cookies["user-logged"] == "true"){
         var account_opt = document.createElement("a");
         var logoff_opt = document.createElement("a");
         var config_opt = document.createElement("a");
@@ -157,7 +156,7 @@ function rmClientDrop(){
 function setSignatureOpts(){
     clsSignOpts();
     var local_opts = document.querySelector(".signatures-dropdown .dropdown-menu");
-    if(localStorage.getItem("user_mode") == "prop"){
+    if(swp_cookies["mode"] == "prop"){
         // is a proprietary account
         var che_sig = document.createElement("a");
         var my_sign = document.createElement("a");
@@ -173,7 +172,7 @@ function setSignatureOpts(){
         local_opts.appendChild(my_sign);
         local_opts.appendChild(che_sig);
     }
-    else if(localStorage.getItem("user_mode") == "normie"){
+    else if(swp_cookies["mode"] == "normie"){
         var chk_signature = document.createElement("a");
 
         chk_signature.innerText = "Check a Signature";
@@ -193,7 +192,7 @@ function setSignatureOpts(){
 }
 
 function setClientsDrop(){
-    if(localStorage.getItem("user_mode") == "prop"){
+    if(swp_cookies["mode"] == "prop"){
         var localTo = document.querySelector(".signatures-dropdown .dropdown-menu");
         var optAdd = document.createElement("a");
         var optMy = document.createElement("a");
@@ -251,7 +250,7 @@ function hideError(){
 }
 
 function getLinkedUserIcon(){
-    var ls  = localStorage.getItem("user-icon");
+    var ls  = swp_cookies["user-icon"];
     return "https://" + window.location.hostname + "/" + ls;
 }
 
