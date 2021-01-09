@@ -1,5 +1,16 @@
 // there's some uses of the http://localhost/ if you don't want it then just change't
 
+var swp_cookies = {};
+
+function readCookies(){
+    var arr_cookies = document.cookie.split(";");
+    arr_cookies.forEach((item, i) => {
+        arr = item.split("=");
+        swp_cookies[arr[0].trim()] = arr[1].trim();
+    });
+}
+
+
 function include(src){
     var head = document.querySelector("head");
     var script = document.createElement("script");
