@@ -27,7 +27,7 @@ else if($_POST['account-type'] == "proprietary"){
     foreach($auth as $cookie => $val) setcookie($cookie, $val, time() + 7200);  // two hours of cookies
     $_SESSION = $auth;
 }
-sendUserLogged();
+
 if($_SESSION['checked'] == "false"){
 
     header("Location: check-email-stp1.php");

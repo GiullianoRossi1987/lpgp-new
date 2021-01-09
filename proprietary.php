@@ -11,7 +11,7 @@ use function JSHandler\getImgPath;
 use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
 
-sendUserLogged();  // Just for fixing a error that i don't know why is going on.
+  // Just for fixing a error that i don't know why is going on.
 $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 if(isset($_GET['id'])) $data = $prp->getPropDataByID(base64_decode($_GET['id']));
 ?>

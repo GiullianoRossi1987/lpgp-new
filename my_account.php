@@ -20,8 +20,6 @@ use Core\UsersCheckHistory;
 use Core\ClientsData;
 use Core\ClientsAccessData;
 
-sendUserLogged(); // preventing bugs
-
 $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 
@@ -309,36 +307,19 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
             setSignatureOpts();
             applyToA();
             applyToForms();
-            $.post({
-                url: "ajx_logged_request.php",
-                data: "getJSON=t",
-                success: function(json){
-                    let brute = $.parseJSON(json);
-                    if(brute['Mode'] == 0){
-                        $("#img-cont").addClass("usr-img");
-                    }
-                    else{
-                        $("#img-cont").addClass("prop-img");
-                    }
-                },
-                error: function(xhr, status, error){ console.log(error); }
-            });
-            $("#img-user").css("background-image", "url(" + getLinkedUserIcon() + ")");
-            loadSearchButton();
-            $.post({
-                url: "ajx_logged_request.php",
-                data: "getJSON=t",
-                success: function(response){
-                    let jsonData = $.parseJSON(response);
-                    if(jsonData['Logged'] == false){
-                        alert("your session expired");
-                    }
-                }
-            });
+            
         });
 
         $(document).on("click", ".account-separator .content", function(){
             $(this).toggleClass("selected-separator");
+        });
+        $(document).ready(function(){
+            if(swp_cookies.mode == "prop"){
+
+            }
+            else{
+
+            }
         });
     </script>
 </body>

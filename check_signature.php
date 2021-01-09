@@ -26,7 +26,7 @@ use SignaturesExceptions\SignatureFileNotFound;
 use SignaturesExceptions\SignatureNotFound;
 use SignaturesExceptions\VersionError;
 
-sendUserLogged();   // Just preventing any error in the localStorage.
+   // Just preventing any error in the localStorage.
 $signature_img = "<img src=\"%path%\" alt=\"%alt%\">";
 $signature_msg = "";
 $prp_obj = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);

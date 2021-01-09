@@ -28,7 +28,7 @@ if(isset($_GET['confirm'])){
         }
 		session_unset();
 		session_destroy();
-        sendUserLogged();
+        
         echo "<script>resetVals();</script>";
 	}
 	else{

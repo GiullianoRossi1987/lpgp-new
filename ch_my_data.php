@@ -8,20 +8,17 @@ require_once "core/proprietaries-data.php";
 
 use Core\UsersData;
 use Core\ProprietariesData;
-use function JSHandler\sendUserLogged;
-// use const Core\LPGP_CONF;
 
-sendUserLogged();
 $error_msg = "";
 $err = false;
 
-if($_SESSION['mode'] == "prop"){
+if($_COOKIE['mode'] == "prop"){
 	$prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-	$data = $prp->getPropData($_SESSION['user']);
+	$data = $prp->getPropData($_COOKIE['user']);
 }
 else{
 	$usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-	$data = $usr->getUserData($_SESSION['user']);
+	$data = $usr->getUserData($_COOKIE['user']);
 }
 ?>
 
@@ -103,7 +100,7 @@ else{
             <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
 				<form method="post" class="form-group" enctype="multipart/form-data" id="form">
                     <h1>Your configurations</h1>
-                    <h6>If you don't want to change a field just leave it empty</h6>
+                    <!-- <h6>If you don't want to change a field just leave it empty</h6> -->
                     <br>
 					<div id="avatar-container" data-toggle="tooltip" title="Change Avatar">
 						<div id="avatar-ep">
@@ -183,7 +180,7 @@ else{
     <script src="js/actions.js"></script>
     <script>
         $(document).ready(function(){
-            setAccountOpts(true);
+            setAccountOpts();
             setSignatureOpts();
             $("#avatar-ep").css("background-image", "url(" + getLinkedUserIcon() + ")");
         });
@@ -290,7 +287,7 @@ else{
                 success: function(response){
                     console.log(response)
                     if(response == "success"){
-                        parseLogin();
+                        readCookies();
                         alert("Account data changed");
                         window.location.replace("my_account.php");
                     }
@@ -301,6 +298,35 @@ else{
                 }
             });
 		});
+
+        $(document).ready(function(){
+            console.log(swp_cookies);
+            if(swp_cookies["mode"] == "prop"){
+                $.post({
+                    url: "ajx_prop.php",
+                    data: {get: JSON.stringify({"nm_proprietary": swp_cookies["user"]})},
+                    dataType: "json",
+                    success: function(data){
+                        console.log(data);
+                        $("#username").val(data[0]["nm_proprietary"]);
+                        $("#email").val(data[0]["vl_email"]);
+                        $("#passwd1").val(data[0]["vl_passwd"]);
+                    },
+                    error: function(error){ console.log(error); }
+                });
+            }
+            else{
+                $.post({
+                    url: "ajx_users.php",
+                    data: {get: JSON.stringify({"nm_user": swp_cookies["user"]})},
+                    dataType: "json",
+                    success: function(data){
+                        console.log(data);
+                    },
+                    error: function(error){ console.log(error); }
+                });
+            }
+        });
 
 		$(document).on("click", "#avatar-container", function(){ $("#opt-avatar").collapse("toggle");})
     </script>

@@ -8,7 +8,7 @@ require_once "core/signatures-data.php";
 use Core\SignaturesData;
 use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
-// sendUserLogged();
+// 
 
 if(isset($_GET['sig_id'])){
 	$sig = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);

@@ -10,7 +10,7 @@ use Configurations\ConfigManager;
 $gblConfig = new ConfigManager("config/mainvars.json");
 if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
 
-sendUserLogged();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +109,7 @@ sendUserLogged();
     <script src="./js/actions.js"></script>
     <script>
         $(document).ready(function(){
-            //parseLogin();
+            //readCookies();
             readCookies();
             setAccountOpts();
             setSignatureOpts();

@@ -3,6 +3,7 @@
 var swp_cookies = {};
 
 function readCookies(){
+    swp_cookies = {};
     var arr_cookies = document.cookie.split(";");
     arr_cookies.forEach((item, i) => {
         arr = item.split("=");
@@ -66,6 +67,7 @@ function setAccountOpts(ext_fls = false){
     /**
      *
      */
+    readCookies();
     clsLoginOpts();
     rmClientDrop();
     var local_opts = document.querySelector(".login-dropdown .dropdown-menu");
@@ -129,7 +131,7 @@ function setAccountOpts(ext_fls = false){
             document.querySelector(".nm-tmp").remove();
         }
         catch(error){
-            console.log("There's no image to remove!");
+            // console.log("There's no image to remove!");
             err = true;
         }
         if(!err){
@@ -155,6 +157,7 @@ function rmClientDrop(){
  */
 function setSignatureOpts(){
     clsSignOpts();
+    readCookies();
     var local_opts = document.querySelector(".signatures-dropdown .dropdown-menu");
     if(swp_cookies["mode"] == "prop"){
         // is a proprietary account
@@ -192,6 +195,7 @@ function setSignatureOpts(){
 }
 
 function setClientsDrop(){
+    readCookies();
     if(swp_cookies["mode"] == "prop"){
         var localTo = document.querySelector(".signatures-dropdown .dropdown-menu");
         var optAdd = document.createElement("a");
@@ -250,6 +254,7 @@ function hideError(){
 }
 
 function getLinkedUserIcon(){
+    readCookies();
     var ls  = swp_cookies["user-icon"];
     return "https://" + window.location.hostname + "/" + ls;
 }

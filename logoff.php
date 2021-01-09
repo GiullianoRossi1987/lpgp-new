@@ -1,15 +1,20 @@
 <?php
 require_once "core/Core.php";
 use templateSystem\ErrorTemplate;
-if(session_status() == PHP_SESSION_NONE) session_start();
+// if(session_status() == PHP_SESSION_NONE) session_start();
 
-if($_SESSION['user-logged'] == "false"){
+if($_COOKIE['user-logged'] == "false"){
     $err = new ErrorTemplate("/core/templates/500-error-internal.html", "There's no user logged!", __FILE__, 7, "<button class=\"default-btn btn darkble-btn\" onclick=\"window.location.replace('http://localhost/')\">Back to the index</button>");
     die($err->parseFile());
 }
 else{
     session_unset();
     session_destroy();
+    setcookie("user-logged", false, time() + 3600);
+    unset($_COOKIE["user"]);
+    unset($_COOKIE["mode"]);
+    unset($_COOKIE["user-icon"]);
+    unset($_COOKIE["checked"]);
     echo "<script src=\"js/main-script.js\"></script>";
     echo "<script>resetVals();\n</script>";
 

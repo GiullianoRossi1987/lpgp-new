@@ -10,7 +10,7 @@ if(isset($_SESSION['logged-user']) && $_SESSION['logged-user']){
     $tpl = new ErrorTemplate($err, "UNKNOWN ERROR: that page souldn't appear to a logged user!", "login_frm.php", null, "<a role=\"button\" class=\"default-btn-err btn\" href=\"https://localhost\"></a>");
     die($tpl->parseFile());
 }
-sendUserLogged();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
