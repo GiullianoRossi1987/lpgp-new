@@ -18,17 +18,17 @@ if($_POST['account-type'] == "normal"){
     $auth = $user_obj->login($_POST['username'], $_POST['password']);
     // tests with cookies too
     foreach($auth as $cookie => $val) setcookie($cookie, $val, time() + 7200);  // two hours of cookies
-    $_SESSION = $auth;
+    $_COOKIE = $auth;
 }
 else if($_POST['account-type'] == "proprietary"){
     $prop_obj = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
     $auth = $prop_obj->login($_POST['username'], $_POST['password']);
     // tests with cookies too
     foreach($auth as $cookie => $val) setcookie($cookie, $val, time() + 7200);  // two hours of cookies
-    $_SESSION = $auth;
+    $_COOKIE = $auth;
 }
 
-if($_SESSION['checked'] == "false"){
+if($_COOKIE['checked'] == "false"){
 
     header("Location: check-email-stp1.php");
 

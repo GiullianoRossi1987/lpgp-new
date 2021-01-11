@@ -17,7 +17,7 @@ function queryAll(string $needle): string{
 
     if($_POST['scope'] != "all"){
         $clients = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        $cls = $_POST['scope'] == "all" ? $clients->qrAllClients($needle) : $clients->qrClientsOfProp($needle, $_SESSION['user']);
+        $cls = $_POST['scope'] == "all" ? $clients->qrAllClients($needle) : $clients->qrClientsOfProp($needle, $_COOKIE['user']);
         foreach($cls as $item) $mainContent .= genResultClient($item);
         $mainContent .= "<br>" . PHP_EOL;
         unset($clients);
@@ -39,7 +39,7 @@ function queryAll(string $needle): string{
         unset($prps);
 
         $clients = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        $cls = $_POST['scope'] == "all" ? $clients->qrAllClients($needle) : $clients->qrClientsOfProp($needle, $_SESSION['user']);
+        $cls = $_POST['scope'] == "all" ? $clients->qrAllClients($needle) : $clients->qrClientsOfProp($needle, $_COOKIE['user']);
         foreach($cls as $item) $mainContent .= genResultClient($item);
         $mainContent .= "<br>" . PHP_EOL;
         unset($clients);
@@ -108,7 +108,7 @@ if(isset($_POST['scope']) && isset($_POST['mode']) && isset($_POST['needle'])){
                 break;
             case 4:
                 $cld = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                $blank_ = $cld->qrClientsOfProp($_POST['needle'], $_SESSION['user']);
+                $blank_ = $cld->qrClientsOfProp($_POST['needle'], $_COOKIE['user']);
                 foreach($blank_ as $client) $content .= genResultClient($client);
                 unset($cld);
                 break;

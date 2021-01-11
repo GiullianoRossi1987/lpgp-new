@@ -20,19 +20,19 @@ if(isset($_POST['scope']) && isset($_POST['sortType'])){
         $cls = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
         switch((int)$_POST['sortType']){
             case 0:
-                $clients = $cls->getClientsByOwner($_SESSION['user']);
+                $clients = $cls->getClientsByOwner($_COOKIE['user']);
                 $content = "";
                 foreach($clients as $client) $content .= createClientCard($cls->getClientCardData($client['cd_client']));
                 die(strlen($content) > 0 ? $content : RESULT_LESS);
                 break;
             case 21:
-                $clients = $cls->sortAZ($_SESSION['user']);
+                $clients = $cls->sortAZ($_COOKIE['user']);
                 $content = "";
                 foreach($clients as $client) $content .= createClientCard($cls->getClientCardData($client['cd_client']));
                 die(strlen($content) > 0 ? $content : RESULT_LESS);
                 break;
             case 22:
-                $clients = $cls->sortZA($_SESSION['user']);
+                $clients = $cls->sortZA($_COOKIE['user']);
                 $content = "";
                 foreach($clients as $client) $content .= createClientCard($cls->getClientCardData($client['cd_client']));
                 die(strlen($content) > 0 ? $content : RESULT_LESS);
@@ -45,7 +45,7 @@ if(isset($_POST['scope']) && isset($_POST['sortType'])){
         $sig = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
         switch((int)$_POST['sortType']){
             case 0:
-                $id = $prop->getPropID($_SESSION['user']);
+                $id = $prop->getPropID($_COOKIE['user']);
                 $items = $sig->qrSignatureProprietary($id);
                 $content = "";
                 foreach($items as $signId) {
@@ -55,35 +55,35 @@ if(isset($_POST['scope']) && isset($_POST['sortType'])){
                 die(strlen($content) > 0 ? $content : RESULT_LESS);
                 break;
             case 11:
-                $items = $sig->filterNewer($_SESSION['user']);
+                $items = $sig->filterNewer($_COOKIE['user']);
                 $content = "";
                 foreach($items as $sigItem)
                     $content .= genSignatureCard($sigItem);
                 die(strlen($content) > 0 ? $content : RESULT_LESS);
                 break;
             case 12:
-                $items = $sig->filterOlder($_SESSION['user']);
+                $items = $sig->filterOlder($_COOKIE['user']);
                 $content = "";
                 foreach($items as $sigItem)
                     $content .= genSignatureCard($sigItem);
                 die(strlen($content) > 0 ? $content : RESULT_LESS);
                 break;
             case 13:
-                $items = $sig->filterMd5($_SESSION['user']);
+                $items = $sig->filterMd5($_COOKIE['user']);
                 $content = "";
                 foreach($items as $sigItem)
                     $content .= genSignatureCard($sigItem);
                 die(strlen($content) > 0 ? $content : RESULT_LESS);
                 break;
             case 14:
-                $items = $sig->filterSha1($_SESSION['user']);
+                $items = $sig->filterSha1($_COOKIE['user']);
                 $content = "";
                 foreach($items as $sigItem)
                     $content .= genSignatureCard($sigItem);
                 die(strlen($content) > 0 ? $content : RESULT_LESS);
                 break;
             case 15:
-                $items = $sig->filterSha256($_SESSION['user']);
+                $items = $sig->filterSha256($_COOKIE['user']);
                 $content = "";
                 foreach($items as $sigItem)
                     $content .= genSignatureCard($sigItem);

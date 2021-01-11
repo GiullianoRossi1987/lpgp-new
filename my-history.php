@@ -12,13 +12,13 @@ use const LPGP_CONF;
 
 $body = "";
 
-if($_SESSION['mode'] == "prop"){
+if($_COOKIE['mode'] == "prop"){
 	$prp_c = new PropCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-	$body = $prp_c->getPropHistory($_SESSION['user']);
+	$body = $prp_c->getPropHistory($_COOKIE['user']);
 }
 else{
 	$usr_c = new UsersCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-	$body = $usr_c->getUsrHistory($_SESSION['user']);
+	$body = $usr_c->getUsrHistory($_COOKIE['user']);
 }
 
 ?>

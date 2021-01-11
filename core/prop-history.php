@@ -160,7 +160,7 @@ class PropCheckHistory extends DatabaseConnection{
      * Returns all the HTML of the history from a proprietary user, using the cards to represents the relatories. That method was created for make faster the
      * development of the profile account page, wich have that history of the checked signatures in both types of accounts.
      *
-     * @param string $nm_proprietary The name of the user, normally used with the $_SESSION['user'].
+     * @param string $nm_proprietary The name of the user, normally used with the $_COOKIE['user'].
      * @return string
      */
     public function getPropHistory(string $nm_proprietary){

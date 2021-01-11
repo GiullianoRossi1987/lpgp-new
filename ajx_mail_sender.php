@@ -75,8 +75,8 @@ function send(string $to, string $content, string $from, string $subject){
 
 $m_usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 $m_prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-$l_name = $_SESSION['user'];
-$dt = $_SESSION['mode'] == "normie" ? $m_usr->getUserData($l_name) : $m_prp->getPropData($l_name);
+$l_name = $_COOKIE['user'];
+$dt = $_COOKIE['mode'] == "normie" ? $m_usr->getUserData($l_name) : $m_prp->getPropData($l_name);
 
 if(isset($_POST['report'])){
     $email = fetchTemplate($_POST['report-content'], $l_name, $dt['vl_email'], REPORT_TEMPLATE);

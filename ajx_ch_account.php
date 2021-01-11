@@ -11,9 +11,9 @@ use function JSHandler\sendUserLogged;
 
 $status = "none";
 try{
-    if($_SESSION['mode'] == "prop"){
+    if($_COOKIE['mode'] == "prop"){
     	$prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        $data = $prp->getPropData($_SESSION["user"]);
+        $data = $prp->getPropData($_COOKIE["user"]);
     	if(isset($_POST['new-name']))
             $prp->chProprietaryName($data["nm_proprietary"], $_POST['new-name']);
         if(isset($_POST["new-img"]))
@@ -25,7 +25,7 @@ try{
     }
     else{
     	$usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-    	$data = $usr->getUserData($_SESSION['user']);
+    	$data = $usr->getUserData($_COOKIE['user']);
     	if(isset($_POST['new-name']))
             $usr->chUserName($data["nm_user"], $_POST['new-name']);
         if(isset($_POST["new-img"]))

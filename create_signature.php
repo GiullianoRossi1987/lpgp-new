@@ -8,7 +8,7 @@ use Core\ProprietariesData;
 use const LPGP_CONF;
 
 $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-$id = $prp->getPropID($_SESSION['user']);
+$id = $prp->getPropID($_COOKIE['user']);
 $inpt = "<input type=\"hidden\" name=\"prop-id\" value=\"$id\">";
 ?>
 

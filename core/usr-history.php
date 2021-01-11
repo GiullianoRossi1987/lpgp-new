@@ -186,7 +186,7 @@ class UsersCheckHistory extends DatabaseConnection{
      * Returns all the HTML of the history from a user, using the cards to represents the relatories. That method was created for make faster the
      * development of the profile account page, wich have that history of the checked signatures in both types of accounts.
      *
-     * @param string $nm_user The name of the user, normally used with the $_SESSION['user'].
+     * @param string $nm_user The name of the user, normally used with the $_COOKIE['user'].
      * @return string
      */
     public function getUsrHistory(string $nm_user){

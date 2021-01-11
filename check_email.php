@@ -62,10 +62,10 @@ if(session_status() == PHP_SESSION_NONE) session_start();
             <div class="col-12 clear-content center-content" style="position: relative;">
             <?php
 else if(isset($_POST['bt-code'])){
-    if($_SESSION['mode'] == "normie"){
+    if($_COOKIE['mode'] == "normie"){
         $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        if($usr->authUserKey($_SESSION['user'], $_POST['code'])){
-            $usr->setUserChecked($_SESSION['user'], true);
+        if($usr->authUserKey($_COOKIE['user'], $_POST['code'])){
+            $usr->setUserChecked($_COOKIE['user'], true);
             echo "<script>window.location.replace(\"https://localhost/\");</script>";
         }
         else{
@@ -75,8 +75,8 @@ else if(isset($_POST['bt-code'])){
     }
     else{
         $prop = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        if($prop->authPropKey($_SESSION['user'], $_POST['code'])){
-            $prop->setProprietaryChecked($_SESSION['user'], true);
+        if($prop->authPropKey($_COOKIE['user'], $_POST['code'])){
+            $prop->setProprietaryChecked($_COOKIE['user'], true);
             echo "<script>window.location.replace(\"https://localhost\");</script>";
         }
         else{
@@ -97,7 +97,7 @@ else{
     <div class="container-fluid container-content" style="position: relative;margin-left: 23%;">
         <div class="row-main row">
             <div class="col-7 clear-content">
-                <h1>Check your email <?php echo $_SESSION['user'];?></h1>
+                <h1>Check your email <?php echo $_COOKIE['user'];?></h1>
                 <br>
                 <form action="check_email.php" method="post">
                     <label for="code" class="form-label">

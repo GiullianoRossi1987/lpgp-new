@@ -37,6 +37,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
     <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/new-features.css">
 </head>
 <style>
     #img-user{
@@ -49,6 +50,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
     }
 </style>
 <body>
+    <div class="test-cover" style="visibility: hidden"></div>
     <div class="container-fluid header-container" role="banner" style="position: fixed;">
         <div class="col-12 header" style="height: 71px; transition: background-color 200ms linear;">
             <div class="opt-dropdown dropdown login-dropdown">
@@ -93,16 +95,19 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                     <br>
                                     <div class="col-12 data-usr">
                                         <br>
+                                        <h1 id="username-ttl"></h1>
+                                        <h3 id="email-ttl"></h3>
+                                        <h3 id="date-creation-ttl"></h3>
                                         <?php
-                                        if($_SESSION['mode'] == "prop"){
-                                            $dt = $prp->getPropData($_SESSION['user']);
+                                        if($_COOKIE['mode'] == "prop"){
+                                            $dt = $prp->getPropData($_COOKIE['user']);
                                             echo "<h1 class=\"user-name\">Name: " . $dt['nm_proprietary'] . " <span class=\"badge badge-success\">Proprietary</span></h1>";
                                             echo "<h3 class=\"email\">Email: " . $dt['vl_email'] . "</h3>\n";
                                             echo "<h3 class=\"date-creation\">Date of creation: " . date_format(new DateTime($dt['dt_creation']), "Y-m-d") . "</h3>\n";
 
                                         }
                                         else{
-                                            $dt = $usr->getUserData($_SESSION['user']);
+                                            $dt = $usr->getUserData($_COOKIE['user']);
                                             echo "<h1 class=\"user-name\"> " . $dt['nm_user'] . "   <span class=\"badge badge-secondary\">Normal User</span></h1>";
                                             echo "<h3 class=\"email\">Email: " . $dt['vl_email'] . "</h3>\n";
                                             echo "<h6 class=\"date-creation\">Date creation: " . date_format(new DateTime($dt['dt_creation']), "Y-m-d") . "</h3>\n";
@@ -146,7 +151,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                                 </div>
                                                 <br>
                                                 <?php
-                                                if($_SESSION['mode'] == "prop"){
+                                                if($_COOKIE['mode'] == "prop"){
                                                     $id = base64_encode($dt['cd_proprietary']);
                                                     echo "<a href=\"proprietary.php?id=$id\" role=\"button\" target=\"_blanck\" class=\"btn btn-primary btn-lg\">See as another one</a>";
                                                 }
@@ -167,7 +172,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     <div class="row itens-row">
                         <div class="others-col col-md-7" style="margin-left: 21%;">
                             <div class="signatures-col col-12">
-                                <?php if($_SESSION['mode'] == "prop") echo '<a href="#signatures-section" class="account-separator" id="signature-sep" aria-controls="signatures-section" aria-expanded="false" data-toggle="collapse">
+                                <?php if($_COOKIE['mode'] == "prop") echo '<a href="#signatures-section" class="account-separator" id="signature-sep" aria-controls="signatures-section" aria-expanded="false" data-toggle="collapse">
                                         <div class="content"><h2 class="mainheader-heading mb-0">My Signatures</h2></div>
                                     </a>';
                                 ?>
@@ -175,9 +180,9 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                     <?php
                                     // Signatures
                                     /////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if($_SESSION['mode'] == "prop"){
+                                    if($_COOKIE['mode'] == "prop"){
                                         $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                                        echo lsSignaturesMA($prp->getPropID($_SESSION['user']));
+                                        echo lsSignaturesMA($prp->getPropID($_COOKIE['user']));
                                         echo "<br>\n<a href=\"create_signature.php\" role=\"button\" class=\"btn btn-block btn-success\">".
                                                     "Create a new signature <span><i class=\"fas fa-id-card\"></i></span>".
                                                     "</a><br>";
@@ -197,9 +202,9 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                     <?php
                                     // History
                                     ///////////////////////////////////////////////////////////////////////////////////////////////
-                                    if($_SESSION['mode'] == "prop"){
+                                    if($_COOKIE['mode'] == "prop"){
                                         $obj = new PropCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                                        $hist = $obj->getPropHistory($_SESSION['user']);
+                                        $hist = $obj->getPropHistory($_COOKIE['user']);
                                         $hist_e = explode("<br>", $hist);
                                         for($i = 0; $i <= MAX_SIGC; $i++){
                                             if(isset($hist_e[$i])) echo $hist_e[$i] . "<br>";
@@ -208,7 +213,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                     }
                                     else{
                                         $obj = new UsersCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                                        $hist = $obj->getUsrHistory($_SESSION['user']);
+                                        $hist = $obj->getUsrHistory($_COOKIE['user']);
                                         $hist_e = explode("<br>", $hist);
                                         for($i = 0; $i <= MAX_SIGC; $i++){
                                             if(isset($hist_e[$i])) echo $hist_e[$i] . "<br>";
@@ -226,7 +231,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                             </div>
                             <div class="col-12 clients-col" style="margin-top: 10%;">
                                 <?php
-                                if($_SESSION['mode'] == "prop") echo '<a href="#clients-section" class="account-separator" data-toggle="collapse" aria-controls="clients-section" aria-expanded="false" id="client-sep">
+                                if($_COOKIE['mode'] == "prop") echo '<a href="#clients-section" class="account-separator" data-toggle="collapse" aria-controls="clients-section" aria-expanded="false" id="client-sep">
                                     <div class="content">
                                         <h2>
                                             My Clients
@@ -236,9 +241,9 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                 ?>
                                 <div class="collapse section" id="clients-section">
                                     <?php
-                                    if($_SESSION['mode'] == "prop"){
+                                    if($_COOKIE['mode'] == "prop"){
                                         $obj = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                                        $clients = $obj->getClientsByOwner($_SESSION['user']);
+                                        $clients = $obj->getClientsByOwner($_COOKIE['user']);
                                         $hs = new ClientsAccessData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
                                         $dt = "";
                                         if(count($clients) == 0){
@@ -307,7 +312,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
             setSignatureOpts();
             applyToA();
             applyToForms();
-            
+
         });
 
         $(document).on("click", ".account-separator .content", function(){
@@ -315,10 +320,38 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         });
         $(document).ready(function(){
             if(swp_cookies.mode == "prop"){
-
+                $.post({
+                    url: "ajx_prop.php",
+                    data: {get: JSON.stringify({"nm_proprietary": swp_cookies["user"]})},
+                    dataType: 'json',
+                    beforeSend: function(xhr){
+                        // console.log("waiting");
+                        $(".test-cover").css("visibility", "visible");
+                    },
+                    success: function(resp){
+                        // console.log(resp);
+                        setTimeout(function(){ $(".test-cover").css("visibility", "hidden"); }, 3600);
+                        $("#username-ttl").html(resp[0]["nm_proprietary"] + "<span class=\"badge badge-success\">Proprietary</span>");
+                        $("#img-user").css("background-image", "url(" + getLinkedUserIcon() + ")");
+                    },
+                    error: function(error){ alert(error); }
+                });
             }
             else{
-
+                $.post({
+                    url: "ajx_user.php",
+                    data: {get: JSON.stringify({"nm_user": swp_cookies["user"]})},
+                    dataType: 'json',
+                    beforeSend: function(xhr){
+                        // console.log("waiting");
+                        $(".test-cover").css("visibility", "visible");
+                    },
+                    success: function(resp){
+                        // console.log(resp);
+                        $("#img-user").attr("src", getLinkedUserIcon());
+                    },
+                    error: function(error){ alert(error); }
+                });
             }
         });
     </script>

@@ -11,7 +11,7 @@ use const LPGP_CONF;
 
 
 $obj = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-$clients = $obj->getClientsByOwner($_SESSION['user']);
+$clients = $obj->getClientsByOwner($_COOKIE['user']);
 
 $content = "";
 

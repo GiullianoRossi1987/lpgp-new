@@ -16,15 +16,15 @@ $log = new SysLogger($_SERVER['DOCUMENT_ROOT'] . "/logs/accounts.log");
 
 if(isset($_GET['confirm'])){
 	if($_GET['confirm'] == "y"){
-		if($_SESSION['mode'] == 'prop'){
+		if($_COOKIE['mode'] == 'prop'){
             $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-            $tt  = $_SESSION['user'];
-			$prp->delProprietary($_SESSION['user']);
+            $tt  = $_COOKIE['user'];
+			$prp->delProprietary($_COOKIE['user']);
             $log->addLog("Removed Proprietary $tt");
 		}
 		else{
 			$usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-			$usr->deleteUser($_SESSION['user']);
+			$usr->deleteUser($_COOKIE['user']);
         }
 		session_unset();
 		session_destroy();

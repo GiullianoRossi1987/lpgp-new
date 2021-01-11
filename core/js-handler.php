@@ -20,26 +20,26 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
 if(!defined("MAX_SIGC")) define("MAX_SIGC", 5);   // the max number of the signatures checked card displayed at the my_account.php page
 
 /**
- * That method sends the $_SESSION vars about the logged user to the localStorage. In a inexisting session
+ * That method sends the $_COOKIE vars about the logged user to the localStorage. In a inexisting session
  * It will set such as no one logged at the system.
  *
  * @return void
  */
 function sendUserLogged(){
     if(session_status() == PHP_SESSION_NONE) session_start();
-    if(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED || empty($_SESSION) || !isset($_SESSION['user-logged']) || !$_SESSION['user-logged']){
+    if(session_status() == PHP_SESSION_NONE || session_status() == PHP_SESSION_DISABLED || empty($_COOKIE) || !isset($_COOKIE['user-logged']) || !$_COOKIE['user-logged']){
         // if there's no one logged.
         echo "";
-        $_SESSION['user-logged']  = true;
-        $_SESSION['mode']         = null;
-        $_SESSION['checked']      = null;
-        $_SESSION['user-icon']    = null;
+        $_COOKIE['user-logged']  = true;
+        $_COOKIE['mode']         = null;
+        $_COOKIE['checked']      = null;
+        $_COOKIE['user-icon']    = null;
     }
     else{
-        $logged_user = $_SESSION['user-logged'];
-        $mode = $_SESSION['mode'];
-        $checked = $_SESSION['checked'];
-        $img = $_SESSION['user-icon'];
+        $logged_user = $_COOKIE['user-logged'];
+        $mode = $_COOKIE['mode'];
+        $checked = $_COOKIE['checked'];
+        $img = $_COOKIE['user-icon'];
         echo "<script>\n\n</script>";
         unset($logged_user);
         unset($mode);
@@ -253,7 +253,7 @@ function createSignatureCardAuth(int $sign_ref, bool $valid){
  * @return string
  */
 function setCon1Links(){
-    if($_SESSION['user-logged'] && $_SESSION['mode'] == "prop"){
+    if($_COOKIE['user-logged'] && $_COOKIE['mode'] == "prop"){
         return "<ul>\n" .
                 "   <li>\n<a href=\"./devcenter/sdks/sdks.php\">See our SDK'S</a>\n</li>\n" .
                 "   <li>\n<a href=\"./devcenter/add-client.php\">First add a client for the System</a></li>\n" .

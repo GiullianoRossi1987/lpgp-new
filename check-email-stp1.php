@@ -48,7 +48,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
     <div class="container-fluid container-content" style="margin-left: 23%; margin-top: 10%;">
         <div class="row-main row">
             <div class="col-7 clear-content">
-                <h1>Check your email <?php echo $_SESSION['user'];?></h1>
+                <h1>Check your email <?php echo $_COOKIE['user'];?></h1>
                 <br>
                 <form action="check_email.php" method="post">
                     <label for="code" class="form-label">

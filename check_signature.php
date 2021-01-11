@@ -37,10 +37,10 @@ $domAdd = "";
 move_uploaded_file($_FILES['signature-ext']['tmp_name'][0], "../usignatures.d/" . $_FILES['signature-ext']['name'][0]);
 
 
-if($_SESSION['mode'] == 'prop'){
+if($_COOKIE['mode'] == 'prop'){
 	$prp_c = new PropCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 	$sig = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-	$prop_id = $prp_obj->getPropID($_SESSION['user']);
+	$prop_id = $prp_obj->getPropID($_COOKIE['user']);
 	$data = $sig->getSignatureFData("../usignatures.d/".$_FILES['signature-ext']['name'][0]);
 	$rp1 = "";
 	$vl = false;
@@ -92,7 +92,7 @@ if($_SESSION['mode'] == 'prop'){
 else{
 	$usr_c = new UsersCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 	$sig = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-	$usr_id = $usr_obj->getUserData($_SESSION['user'])['cd_user'];
+	$usr_id = $usr_obj->getUserData($_COOKIE['user'])['cd_user'];
 	$vl = false;
 	try{
 		if($sig->checkSignatureFile("../usignatures.d/".$_FILES['signature-ext']['name'][0])){

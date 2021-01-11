@@ -11,7 +11,7 @@ use const LPGP_CONF;
 $relatory_bd = "";
 
 if(isset($_GET['rel'])){
-	if($_SESSION['mode'] == "prop"){
+	if($_COOKIE['mode'] == "prop"){
 		$prp_c = new PropCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 		$relatory_bd = $prp_c->generateRelatory((int) base64_decode($_GET['rel']));
 	}
@@ -73,7 +73,7 @@ if(isset($_GET['rel'])){
             <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
 				<?php
 					if(isset($_GET['rel'])){
-                        if($_SESSION['mode'] == "prop"){
+                        if($_COOKIE['mode'] == "prop"){
                             $prp_c = new PropCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
                             echo $prp_c->generateRelatory((int) base64_decode($_GET['rel']));
                         }

@@ -9,13 +9,13 @@ use Core\UsersData;
 use Core\ProprietariesData;
 
 if(isset($_POST['resend'])){
-    if($_SESSION['mode'] === "normie"){
+    if($_COOKIE['mode'] === "normie"){
         $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        $usr->sendCheckEmail($_SESSION['user']);
+        $usr->sendCheckEmail($_COOKIE['user']);
     }
-    else if($_SESSION['mode'] === "prop"){
+    else if($_COOKIE['mode'] === "prop"){
         $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-        $prp->sendCheckEmail($_SESSION['user']);
+        $prp->sendCheckEmail($_COOKIE['user']);
     }
     else{
         die("INTERNAL ERROR");

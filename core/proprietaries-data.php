@@ -114,7 +114,7 @@ class ProprietariesData extends DatabaseConnection{
      }
 
      /**
-      * Makes the authentication and sets the $_SESSION keys to do the login.
+      * Makes the authentication and sets the $_COOKIE keys to do the login.
       * Just like the UsersData->login function.
       *
       * @param string $proprietary The proprietary that will do the login.

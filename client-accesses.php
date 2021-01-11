@@ -21,9 +21,9 @@ if(isset($_GET['client'])){
 else if(isset($_POST['changer'])){
     if($_POST['client'] == 0){
         // all clients
-        if($_POST['mode'] == 0) $objClients->allClientsChart($_SESSION['user'], true);
-        else if($_POST['mode'] == 1) $objClients->allClientsSuccessfulChart($_SESSION['user'], true);
-        else $objClients->allClientsUnsuccessulChart($_SESSION['user'], true);
+        if($_POST['mode'] == 0) $objClients->allClientsChart($_COOKIE['user'], true);
+        else if($_POST['mode'] == 1) $objClients->allClientsSuccessfulChart($_COOKIE['user'], true);
+        else $objClients->allClientsUnsuccessulChart($_COOKIE['user'], true);
     }
     else{
         // specific clients
@@ -34,7 +34,7 @@ else if(isset($_POST['changer'])){
 }
 
 $clients = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-$all = $clients->getClientsByOwner($_SESSION['user']);
+$all = $clients->getClientsByOwner($_COOKIE['user']);
 $clls = "";
 
 foreach($all as $clientData) $clls .= '<option value="' . $clientData['cd_client'] . '">' . $clientData['nm_client'] . '</option>';

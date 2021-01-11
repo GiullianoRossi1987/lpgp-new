@@ -28,7 +28,7 @@ $obj_main = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['p
 <?php
 if(isset($_POST['submit'])){
 	$isroot = $_POST['root_permissions'] == "root";
-	$obj_main->addClient($_POST['client-name'], $_SESSION['user'], $isroot);
+	$obj_main->addClient($_POST['client-name'], $_COOKIE['user'], $isroot);
     echo '<script>show = true</script>';
 }
 ?>

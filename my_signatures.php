@@ -10,7 +10,7 @@ use Core\ProprietariesData;
 use function JSHandler\lsSignaturesMA;
 
 $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-$id = $prp->getPropID($_SESSION['user']);
+$id = $prp->getPropID($_COOKIE['user']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

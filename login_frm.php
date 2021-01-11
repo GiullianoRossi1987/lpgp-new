@@ -5,7 +5,7 @@ require_once "core/Core.php";
 use function JSHandler\sendUserLogged;
 use templateSystem\ErrorTemplate;
 
-if(isset($_SESSION['logged-user']) && $_SESSION['logged-user']){
+if(isset($_COOKIE['logged-user']) && $_COOKIE['logged-user']){
     $err = "/core/templates/500-error-internal.html";
     $tpl = new ErrorTemplate($err, "UNKNOWN ERROR: that page souldn't appear to a logged user!", "login_frm.php", null, "<a role=\"button\" class=\"default-btn-err btn\" href=\"https://localhost\"></a>");
     die($tpl->parseFile());

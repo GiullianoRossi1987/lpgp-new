@@ -18,10 +18,10 @@ if(isset($_POST['client']) && (int)$_POST['client'] != 0){
     $content = $charter->generateChart("clients-plot");
 }
 else{
-    $charter = new AccessPlot("Clients of " . $_SESSION['user']);
-    if((int)$_POST['mode'] == 0) $charter->allClientsChart($_SESSION['user'], true);
-    else if((int)$_POST['mode'] == 1) $charter->allClientsSuccessfulChart($_SESSION['user'], true);
-    else $charter->allClientsUnsuccessulChart($_SESSION['user'], true);
+    $charter = new AccessPlot("Clients of " . $_COOKIE['user']);
+    if((int)$_POST['mode'] == 0) $charter->allClientsChart($_COOKIE['user'], true);
+    else if((int)$_POST['mode'] == 1) $charter->allClientsSuccessfulChart($_COOKIE['user'], true);
+    else $charter->allClientsUnsuccessulChart($_COOKIE['user'], true);
     $content = $charter->generateChart("clients-plot");
 }
 die($content);
