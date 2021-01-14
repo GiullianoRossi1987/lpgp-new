@@ -8,17 +8,19 @@ dispose the card at a specified element
 @return void
 */
 function genSignatureCard(data, dispose){
-    var container = document.createElement("div");
-    var contentDiv = document.createElement("div");
-    var header = document.createElement("div");
-    var signatureTitle = document.createElement("h1");
-    var signatureSub = document.createElement("h3");
-    var body = document.createElement("div");
-    var propLink = document.createElement("a");
+    var container        = document.createElement("div");
+    var contentDiv       = document.createElement("div");
+    var header           = document.createElement("div");
+    var signatureTitle   = document.createElement("h1");
+    var signatureSub     = document.createElement("h3");
+    var body             = document.createElement("div");
+    var propLink         = document.createElement("a");
     var changelogDispose = document.createElement("div");
-    var footerDiv = document.createElement("div");
-    var configBtn = document.createElement("button");
-    var configIcon = document.createElement("span");
+    var footerDiv        = document.createElement("div");
+    var configBtn        = document.createElement("a");
+    var configIcon       = document.createElement("span");
+    var downloadBtn      = document.createElement("a");
+    var downloadIcon     = document.createElement("span");
 
 
     container.classList.add("card");
@@ -47,14 +49,27 @@ function genSignatureCard(data, dispose){
 
     footerDiv.classList.add("card-footer");
     configIcon.classList.add("fas");
-    configIcon.classList.add("fas-cog");
+    configIcon.classList.add("fa-cog");
     configBtn.classList.add("btn");
     configBtn.classList.add("btn-lg");
     configBtn.classList.add("btn-secondary");
-    configBtn.appendChild(configIcon);
     configBtn.innerText = "Configurations";
+    configBtn.role = "button";
+    configBtn.href = "ch_signature_data.php?sig_id=" + btoa(data["cd_signature"]);
+    configBtn.appendChild(configIcon);
+
+    downloadIcon.classList.add("fas");
+    downloadIcon.classList.add("fa-file-download");
+    downloadBtn.classList.add("btn");
+    downloadBtn.classList.add("btn-lg");
+    downloadBtn.classList.add("btn-secondary");
+    downloadBtn.role = "button";
+    downloadBtn.innerText = "Download Signature File";
+    downloadBtn.href = "get_my_signature.php?id=" + btoa(data["cd_signature"]);
+    downloadBtn.appendChild(downloadIcon);
 
     footerDiv.appendChild(configBtn);
+    footerDiv.appendChild(downloadBtn);
     contentDiv.appendChild(header);
     contentDiv.appendChild(body);
     contentDiv.appendChild(footerDiv);
@@ -62,4 +77,101 @@ function genSignatureCard(data, dispose){
     container.appendChild(contentDiv);
 
     document.getElementById(dispose).appendChild(container);
+}
+
+/**
+ * Generates the signature add button, this button is used at the profile page
+ * on the final of the signatures section, to be able to add an brand new signature
+ * @param dispose The id of the section to put the button
+ */
+function genSignatureAdd(dispose){
+    var button = document.createElement("a");
+    button.classList.add("btn");
+    button.classList.add("btn-block");
+    button.classList.add("btn-success");
+    button.role = "button";
+    button.innerText = "Create a new signature";
+    button.href = "create_signature.php";
+    document.getElementById(dispose).appendChild(button);
+}
+
+function genClientCard(data, dispose){
+    var container        = document.createElement("div");
+    var containerContent = document.createElement("div");
+    var header           = document.createElement("div");
+    var body             = document.createElement("div");
+    var footer           = document.createElement("div");
+    var chartBtn         = document.createElement("a"); // body
+    var downloadBtn      = document.createElement("a"); // body
+    var configBtn        = document.createElement("a"); // body
+    var titleCC          = document.createElement("h1"); // header
+    var subTitle         = document.createElement("h3"); // header
+    var accTitle         = document.createElement("h5"); // footer
+
+    container.classList.add("card");
+    container.classList.add("client-card");
+
+    containerContent.classList.add("card-content");
+
+    header.classList.add("card-header");
+    body.classList.add("card-body");
+    footer.classList.add("card-footer");
+
+    titleCC.classList.add("card-title");
+    titleCC.innerText = "Client " + data["nm_client"];
+    subTitle.classList.add("card-subtitle");
+    subTitle.classList.add("mb-2");
+    subTitle.innerText = "#" + data["cd_client"];
+    header.appendChild(titleCC);
+    header.appendChild(subTitle);
+
+    chartBtn.classList.add("btn");
+    chartBtn.classList.add("btn-lg");
+    chartBtn.classList.add("btn-secondary");
+    chartBtn.role = "button";
+    chartBtn.href = "client-accesses.php?client=" + btoa(data["cd_client"]);
+    chartBtn.innerHTML = "<span class=\"fas fa-chart-bar\"></span>Client acesses";
+
+    downloadBtn.classList.add("btn");
+    downloadBtn.classList.add("btn-lg");
+    downloadBtn.classList.add("btn-secondary");
+    downloadBtn.role = "button";
+    downloadBtn.href = "client-data.php?client=" + btoa(data["cd_client"]);
+    downloadBtn.innerHTML = "<span class=\"fas fa-box\"></span>Download the Client data";
+
+    configBtn.classList.add("btn");
+    configBtn.classList.add("btn-lg");
+    configBtn.classList.add("btn-secondary");
+    configBtn.role = "button";
+    configBtn.href = "ch_client.php?client=" + btoa(data["cd_client"]);
+    configBtn.innerHTML = "<span class=\"fas fa-cog\"></span>Configurations";
+
+    body.appendChild(chartBtn);
+    body.appendChild(downloadBtn);
+    body.appendChild(configBtn);
+
+    accTitle.innerText = "Accesses: " + data["acesses"];
+    footer.appendChild(accTitle);
+
+    containerContent.appendChild(header);
+    containerContent.appendChild(body);
+    containerContent.appendChild(footer);
+
+    container.appendChild(containerContent);
+    document.getElementById(dispose).appendChild(container);
+
+    // TODO: finish the generator methods (and continue the changelogs developmnent);
+}
+
+function genClientAdd(dispose){
+    var button = document.createElement("a");
+
+    button.classList.add("btn");
+    button.classList.add("btn-block");
+    button.classList.add("btn-success");
+    button.role = "button";
+    button.innerText = "Create new Client";
+    button.href = "create-client.php";
+
+    document.getElementById(dispose).appendChild(button);
 }

@@ -98,21 +98,6 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                         <h1 id="username-ttl"></h1>
                                         <h3 id="email-ttl"></h3>
                                         <h3 id="date-creation-ttl"></h3>
-                                        <?php
-                                        if($_COOKIE['mode'] == "prop"){
-                                            $dt = $prp->getPropData($_COOKIE['user']);
-                                            echo "<h1 class=\"user-name\">Name: " . $dt['nm_proprietary'] . " <span class=\"badge badge-success\">Proprietary</span></h1>";
-                                            echo "<h3 class=\"email\">Email: " . $dt['vl_email'] . "</h3>\n";
-                                            echo "<h3 class=\"date-creation\">Date of creation: " . date_format(new DateTime($dt['dt_creation']), "Y-m-d") . "</h3>\n";
-
-                                        }
-                                        else{
-                                            $dt = $usr->getUserData($_COOKIE['user']);
-                                            echo "<h1 class=\"user-name\"> " . $dt['nm_user'] . "   <span class=\"badge badge-secondary\">Normal User</span></h1>";
-                                            echo "<h3 class=\"email\">Email: " . $dt['vl_email'] . "</h3>\n";
-                                            echo "<h6 class=\"date-creation\">Date creation: " . date_format(new DateTime($dt['dt_creation']), "Y-m-d") . "</h3>\n";
-                                        }
-                                        ?>
                                         <a class="account-separator" id="accountopt-sep" href="#moreoptions-section" data-toggle="collapse" aria-expanded="false" aria-controls="moreoptions-section">
                                             <div class="content"><h2>More account options</h2></div>
                                         </a>
@@ -306,6 +291,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
     <script src="js/main-script.js"></script>
     <script src="js/actions.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="js/generator.js"></script>
     <script>
         $(document).ready(function(){
             setAccountOpts(true);
@@ -320,6 +306,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         });
         $(document).ready(function(){
             if(swp_cookies.mode == "prop"){
+                data = {};
                 $.post({
                     url: "ajx_prop.php",
                     data: {get: JSON.stringify({"nm_proprietary": swp_cookies["user"]})},
@@ -330,11 +317,34 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     },
                     success: function(resp){
                         // console.log(resp);
+                        data = resp;
                         setTimeout(function(){ $(".test-cover").css("visibility", "hidden"); }, 3600);
-                        $("#username-ttl").html(resp[0]["nm_proprietary"] + "<span class=\"badge badge-success\">Proprietary</span>");
+                        $("#username-ttl").html(resp[0]["nm_proprietary"] + "<span class=\"badge badge-success badge-account\">Proprietary</span>");
+                        $("#email-ttl").text(resp[0]["vl_email"]);
+                        $("#date-creation-ttl").text(resp[0]["dt_creation"]);
                         $("#img-user").css("background-image", "url(" + getLinkedUserIcon() + ")");
                     },
                     error: function(error){ alert(error); }
+                });
+                $.post({
+                    url: "ajx_signatures.php",
+                    data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]})},
+                    dataType: "json",
+                    success: function(resp){
+                        console.log(resp);
+                        resp.forEach((item, i) => {genSignatureCard(item, "signatures-section");});
+                    },
+                    error: function(xhr, status, error){ console.error(error); }
+                });
+                $.post({
+                    url: "ajx_clients.php",
+                    data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]}), acesses: true},
+                    dataType: "json",
+                    success: function(resp){
+                        console.log(resp);
+                        resp.forEach((item, i) => {genClientCard(item, "clients-section");})
+                    },
+                    error: function(xhr, status, error){ alert(error); }
                 });
             }
             else{

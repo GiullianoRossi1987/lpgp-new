@@ -7,11 +7,9 @@ $obj = new SignaturesData(LPGP_CONF["mysql"]["sysuser"], LPGP_CONF["mysql"]["pas
 // die(var_dump(json_decode($_POST["test"], true)));
 if(isset($_POST["get"])){
     // searches for signatures with the parameters received
-    if(isset($_POST["query-params"])){
-        $params = json_decode($_POST["query-params"], true);
-        $result = $obj->fastQuery($params);
-        die(json_encode($result));
-    }
+    $params = json_decode($_POST["get"], true);
+    $result = $obj->fastQuery($params);
+    die(json_encode($result));
 }
 else if(isset($_POST["add"])){
     $obj->addSignature((int)$_POST["prop"], $_POST["passwd"], (int)$_POST["code"], (bool)$_POST["needsEncode"]);

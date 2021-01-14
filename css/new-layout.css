@@ -547,3 +547,7 @@
 .valid-signature-sg{ animation-name: auth-valid; }
 
 .invalid-signature-sg{ animation-name: auth-invalid; }
+
+.badge-account{
+    margin-left: 10px;
+}
