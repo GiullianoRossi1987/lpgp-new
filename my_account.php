@@ -23,6 +23,7 @@ use Core\ClientsAccessData;
 $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 
+// TODO: Change the style of the profile page, use card to the main profile data
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -306,7 +307,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         });
         $(document).ready(function(){
             if(swp_cookies.mode == "prop"){
-                data = {};
+                var data = {};
                 $.post({
                     url: "ajx_prop.php",
                     data: {get: JSON.stringify({"nm_proprietary": swp_cookies["user"]})},
@@ -331,8 +332,10 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]})},
                     dataType: "json",
                     success: function(resp){
-                        console.log(resp);
-                        resp.forEach((item, i) => {genSignatureCard(item, "signatures-section");});
+                        for(var i = 0; i < 5; ++i){
+                            if(i > resp.length || resp[i] == undefined) break;
+                            else genSignatureCard(resp[i], "signatures-section");
+                        }
                     },
                     error: function(xhr, status, error){ console.error(error); }
                 });
@@ -341,13 +344,28 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]}), acesses: true},
                     dataType: "json",
                     success: function(resp){
-                        console.log(resp);
-                        resp.forEach((item, i) => {genClientCard(item, "clients-section");})
+                        console.log(data);
+                        for(var i = 0; i < 5; ++i){
+                            console.log(resp[i]);
+                            if(i > resp.length || resp[i] == undefined) break;
+                            else genClientCard(resp[i], "clients-section");
+                        }
                     },
                     error: function(xhr, status, error){ alert(error); }
                 });
+                $.post({
+                    url: "ajx_prp_history.php",
+                    data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]})},
+                    dataType: "json",
+                    success: function(resp){
+
+
+                    },
+                    error: function(xhr, status, error){ alert(xhr); }
+                })
             }
             else{
+                $("#signature-sep");
                 $.post({
                     url: "ajx_user.php",
                     data: {get: JSON.stringify({"nm_user": swp_cookies["user"]})},

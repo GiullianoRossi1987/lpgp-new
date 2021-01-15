@@ -1,38 +1,3 @@
-<?php
-if(session_status() == PHP_SESSION_NONE) session_start();
-require_once "core/Core.php";
-require_once "core/js-handler.php";
-require_once "core/signatures-data.php";
-
-use Core\SignaturesData;
-use function JSHandler\sendUserLogged;
-use const LPGP_CONF;
-
-if(isset($_POST['cancel-btn'])) echo "<script>window.location.replace(\"https://localhost/my_account.php\");</script>";
-
-if(isset($_POST['rm-btn'])){
-	if(isset($_POST['sig_id'])){
-		$si = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-		$si->delSignature((int) base64_decode($_POST['sig_id']));
-		echo "<script>window.location.replace(\"https://localhost/my_account.php\");</script>";
-	}
-}
-
-if(isset($_POST['save-btn'])){
-	if(isset($_POST['sig_id'])){
-		$sig = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-		// checks the password field;
-		if(isset($_POST['passcode']) && strlen($_POST['passcode']) > 0){
-			$sig->chSignaturePassword((int) base64_decode($_POST['sig_id']), (string) $_POST['passcode']);
-		}
-		$sig_code = (int)$sig->getSignatureData((int) base64_decode($_POST['sig_id']))['vl_code'];
-		if(isset($_POST['code']) && $_POST['code'] != $sig_code && isset($_POST['conf-pass'])){
-			$sig->chSignatureCode((int) base64_decode($_POST['sig_id']), (int) $_POST['code'], $_POST['conf-pass']);
-		}
-	}
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,24 +34,15 @@ if(isset($_POST['save-btn'])){
                             Help
                         </button>
                         <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                            <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
-                            <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
-                            <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
+                            <a href="https://localhost/docs/" class="dropdown-item">Documentation</a>
+                            <a href="https://localhost/about.html" class="dropdown-item">About Us</a>
+                            <a href="https://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
                         </div>
                     </div>
                 </div>
 			</div>
 		</div>
 	</div>
-    <br>
-    <hr>
-    <div class="container-fluid container-content" style="position: relative;">
-        <div class="row-main row">
-            <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
-            </div>
-		</div>
-	</div>
-    <br>
     <div class="footer-container container">
         <div class="footer-row row">
             <div class="footer col-12" style="height: 150px; background-color: black; margin-top: 190%; position: relative !important; max-width: 100%; left: 0;">
@@ -119,43 +75,10 @@ if(isset($_POST['save-btn'])){
         $(document).ready(function(){
             setAccountOpts(true);
             setSignatureOpts();
+
         });
 
-        var pas1 = "text";
-        var pas2 = "text";
-        var vb = "visible";
-
-        $(document).on("click", "#show-passwd1", function(){
-            $("#password1").attr("type", pas1);
-            if(pas1 == "text") pas1 = "password";
-            else pas1 = "text";
-        });
-
-        $(document).on("click", "#show-passwd2", function(){
-            $("#password2").attr("type", pas1);
-            if(pas2 == "text") pas2 = "password";
-            else pas2 = "text";
-        });
-
-        $(document).on("change", "#password1", function(){
-            var content = $(this).val();
-            if(content.length <= 7){
-                $("#err-lb-passwd1").text("Please choose a password with more then 7 characters.");
-                $("#err-lb-passwd1").show();
-            }
-            else if(content != $("#password2").val()){
-                $("#err-lb-passwd1").text("The passwords doesn't match");
-                $("#err-lb-passwd1").show();
-            }
-            else $("#err-lb-passwd1").hide();
-        });
-
-		$(document).on("change", "#code-sel", function(){
-			if($("#code-sel").val() != code){
-				$("#confirm-passcode").css("visibility", "visible");
-			}
-			else $("#confirm-passcode").css("visibility", "hidden");
-		});
+        
 
     </script>
 </body>

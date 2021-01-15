@@ -1,33 +1,3 @@
-<?php
-if(session_status() == PHP_SESSION_NONE) session_start();
-
-require_once "core/Core.php";
-require_once "core/js-handler.php";
-require_once "core/signatures-data.php";
-
-use Core\SignaturesData;
-use function JSHandler\sendUserLogged;
-use const LPGP_CONF;
-// 
-
-if(isset($_GET['sig_id'])){
-	$sig = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-	$data = $sig->getSignatureData((int)base64_decode($_GET['sig_id']));
-	$select_vl = "<select name=\"code\" id=\"code-sel\" class=\"form-control\">";
-	$opt = "<option value=\"" . $data['vl_code'] . "\" selected>" . $sig::CODES[$data['vl_code']] . "</option>";
-	// others options
-	$opts_o = [];
-	for($i = 0; $i < count($sig::CODES); $i++){
-		if($i != $data['vl_code']){
-			$opts_o[] = "<option value=\"" . $i . "\">" . $sig::CODES[$i] . "</option>";
-		}
-	}
-	$hidden = "<input type=\"hidden\" value=\"" . base64_decode($_GET['sig_id']) . "\" name=\"sig_id\">";
-	echo "<script> const code = " . $data['vl_code'] . ";</script>";
-	$raw_inpt = "<input readonly=\"true\" value=\"" . $data['vl_password'] . "\" id=\"raw_code\" style=\"visibility: hidden;\" class=\"form-control\">";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +12,7 @@ if(isset($_GET['sig_id'])){
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
+    <!-- TODO: Try to change this from page to modal -->
     <div class="container-fluid header-container" role="banner" style="position: fixed;">
         <div class="col-12 header" style="height: 71px; transition: background-color 200ms linear;">
             <div class="opt-dropdown dropdown login-dropdown">
@@ -75,7 +46,8 @@ if(isset($_GET['sig_id'])){
     <div class="container-fluid container-content" style="position: relative;">
         <div class="row-main row">
             <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
-				<form action="./change_signature_data.php" method="post" class="form-group">
+				<form method="post" class="form-group">
+                    <?php if(isset($_GET["sig_id"])) echo "<input type=\"hidden\" value=\"" . base64_decode($_GET['sig_id']) . "\" name=\"sig_id\" id=\"sig_id\">"; ?>
                     <label for="passcode" class="form-label">The code</label>
 					<br>
 					<input type="password" name="passcode" id="passcode" class="form-control">
@@ -86,26 +58,23 @@ if(isset($_GET['sig_id'])){
 					<label for="passcode" class="form-label">
 						<button type="button" class="btn btn-sm btn-secondary" id="show-code">Show the code</button>
 					</label>
+                    <input type="password" name="conf-pass" id="confirm-passcode" class="form-control" placeholder="Confirm the passcode" style="visibility: hidden;">
 					<br>
-					<?php
-						echo $select_vl;
-						echo $opt;
-						foreach($opts_o as $o) echo $o;
-						echo "</select>";
-						echo "<br>";
-						echo $raw_inpt;
-					?>
+                    <select class="form-control" name="opt" id="sel_opt"></select>
 					<br>
 					<label for="raw_code" class="form-label">
-						<button type="button" class="btn btn-secondary" id="see-raw">See raw key</button>
+						<button type="button" class="btn btn-secondary" id="see-raw" class="form-control">See raw key</button>
 					</label>
+                    <div class="input-group input-group-inline" id="raw_grp" style="visibility: hidden">
+                        <input type="text" name="raw_code" value="" id="raw_code" class="form-control" readonly>
+                        <button class="btn btn-primary clipboard-btn input-group-append" id="cp-raw-code" type="button" data-toggle="tooltip" title="copy to clipboard">
+                            <span class="fas fa-copy"></span>
+                        </button>
+                    </div>
 					<br>
-					<input type="password" name="conf-pass" id="confirm-passcode" class="form-control" placeholder="Confirm the passcode" style="visibility: hidden;">
-					<button type="submit" class="btn btn-lg btn-success" name="save-btn">Save changes</button>
-					<button type="button" class="btn btn-lg btn-secondary" name="cancel-btn">Cancel</button>
-					<button class="btn btn-lg btn-danger" type="submit" name="rm-btn">Delete signature</button>
-					<br>
-					<?php echo $hidden; ?>
+					<button type="submit" class="btn btn-lg btn-success" name="save-btn" id="btn-save">Save changes</button>
+					<button class="btn btn-lg btn-danger" type="button" name="rm-btn" id="btn-rm">Delete signature</button>
+                    <button type="button" class="btn btn-lg btn-secondary" name="cancel-btn" id="btn-cnc">Cancel</button>
 				</form>
             </div>
 		</div>
@@ -138,53 +107,100 @@ if(isset($_GET['sig_id'])){
     <script src="js/main-script.js"></script>
     <script src="js/actions.js"></script>
     <script>
+        var sig_data = {};
         $(document).ready(function(){
             setAccountOpts(true);
             setSignatureOpts();
+
+            // loads the signature data
+            $.post({
+                url: "ajx_signatures.php",
+                data: {get: JSON.stringify({cd_signature: $("#sig_id").val()})},
+                dataType: "json",
+                success: function(resp){
+                    sig_data = resp[0];
+                    $("#raw_code").val(sig_data["vl_password"]);
+
+                },
+                error: function(error){ alert(error); }
+            });
+
+            $.post({
+                url: "ajx_signatures.php",
+                data: {"get-opts": true},
+                dataType: "json",
+                success: function(resp){
+                    resp.forEach((item, i) => {
+                        var opt = document.createElement("option");
+                        opt.value = i;
+                        opt.innerText = item;
+                        $("#sel_opt").append(opt);
+                    });
+                    $("#sel_opt").val(sig_data["vl_code"]);
+                },
+                error: function(error){ alert(error); }
+            });
         });
 
         var pas1 = "text";
         var pas2 = "text";
         var vb = "visible";
 
-        $(document).on("click", "#show-passwd1", function(){
-            $("#password1").attr("type", pas1);
+        $(document).on("click", "#show-code", function(){
+            $("#passcode").attr("type", pas1);
             if(pas1 == "text") pas1 = "password";
             else pas1 = "text";
         });
 
-        $(document).on("change", "#password1", function(){
-            var content = $(this).val();
-            if(content.length <= 7){
-                $("#err-lb-passwd1").text("Please choose a password with more then 7 characters.");
-                $("#err-lb-passwd1").show();
-            }
-            else if(content != $("#password2").val()){
-                $("#err-lb-passwd1").text("The passwords doesn't match");
-                $("#err-lb-passwd1").show();
-            }
-            else $("#err-lb-passwd1").hide();
+        $(document).on("change keyup keydown", "#passcode", function(){
+            if($("#passcode").val().length > 0){
+				$("#confirm-passcode").css("visibility", "visible");
+			}
+			else $("#confirm-passcode").css("visibility", "hidden");
         });
 
-		$(document).on("change", "#code-sel", function(){
-			if($("#code-sel").val() != code){
+		$(document).on("change", "#sel_opt", function(){
+			if($(this).val() != sig_data["vl_code"]){
 				$("#confirm-passcode").css("visibility", "visible");
 			}
 			else $("#confirm-passcode").css("visibility", "hidden");
 		});
 
 		$(document).on("click", "#see-raw", function(){
-			if($("#raw_code").css("visibility") == "hidden"){
-				$("#raw_code").css("visibility", "visible");
+			if($("#raw_grp").css("visibility") == "hidden"){
+				$("#raw_grp").css("visibility", "visible");
 			}
-			else $("#raw_code").css("visibility", "hidden");
+			else $("#raw_grp").css("visibility", "hidden");
 		});
 
-        $(document).scroll(function(){
-            $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".default-btn-header").toggleClass("default-btn-header-scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".opts").toggleClass("opts-scrolled", $(this).scrollTop() > $(".header-container").height());
+        $(document).on("click", "#cp-raw-code", function(){
+            var raw_code = document.getElementById("raw_code");
+            raw_code.select();
+            raw_code.setSelectionRange(0, 999999);
+            document.execCommand("copy");
+            $("#cp-raw-code").attr("title", "Copied UwU");
+            $("#cp-raw-code").tooltip("show");
         });
+
+        $(document).on("click", "#btn-save", function(){
+            var to_save = {};
+            if($("#passcode").val().length > 0) to_save["passwd"] = $("#passcode").val();
+            if($("#sel_opt").va() != sig_data["vl_code"]) to_save["code"] = $("#sel_opt").val();
+            to_save["sig"] = $("#sig_id").val();
+            $.post({
+                url: "ajx_signatures",
+                data: to_save,
+                dataType: "json",
+                success: function(resp){
+                    alert("Data changed");
+                    setTimeout(function(){window.location.replace("my_account.php");}, 36000);
+                },
+                error: function(error){ console.error(error); }
+            })
+        });
+
+        
+
     </script>
 </body>
 </html>

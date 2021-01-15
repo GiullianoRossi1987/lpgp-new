@@ -9,7 +9,7 @@ if(isset($_POST["get"])){
     die(json_encode($obj->fastQuery(json_decode($_POST["get"], true))));
 }
 else if($_POST["stage"]){
-    $params = json_decode($_POST["add"], true);
+    $params = json_decode($_POST["stage"], true);
     $obj->addReg((int)$params["usr"], (int)$params["signature"], (int)$params["success"], $params["error"]);
 }
 else die("INVALID OPTION");

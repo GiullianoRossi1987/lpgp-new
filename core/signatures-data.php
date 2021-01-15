@@ -48,6 +48,17 @@ class SignaturesData extends DatabaseConnection{
     }
 
     /**
+     * Encodes a password with the specified code
+     * @param string $passwd The password to encode
+     * @param string|integer $code The code to use
+     * @return string The password encoded with the hash specified by the code
+     */
+    private function encode_passwd(string $passwd, $code): string{
+        $algo = is_numeric($code) ? SignaturesData::CODES[$code] : $code;
+        return hash($algo, $passwd);
+    }
+
+    /**
      * Returns all the options of codes in the HTML format, it can be on input mode, using the select tag, or in the list mode, if the param
      * of the input mode is false. In both case it will return a string with the codes options in HTML.
      *
@@ -513,13 +524,18 @@ class SignaturesData extends DatabaseConnection{
      * array
      * @param array $parameters The associative array with the parameters
      * @param integer $signature The referred signature to UPDATE
+     * @param boolean $encode_passwd If the method will encode the signature password received
+     *                               if this option is true, then the code must be included in the parameters
      * @return void
      */
-    public function fastUpdate(array $parameters, int $signature): void{
+    public function fastUpdate(array $parameters, int $signature, bool $encode_passwd = true): void{
         $this->checkNotConnected();
         $addedFirst = false;
         $qr_str = "UPDATE tb_signatures SET ";
         foreach($parameters as $field => $newVal){
+            if($field == "vl_password" && isset($parameters["vl_code"]) && $encode_passwd){
+                $parameters[$field] = $this->encode_passwd($newVal, $paramters["vl_code"]);
+            }
             if(!$addedFirst){
                 $qr_str .= is_numeric($newVal) ? " $field = $newVal" : " $field = \"$newVal\" ";
             }

@@ -10,7 +10,7 @@ use Configurations\ConfigManager;
 $gblConfig = new ConfigManager("config/mainvars.json");
 if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
 
-
+// TODO: Fix the query button
 ?>
 <!DOCTYPE html>
 <html lang="en">

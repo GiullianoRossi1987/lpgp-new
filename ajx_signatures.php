@@ -19,9 +19,15 @@ else if(isset($_POST["del"]) && isset($_POST["signature"])){
     $obj->delSignature((int)$_POST["signature"]);
     die("0");
 }
-else if(isset($_POST["change"]) && isset($_POST["signature"]) && isset($_POST["change-params"])){
-    $obj->fastUpdate(json_decode($_POST["change-params"]), (int)$_POST["signature"]);
+else if(isset($_POST["change"]) && isset($_POST["signature"])){
+    $obj->fastUpdate(json_decode($_POST["change"], true), (int)$_POST["signature"]);
     die("0");
+}
+else if(isset($_POST["get-opts"])){
+    die(json_encode(SignaturesData::CODES));
+}
+else if(isset($_POST["ch_passwd"])){
+    
 }
 else{
     die("INVALID OPERATION");
