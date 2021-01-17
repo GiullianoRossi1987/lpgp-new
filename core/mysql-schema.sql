@@ -83,8 +83,7 @@ CREATE TABLE tb_changelog_signatures(
     cd_changelog INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
     id_signature INTEGER NOT NULL,
     dt_changelog TIMESTAMP NOT NULL DEFAULT current_timestamp(),
-    tp_changelog INTEGER NOT NULL CHECK(tp_changelog IN (0, 1, 2, 3)),
-    vl_oldname   VARCHAR(255) NOT NULL,
+    -- vl_oldname   VARCHAR(255) NOT NULL,
     vl_oldkey    LONGTEXT NOT NULL,
     vl_oldcode   INTEGER NOT NULL CHECK(vl_oldcode IN (0, 1, 2, 3)),
     FOREIGN KEY (id_signature) REFERENCES tb_signatures(cd_signature)
@@ -94,7 +93,6 @@ CREATE TABLE tb_changelog_clients(
     cd_changelog INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
     id_client    INTEGER NOT NULL,
     dt_changelog TIMESTAMP NOT NULL DEFAULT current_timestamp(),
-    tp_changelog INTEGER NOT NULL CHECK(tp_changelog IN (0, 1, 2, 3)),
     vl_oldname   VARCHAR(255) NOT NULL,
     vl_oldtoken  LONGTEXT NOT NULL,
     vl_oldroot   INTEGER NOT NULL CHECK(vl_oldroot IN (0, 1)),
@@ -147,6 +145,18 @@ BEGIN
     SELECT * FROM tb_changelog_clients WHERE id_client = cd AND tp_changelog = code;
 END$
 
+-- TODO: Recreate triggers (setChangelog_c & setChangelog_s)
+
+CREATE TRIGGER setChangelog_c AFTER UPDATE ON tb_clients
+FOR EACH ROW
+BEGIN
+    INSERT INTO tb_changelog_clients (id_client, vl_oldname, vl_oldtoken, vl_oldroot) VALUES (OLD.cd_client, OLD.nm_client, OLD.tk_client, OLD.vl_root);
+END$
+
+CREATE TRIGGER setChangelog_s AFTER UPDATE ON tb_signatures
+FOR EACH ROW
+BEGIN
+    INSERT INTO tb_changelog_signatures (id_signature, vl_oldcode, vl_oldkey) VALUES (OLD.cd_signature, OLD.vl_code, OLD.vl_password);
 DELIMITER ;
 
 create user 'lpgp_internal'@'localhost' identified with mysql_native_password by "lpgpofficial";
