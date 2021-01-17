@@ -137,14 +137,14 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                                 </div>
                                                 <br>
                                                 <?php
-                                                if($_COOKIE['mode'] == "prop"){
-                                                    $id = base64_encode($dt['cd_proprietary']);
-                                                    echo "<a href=\"proprietary.php?id=$id\" role=\"button\" target=\"_blanck\" class=\"btn btn-primary btn-lg\">See as another one</a>";
-                                                }
-                                                else{
-                                                    $id = base64_encode($dt['cd_user']);
-                                                    echo "<a href=\"user.php?id=$id\" role=\"button\" target=\"_blanck\" class=\"btn  btn-lg btn-primary\">See as another one</a>";
-                                                }
+                                                // if($_COOKIE['mode'] == "prop"){
+                                                //     $id = base64_encode($dt['cd_proprietary']);
+                                                //     echo "<a href=\"proprietary.php?id=$id\" role=\"button\" target=\"_blanck\" class=\"btn btn-primary btn-lg\">See as another one</a>";
+                                                // }
+                                                // else{
+                                                //     $id = base64_encode($dt['cd_user']);
+                                                //     echo "<a href=\"user.php?id=$id\" role=\"button\" target=\"_blanck\" class=\"btn  btn-lg btn-primary\">See as another one</a>";
+                                                // }
                                                 ?>
                                             </div>
                                         </div>

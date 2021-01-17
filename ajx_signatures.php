@@ -26,9 +26,6 @@ else if(isset($_POST["change"]) && isset($_POST["signature"])){
 else if(isset($_POST["get-opts"])){
     die(json_encode(SignaturesData::CODES));
 }
-else if(isset($_POST["ch_passwd"])){
-    
-}
 else{
     die("INVALID OPERATION");
 }

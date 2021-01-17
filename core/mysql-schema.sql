@@ -145,8 +145,6 @@ BEGIN
     SELECT * FROM tb_changelog_clients WHERE id_client = cd AND tp_changelog = code;
 END$
 
--- TODO: Recreate triggers (setChangelog_c & setChangelog_s)
-
 CREATE TRIGGER setChangelog_c AFTER UPDATE ON tb_clients
 FOR EACH ROW
 BEGIN
@@ -157,6 +155,7 @@ CREATE TRIGGER setChangelog_s AFTER UPDATE ON tb_signatures
 FOR EACH ROW
 BEGIN
     INSERT INTO tb_changelog_signatures (id_signature, vl_oldcode, vl_oldkey) VALUES (OLD.cd_signature, OLD.vl_code, OLD.vl_password);
+END$
 DELIMITER ;
 
 create user 'lpgp_internal'@'localhost' identified with mysql_native_password by "lpgpofficial";

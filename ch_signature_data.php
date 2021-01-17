@@ -60,7 +60,7 @@
 					</label>
                     <input type="password" name="conf-pass" id="confirm-passcode" class="form-control" placeholder="Confirm the passcode" style="visibility: hidden;">
 					<br>
-                    <select class="form-control" name="opt" id="sel_opt"></select>
+                    <select class="form-control" name="opt" id="sel_opt"></select><small>If you change the code, please confirm the password</small>
 					<br>
 					<label for="raw_code" class="form-label">
 						<button type="button" class="btn btn-secondary" id="see-raw" class="form-control">See raw key</button>
@@ -72,7 +72,7 @@
                         </button>
                     </div>
 					<br>
-					<button type="submit" class="btn btn-lg btn-success" name="save-btn" id="btn-save">Save changes</button>
+					<button type="button" class="btn btn-lg btn-success" name="save-btn" id="btn-save">Save changes</button>
 					<button class="btn btn-lg btn-danger" type="button" name="rm-btn" id="btn-rm">Delete signature</button>
                     <button type="button" class="btn btn-lg btn-secondary" name="cancel-btn" id="btn-cnc">Cancel</button>
 				</form>
@@ -108,6 +108,7 @@
     <script src="js/actions.js"></script>
     <script>
         var sig_data = {};
+        var err_pc = false;
         $(document).ready(function(){
             setAccountOpts(true);
             setSignatureOpts();
@@ -136,7 +137,7 @@
                         opt.innerText = item;
                         $("#sel_opt").append(opt);
                     });
-                    $("#sel_opt").val(sig_data["vl_code"]);
+                    setTimeout(function(){$("#sel_opt").val(sig_data["vl_code"]);}, 200);
                 },
                 error: function(error){ alert(error); }
             });
@@ -182,24 +183,38 @@
             $("#cp-raw-code").tooltip("show");
         });
 
+        $(document).on("change", "#confirm-passcode", function(){
+            if($(this).val() != $("#passcode").val() && $("#passcode").val().length > 0){
+                err_pc = true;
+                alert("The passwords aren't the same!");  // use alerts for now
+                // TODO: Implement the new modal alerts
+            }
+            else err_pc = false;
+        });
+
         $(document).on("click", "#btn-save", function(){
             var to_save = {};
-            if($("#passcode").val().length > 0) to_save["passwd"] = $("#passcode").val();
-            if($("#sel_opt").va() != sig_data["vl_code"]) to_save["code"] = $("#sel_opt").val();
-            to_save["sig"] = $("#sig_id").val();
+            if($("#passcode").val().length > 0){
+                if(!err_pc) to_save["vl_password"] = $("#passcode").val();
+            }
+            if($("#sel_opt").val() != sig_data["vl_code"]){
+                 if(!err_pc) to_save["vl_code"] = parseInt($("#sel_opt").val());
+            }
+            console.log(to_save);
             $.post({
-                url: "ajx_signatures",
-                data: to_save,
+                url: "ajx_signatures.php",
+                data: {change: JSON.stringify(to_save), "signature": $("#sig_id").val()},
                 dataType: "json",
                 success: function(resp){
-                    alert("Data changed");
-                    setTimeout(function(){window.location.replace("my_account.php");}, 36000);
+                    // console.log(resp);
+                    alert("Data changed"); // TODO: change the alert methods by the modal creator method
+                    setTimeout(function(){window.location.replace("my_account.php");}, 200);
                 },
                 error: function(error){ console.error(error); }
             })
         });
 
-        
+
 
     </script>
 </body>
