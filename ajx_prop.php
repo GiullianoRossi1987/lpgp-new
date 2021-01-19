@@ -19,5 +19,9 @@ else if(isset($_POST["del"])){
 else if(isset($_POST["update"])){
     die(json_encode($obj->fastUpdate(json_decode($_POST["update"], true))));
 }
+else if(isset($_POST["check"])){
+    $results = $obj->fastQuery(array("cd_proprietary" => $_POST["check"]));
+    die(json_encode(array("exists" => (bool)count($results))));
+}
 else die("INVALID OPTION");
 ?>

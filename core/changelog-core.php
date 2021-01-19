@@ -153,7 +153,7 @@ namespace Core{
          * Adds a change log to the system.
          *
          * @param integer $reference The reference of the item who changed.
-         * @param integer $code The change code that sinalizes what was changed
+         * @param integer $code The change code that sinalizes what was changed (USELESS)
          * @param integer|null $waybackRef If the change was a wayback, it must
          *                                 reference which changelog was reset (by default it's null).
          * @param string|null $p_name The name reference of the item before the change.
@@ -167,8 +167,8 @@ namespace Core{
         public function addChangelog(int $reference, $date = null, int $code, $waybackRef = null, string $p_name, string $p_key_pass, $p_root_code): void{
             $this->checkNotConnected();
             if(!$this->checkReferenceExists($reference)) throw new ClientReferenceError($reference);
-            $stmt = $this->connection->prepare("INSERT INTO tb_changelog_clients (id_client, tp_changelog, id_wayback, vl_oldname, vl_oldkey, vl_oldcode) VALUES (?, ?, ?, ?, ?, ?);");
-            $stmt->bind_param("iiissi", $reference, $code, $waybackRef, $p_name, $p_key_pass, $p_root_code);
+            $stmt = $this->connection->prepare("INSERT INTO tb_changelog_clients (id_client, id_wayback, vl_oldname, vl_oldkey, vl_oldcode) VALUES (?, ?, ?, ?, ?);");
+            $stmt->bind_param("iiissi", $reference, $waybackRef, $p_name, $p_key_pass, $p_root_code);
             $rsp = $stmt->execute();
             $stmt->close();
             return;

@@ -3,3 +3,17 @@
 .signature-vl-card{
 	padding: 10px 11px;
 }
+
+.hs-valid > .card-title::after{
+    content: "\f058";
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    float: right;
+}
+
+.hs-invalid > .card-title::after{
+    content: "\f00d";
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    float: right;
+}

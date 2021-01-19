@@ -117,6 +117,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                                         <i class="fas fa-times"></i>
                                                     </span>
                                                 </button>
+                                                <!-- Modal -->
                                                 <div class="modal" id="modal-delete" tabindex="-1" aria-labelledby="del-btn" aria-hidden="true" role="dialog">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -157,24 +158,11 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     </div>
                     <div class="row itens-row">
                         <div class="others-col col-md-7" style="margin-left: 21%;">
-                            <div class="signatures-col col-12">
-                                <?php if($_COOKIE['mode'] == "prop") echo '<a href="#signatures-section" class="account-separator" id="signature-sep" aria-controls="signatures-section" aria-expanded="false" data-toggle="collapse">
-                                        <div class="content"><h2 class="mainheader-heading mb-0">My Signatures</h2></div>
-                                    </a>';
-                                ?>
-                                <div id="signatures-section" class="collapse section">
-                                    <?php
-                                    // Signatures
-                                    /////////////////////////////////////////////////////////////////////////////////////////////////
-                                    if($_COOKIE['mode'] == "prop"){
-                                        $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                                        echo lsSignaturesMA($prp->getPropID($_COOKIE['user']));
-                                        echo "<br>\n<a href=\"create_signature.php\" role=\"button\" class=\"btn btn-block btn-success\">".
-                                                    "Create a new signature <span><i class=\"fas fa-id-card\"></i></span>".
-                                                    "</a><br>";
-                                    }
-                                    ?>
-                                </div>
+                            <div class="signatures-col col-12" id="signatures-col">
+                                <a href="#signatures-section" class="account-separator" id="signature-sep" aria-controls="signatures-section" aria-expanded="false" data-toggle="collapse">
+                                    <div class="content"><h2 class="mainheader-heading mb-0">My Signatures</h2></div>
+                                </a>
+                                <div id="signatures-section" class="collapse section"></div>
                             </div>
                             <div class="history-col col-12" style="position: relative; margin-top: 10%;">
                                 <a class="account-separator" href="#history-section" data-toggle="collapse" aria-expanded="false" aria-controls="history-section" id="history-sep">
@@ -216,15 +204,13 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                 </div>
                             </div>
                             <div class="col-12 clients-col" style="margin-top: 10%;">
-                                <?php
-                                if($_COOKIE['mode'] == "prop") echo '<a href="#clients-section" class="account-separator" data-toggle="collapse" aria-controls="clients-section" aria-expanded="false" id="client-sep">
+                                <a href="#clients-section" class="account-separator" data-toggle="collapse" aria-controls="clients-section" aria-expanded="false" id="client-sep">
                                     <div class="content">
                                         <h2>
                                             My Clients
                                         </h2>
                                     </div>
-                                </a>'
-                                ?>
+                                </a>
                                 <div class="collapse section" id="clients-section">
                                     <?php
                                     if($_COOKIE['mode'] == "prop"){
@@ -308,6 +294,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         $(document).ready(function(){
             if(swp_cookies.mode == "prop"){
                 var data = {};
+                $("#signature-sep").css("visibility", "visible");
                 $.post({
                     url: "ajx_prop.php",
                     data: {get: JSON.stringify({"nm_proprietary": swp_cookies["user"]})},
@@ -359,13 +346,13 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     dataType: "json",
                     success: function(resp){
 
-
                     },
                     error: function(xhr, status, error){ alert(xhr); }
                 })
             }
             else{
-                $("#signature-sep");
+                $("#signature-sep").css("visibility", "hidden");
+                $("#clients-sep").css("visibility", "hidden");
                 $.post({
                     url: "ajx_user.php",
                     data: {get: JSON.stringify({"nm_user": swp_cookies["user"]})},

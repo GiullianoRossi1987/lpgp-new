@@ -1,5 +1,32 @@
 // this file contains the main methods that generate the cards of signatures/clients
 
+function checkUser(id, mode = 0){
+    var tt = undefined;
+    if(mode == 0){
+        // normal user
+        tt = $.post({
+            url: "ajx_users.php",
+            data: {check: id},
+            async: false,
+            dataType: "json",
+            success: function(resp){ return resp; },
+            error: function(error){ console.error(error); }
+        }).responseJSON;
+    }
+    else{
+        // proprietary
+        tt = $.post({
+            url: "ajx_prop.php",
+            data: {check: id},
+            async: false,
+            dataType: "json",
+            success: function(resp){ return resp; },
+            error: function(error){ console.error(error); }
+        }).responseJSON;
+    }
+    return tt["exists"];
+}
+
 /**
 Generates a card of a signature using the data received by JSON and
 dispose the card at a specified element
@@ -174,4 +201,46 @@ function genClientAdd(dispose){
     button.href = "create-client.php";
 
     document.getElementById(dispose).appendChild(button);
+}
+
+function genHistoryCard_p(data, dispose){
+    var container = document.createElement("div");
+    var containerContent = document.createElement("div");
+    var header = document.createElement("div");
+    var body = document.createElement("div");
+    var footer = document.createElement("div");
+    var signatureTitle = document.createElement("h2"); // header
+    var relLink = document.createElement("a"); // body
+    var propLink = document.createElement("a"); // body
+    var dtChecked = document.createElement("h4"); // footer
+
+    if(data["vl_valid"] == 0) container.classList.add("hs-valid");
+    else container.classList.add("hs-invalid");
+    container.classList.add("card");
+
+    containerContent.classList.add("card-content");
+    header.classList.add("card-header");
+    signatureTitle.classList.add("card-title");
+    singatureTitle.innerText = "Signature #" + data["id_signature"];
+    header.appendChild(signatureTitle);
+
+    var sig_data = $.post({
+        url: "ajx_signatures.php",
+        data: {get: JSON.stringify({cd_signature: data["id_signature"]})},
+        dataType: "json",
+        async: false,
+        success: function(data){ return data; },
+        error: function(error){ alert(error); }
+    }).responseJSON;
+
+    var existsProp = checkUser(sig_data["id_proprietary"], 1);
+    propLink.innerText = "Go to proprietary";
+    if(existsProp) propLink.href = "proprietary.php?id=" + btoa(sig_data["id_proprietary"]);
+    else{
+        propLink.innerText += "(This proprietary don't exists anymore)";
+        propLink.setAttribute("data-toggle", "tooltip");
+        propLink.setAttribute("title", "This link is unvailable");
+    }
+
+    
 }
