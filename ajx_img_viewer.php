@@ -5,4 +5,10 @@ if(isset($_FILES['img-auto-load'])){
     }
     else die($_FILES['img-auto-load']['error']);
 }
+// else if(isset($_FILES['opt-upload-img'])){
+//     if(move_uploaded_file($_FILES['opt-upload-img']['tmp_name'], "media/tmp/" . $_FILES['opt-upload-img']['name'])){
+//         die("media/tmp/" . $_FILES['opt-upload-img']['name']);
+//     }
+//     else die($_FILES['opt-upload-img']['error']);
+// }
 ?>

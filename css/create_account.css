@@ -1,0 +1,28 @@
+.img-opt{
+    display: inline-grid;
+    margin-bottom: 10%;
+    margin-right: 5%;
+    width: 270px;
+    height: 390px;
+}
+
+.display-img{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+}
+
+.opt-img-c > input[type="radio"]{
+    display: none;
+}
+
+.opt-img-c > label{
+    margin-left: -10px;
+}
