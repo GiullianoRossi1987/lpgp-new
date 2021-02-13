@@ -19,5 +19,16 @@ else if(isset($_POST["del"])){
 else if(isset($_POST["update"])){
     die(json_encode($obj->fastUpdate(json_decode($_POST["update"], true))));
 }
+else if(isset($_POST["verify"])){
+    $results = $obj->fastQuery(array("nm_proprietary" => $_POST["user"]))[0];
+    if((int)$results["checked"] == 0){
+        if($obj->authUserKey($_POST["user"], $_POST["code"])){
+            $obj->setUserChecked($_POST["user"], true);
+            die(json_encode(array("success" => 0)));
+        }
+        else die(json_encode(array("success" => 1)));
+    }
+    else die(json_encode(array("success" => 2)));
+}
 else die("INVALID OPTION");
 ?>

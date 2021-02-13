@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LPGP Oficial Server</title>
+    <link rel="stylesheet" href="css/new-layout.css">
+    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="css/content-style.css">
+    <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/new-features.css">
+</head>
+<style>
+    .mce-code-error{
+        border-color: red;
+    }
+
+    .mce-code-error::after{
+        content: "Invalid code!\n";
+        color: red;
+        font-size: 10px;
+    }
+</style>
+<body>
+    <div class="container-fluid container-content" style="position: relative;">
+        <div class="row-main row">
+            <div class="col-4 clear-content center-content" style="position: relative; margin-left: 32% !important; margin-top: 5% !important; border-radius: 6%;">
+                <div id="logo-ex" style="margin-left: 42% !important;"></div>
+                <form id="login-frm">
+                    <h1 style="margin-left: 42%;" class="masthead-heading mb-0">Login</h1>
+                    <br>
+                    <label for="username">
+                        <h5>Your name</h5>
+                    </label>
+                    <br>
+                    <input type="text" class="form-control usr-inpt" id="username" name="username" placeholder="Username" required>
+                    <br>
+                    <label for="password">
+                        <h5>Your Password</h5>
+                    </label>
+                    <br>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control usr-inpt" id="password" name="password" placeholder="Password" required>
+                        <div class="input-group-append">
+                            <button class="btn" id="show-passwd" type="button">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <label for="password">
+                        <small id="err-lb" style="visibility: none" class="error-lb">
+                        </small>
+                    </label>
+                    <br>
+                    <hr>
+                    <h3>Account type</h3>
+                    <div class="collapse" id="acc-help">
+                        <h1>Teste</h1>
+                    </div>
+                    <br>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-lg btn-success btn-opt-login" id="btn-login-p" data-type="proprietary">Proprietary Login</button>
+                        <button type="button" class="btn btn-lg btn-primary btn-opt-login" id="btn-login-n" data-type="normal">Normal User Login</button>
+                        <button type="button" class="btn" data-target="#acc-help" aria-expanded="false" aria-controls="acc-help" data-toggle="collapse">
+                            <span class="fas fa-question-circle"></span>
+                        </button>
+                    </div>
+                    <br>
+                    <small>
+                        <a href="create_account.html">
+                            Don't have a account? Create one!
+                        </a>
+                    </small>
+                    <br>
+                </form>
+                <!-- Modal Check -->
+                <div class="modal fade" id="m-check-email" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title">Welcome! Please check your e-mail address</h1>
+                            </div>
+                            <div class="modal-body">
+                                <label for="mce-code-i" class="form-label">Insert your key code: </label>
+                                <input type="text" id="mce-code-i" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                                <div class="btn-group">
+                                    <button class="btn btn-secondary btn-lg" id="mce-btn-resend" type="button" title="E-mail Resent">Resend E-mail</button>
+                                    <button class="btn btn-success btn-lg" id="mce-btn-confirm" type="button">Check code</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Error Modal -->
+                <div class="modal fade" tabindex="-1" id="m-login-error" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title">Login Error!</h1>
+                                <h3 class="modal-subtitle">Invalid username </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="jquery/lib/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/autoload.js" charset="utf-8"></script>
+    <script src="js/main-script.js"></script>
+    <script src="js/actions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="js/generator.js"></script>
+    <script>
+        var mce_type = "";
+
+        $(document).ready(function(){
+            setAccountOpts();
+            setSignatureOpts();
+        });
+
+        var passwd_vl = "text";
+        $(document).on("click", "#show-passwd", function(){
+            $("#password").attr("type", passwd_vl);
+            if(passwd_vl == "text") {
+                passwd_vl = "password";
+                $("#show-passwd i").removeClass("fa-eye");
+                $("#show-passwd i").addClass("fa-eye-slash");
+            }
+            else {
+                passwd_vl = "text";
+                $("#show-passwd i").removeClass("fa-eye-slash");
+                $("#show-passwd i").addClass("fa-eye");
+            }
+        });
+
+        $(document).on("change", "#password", function(){
+            var vl = $("#password").val();
+            if(vl.length <= 4){
+                $("#err-lb").text("Please enter a password with more then 8 characters!");
+                $("#err-lb").css("visibility", "visible");
+            }
+            else{
+                $("#err-lb").css("visibility", "none");
+            }
+        });
+
+        $(document).on("click", ".btn-opt-login", function(){
+            var main = {
+                "username": $("#username").val(),
+                "password": $("#password").val(),
+                "account-type": $(this).data("type")
+            };
+            var mode = $(this).data("type");
+
+            $.post({
+                url: "ajx_login.php",
+                data: main,
+                dataType: "json",
+                async: false,
+                success: function(resp){
+                    console.log(resp);
+                    switch (resp["success"]) {
+                        case 0:
+                            window.location.replace("index.php");
+                            break;
+                        case 1:
+                            console.log(resp["key_check"]);
+                            mce_code = resp["key_check"];
+                            mce_username = $("#username").val();
+                            mce_type = mode;
+                            $("#m-check-email").modal("show");
+                            break;
+                        case -1:
+                            $("#m-login-error").modal("show");
+                            break;
+                        default:
+                            console.log("INVALID OPTION!");
+                    }
+                },
+                error: function(error){ console.error(error); }
+            });
+        });
+
+        $(document).on("click", "#mce-btn-confirm", function(){
+            if(mce_type == "proprietary"){
+                $.post({
+                    url: "ajx_prop.php",
+                    data: {check: JSON.stringify({user: $("#username").val(), code: $("#mce-code-i").val()})},
+                    dataType: "json",
+                    success: function(resp){
+                        switch(resp["success"]){
+                            case 0:
+                                window.location.replace("index.php");
+                                break;
+                            case 1:
+                                $("#mce-code-i").addClass("mce-code-error");
+                                break;
+                            default:
+                                console.error("ERROR");
+                        };
+                    },
+                    error: function(error){console.error(error); }
+                });
+            }
+            else if(mce_type == "normal"){
+                $.post({
+                    url: "ajx_users.php",
+                    data: {check: JSON.stringify({user: $("#username").val(), code: $("#mce-code-i").val()})},
+                    dataType: "json",
+                    success: function(resp){
+                        switch(resp["success"]){
+                            case 0:
+                                window.location.replace("index.php");
+                                break;
+                            case 1:
+                                $("#mce-code-i").addClass("mce-code-error");
+                                break;
+                            default:
+                                console.error("ERROR");
+                        };
+                    },
+                    error: function(error){console.error(error); }
+                });
+            }
+            else console.log("error");
+        });
+
+        $(document).on("click", "#mce-btn-resend", function(){
+            $.post({
+                url: "ajx_general.php",
+                data: {"send-email": "t", "username": $("#username").val(), "account-mode": mce_type},
+                success: function(resp){
+                    $("#mce-btn-resend").prop("title", "Email sent");
+                    $("#mce-btn-resend").tooltip("show");
+                    setTimeout(function(){ $("#mce-btn-resend").tooltip("hide"); }, 400);
+                },
+                error: function(error){ console.error(error); }
+            });
+        });
+    </script>
+</body>
+</html>

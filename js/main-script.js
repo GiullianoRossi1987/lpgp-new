@@ -115,7 +115,7 @@ function setAccountOpts(ext_fls = false){
         var login_opt = document.createElement("a");
         var ct_accopt = document.createElement("a");
 
-        login_opt.href = "https://"+  window.location.hostname + "/login_frm.php";
+        login_opt.href = "https://"+  window.location.hostname + "/login.html";
         ct_accopt.href = "https://"+  window.location.hostname + "/create_account.html";
         login_opt.classList.add("dropdown-item");
         ct_accopt.classList.add("dropdown-item");
@@ -187,7 +187,7 @@ function setSignatureOpts(){
     else{
         var login_need = document.createElement("a");
         login_need.innerText = "Make login for check a signature";
-        login_need.href = "https://" + window.location.hostname +"/login_frm.php";
+        login_need.href = "https://" + window.location.hostname +"/login.html";
         login_need.classList.add("dropdown-item");
         local_opts.appendChild(login_need);
         delete(login_need);

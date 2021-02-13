@@ -261,9 +261,9 @@ function setCon1Links(){
     }
     else{
         return "<ul>\n" .
-                "   <li>\n<a href=\"./login_frm.php\">See our SDK'S</a>\n</li>\n" .
-                "   <li>\n<a href=\"./login_frm.php\">First add a client for the System</a></li>\n" .
-                "   <li>\n><a href=\"./login_frm.php\">If you have any doubt about the clients</a></li>\n</ul>\n<h1> But before accessing it you'll need to make login with a proprietary account</h1>\n";
+                "   <li>\n<a href=\"./login.html\">See our SDK'S</a>\n</li>\n" .
+                "   <li>\n<a href=\"./login.html\">First add a client for the System</a></li>\n" .
+                "   <li>\n><a href=\"./login.html\">If you have any doubt about the clients</a></li>\n</ul>\n<h1> But before accessing it you'll need to make login with a proprietary account</h1>\n";
     }
 }
 

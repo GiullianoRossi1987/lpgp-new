@@ -23,5 +23,16 @@ else if(isset($_POST["check"])){
     $results = $obj->fastQuery(array("cd_proprietary" => $_POST["check"]));
     die(json_encode(array("exists" => (bool)count($results))));
 }
+else if(isset($_POST["verify"])){
+    $results = $obj->fastQuery(array("nm_proprietary" => $_POST["user"]))[0];
+    if((int)$results["checked"] == 0){
+        if($obj->authPropKey($_POST["user"], $_POST["code"])){
+            $obj->setProprietaryChecked($_POST["user"], true);
+            die(json_encode(array("success" => 0)));
+        }
+        else die(json_encode(array("success" => 1)));
+    }
+    else die(json_encode(array("success" => 2)));
+}
 else die("INVALID OPTION");
 ?>

@@ -57,12 +57,12 @@ class UsersData extends DatabaseConnection{
      * Authenticate a user password, for login or another simple authentication.
      * @param string $user The user to authenticate
      * @param string $password The user password
-     * @param bool $encoded_password If the user password's encoded on the database.
+     * @param bool $encoded_password If the user's password encoded on the database.
      * @throws PasswordAuthError If the passwords doesn't matches
      * @throws UserNotFound If the selected user don't exists.
      * @return bool
      */
-    public function authPassword(string $user, string $password, bool $encoded_password = true){
+    public function authPassword(string $user, string $password, bool $encoded_password = true): bool{
         $this->checkNotConnected();
         if(!$this->checkUserExists($user, false)) throw new UserNotFound("There's no user '$user' in the database", 1);
         $usr_dt  = $this->connection->query("SELECT vl_password FROM tb_users WHERE nm_user = \"$user\";")->fetch_array();

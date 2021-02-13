@@ -95,7 +95,7 @@
                 data: "getJSON=t",
                 success: function(json){
                     let mainData = $.parseJSON(json);
-                    if(mainData["Logged"] === false) window.location.replace("../login_frm.php");
+                    if(mainData["Logged"] === false) window.location.replace("../login.html");
                     if(mainData['Mode'] == 1){
                         // proprietary
                         for(var i = 0; i < 8; i++){
