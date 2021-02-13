@@ -116,53 +116,40 @@
                     <hr>
                     <h4>Choose a account type: </h4>
                     <br>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-lg btn-secondary">
-                            <input type="radio" name="account-mode" id="" value="proprietary" autocomplete="off">
-                            Proprietary
-                        </label>
-                        <label class="btn btn-lg btn-secondary active">
-                            <input type="radio" name="account-mode" id="" value="normal" autocomplete="off" checked>
-                            Normal user
-                        </label>
-                        <button type="button" class="btn btn-lg btn-secondary" data-toggle="collapse" aria-expanded="false" aria-controls="acc-help" data-target="#acc-help">
-                            Help
-                            <span>
-                                <i class="fas fa-info"></i>
-                            </span>
-                        </button>
-                    </div>
-                    <br>
-                    <div class="hidden-help collapse" id="acc-help">
-                        <h4>Account types</h4>
-                        <p>There're two kinds of LPGP accounts, they're:</p>
-                        <br>
-                        <ul class="list-unstyled">
-                            <li>
-                                <h1>Normal Accounts</h1>
-                                <h4>It can: </h4>
-                                <ul>
-                                    <li>Check a Signature normally</li>
-                                    <li>Access other accounts and send e-mails directly using our LPGP Fast Crow service&copy</li>
-                                    <li>Manage it own account</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <h1>Proprietary Accounts</h1>
-                                <h4>It can: </h4>
-                                <ul>
-                                    <li>Do all the same things the normal account can</li>
-                                    <li>Create and manage signatures</li>
-                                    <li>Create and manage clients</li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <div class="container container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-5 align-items-stretch prof-type-item">
+                                <div class="container">
+                                    <div class="row justify-content-start">
+                                        <div class="col-md-12 col-sm-12 col-lg-12">
+                                            <h1>Normal User</h1>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        Testing content
+                                    </div>
+                                    <div class="row justify-content-end">
+                                        <label class="pti-label help-show btn btn-primary btn-block" data-target="user-help">
+                                            <input type="radio" name="account-mode" value="normal-user" checked style="display: none;">
+                                            Select
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 align-items-stretch prof-type-item">
+                                <h1>Proprietary</h1>
+                                <label class="pti-label help-show" data-target="user-help">
+                                    <input type="radio" name="account-mode" value="normal-user" checked>
+                                    <span>Select</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <br>
                     <h4>Choose your profile image</h4>
                     <br>
                     <div class="img-select-container">
-                        <div class="options-img d-inline" style="display: inline;">
+                        <div class="options-img d-inline" style="display: inline-block;">
                             <div class="card img-opt">
                                 <div class="card-header">
                                     <img src="media/usr-icon.png" alt="default avatar" class="card-img-top" width="200" height="200">
@@ -183,12 +170,12 @@
                                 <div class="card-body collapse">
                                 </div>
                                 <div class="card-footer">
-                                    <div class="form-check opt-img-c">
+                                    <label class="form-check opt-img-c">
                                         <input type="radio" name="img-usr" value="upload" autocomplete="off" id="upl-img-d" class="form-check-control opt-img-inp" aria-visible="false">
-                                        <label  for="upl-img-d" data-toggle="modal" data-target="#modal-uppo" role="button" class="btn btn-block btn-secondary form-check-label">
+                                        <span data-toggle="modal" data-target="#modal-uppo" role="button" class="btn btn-block btn-secondary form-check-label">
                                             Upload <span class="fas fa-upload"></span>
-                                        </label>
-                                    </div>
+                                        </span>
+                                    </label>
                                 </div>
                             </div>
                     </div>
@@ -219,7 +206,7 @@
         </div>
     </div>
     <br>
-    <div class="footer-container container">
+    <div class="footer-container container footer">
         <div class="footer-row row">
             <div class="footer col-12" style="height: 150px; background-color: black; margin-top: 90%; max-width: 100%; left: 0;">
                 <div class="social-options-grp">
@@ -348,6 +335,10 @@
             $("#upload-img-input").show();
         });
 
+        $(document).on("click", ".prof-type-item > *", function(){
+            $(this).find("input").eq(0).prop("checked", true);
+        });
+
         $(document).on("click", ".dft-img-opt .card-footer .form-check label", function(){
             console.log("got it");
             let toggler = $(".dft-img-opt .card-footer .form-check input").prop("checked");
@@ -387,7 +378,34 @@
             $("#create-account").serializeArray().forEach((item, index) => {
                 mainObj[item["name"]] = item["value"];
             });
-            console.log(mainObj);
+            console.log($("input[name=\"account-mode\"]:checked").val());
+            var dumped_obj = {
+                name: mainObj["username"],
+                email: mainObj["email"],
+                passwd: mainObj["password1"],
+                encodePasswd: true,
+                img: mainObj["img-usr"],
+            };
+            if(mainObj["account-mode"] == "proprietary"){
+                $.post({
+                    url: "ajx_prop.php",
+                    data: {add: JSON.stringify(dumped_obj)},
+                    success: function(response){
+                        console.log(response);
+                    },
+                    error: function(error){ console.error(error); }
+                });
+            }
+            else{
+                $.post({
+                    url: "ajx_users.php",
+                    data: {add: JSON.stringify(dumped_obj)},
+                    success: function(response){
+                        console.log(response);
+                    },
+                    error: function(error){ console.error(error); }
+                });
+            }
         });
     </script>
 </body>

@@ -306,7 +306,7 @@ class ProprietariesData extends DatabaseConnection{
         $this->checkNotConnected();
         if(!$this->checkProprietaryExists($proprietary)) throw new ProprietaryNotFound("There's no proprietary account '$proprietary'", 1);
         $prop_dt = $this->connection->query("SELECT vl_key, checked, vl_email FROM tb_proprietaries WHERE nm_proprietary = \"$proprietary\";")->fetch_array();
-        $content = $this->parseHTMLTemplateEmailK($proprietary, $prop_dt['vl_key'], "/core/templates/template-email.html");
+        $content = $this->parseHTMLTemplateEmailK($proprietary, $prop_dt['vl_key'], "core/templates/template-email-2.html");
         $headers = "MIME-Version: 1.0\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1\n";
         $headers .= "From: " . self::EMAIL_USING . "\n";

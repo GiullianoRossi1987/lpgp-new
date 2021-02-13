@@ -23,6 +23,9 @@
     display: none;
 }
 
-.opt-img-c > label{
-    margin-left: -10px;
+.prof-type-item{
+    /* display: inline-block; */
+    height: 300px;
+    border: 1px solid gray;
+    margin: 0 10px auto auto;
 }

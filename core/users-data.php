@@ -270,7 +270,7 @@ class UsersData extends DatabaseConnection{
      * @return string
      */
     public function fetchTemplateEmail(string $user, string $key){
-        $raw_content = file_get_contents("/core/templates/template-email.html");
+        $raw_content = file_get_contents("core/templates/template-email-2.html");
         $cont1 = str_replace("%user%", $user, $raw_content);
         return str_replace("%key%", $key, $cont1);
     }

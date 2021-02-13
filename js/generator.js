@@ -210,7 +210,7 @@ function genHistoryCard_p(data, dispose){
     var body = document.createElement("div");
     var footer = document.createElement("div");
     var signatureTitle = document.createElement("h2"); // header
-    var relLink = document.createElement("a"); // body
+    var debugButton = document.createElement("button"); // body
     var propLink = document.createElement("a"); // body
     var dtChecked = document.createElement("h4"); // footer
 
@@ -233,6 +233,8 @@ function genHistoryCard_p(data, dispose){
         error: function(error){ alert(error); }
     }).responseJSON;
 
+
+
     var existsProp = checkUser(sig_data["id_proprietary"], 1);
     propLink.innerText = "Go to proprietary";
     if(existsProp) propLink.href = "proprietary.php?id=" + btoa(sig_data["id_proprietary"]);
@@ -242,5 +244,11 @@ function genHistoryCard_p(data, dispose){
         propLink.setAttribute("title", "This link is unvailable");
     }
 
-    
+
+    footer.classList.add("card-footer");
+    dtChecked.innerText = "Checked signature at: " + data["dt_reg"];
+    dtChecked.classList.add("text-muted");
+    footer.appendChild(dtChecked);
+
+    document.getElementById(dispose).appendChild()
 }

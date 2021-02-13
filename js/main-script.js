@@ -116,7 +116,7 @@ function setAccountOpts(ext_fls = false){
         var ct_accopt = document.createElement("a");
 
         login_opt.href = "https://"+  window.location.hostname + "/login_frm.php";
-        ct_accopt.href = "https://"+  window.location.hostname + "/create_account_frm.php";
+        ct_accopt.href = "https://"+  window.location.hostname + "/create_account.html";
         login_opt.classList.add("dropdown-item");
         ct_accopt.classList.add("dropdown-item");
         login_opt.innerText = "Make login";

@@ -128,7 +128,7 @@ if(isset($_COOKIE['logged-user']) && $_COOKIE['logged-user']){
                     <hr>
                     <button type="submit" class="btn btn-success btn-block">Login</button>
                     <small>
-                        <a href="create_account_frm.php">
+                        <a href="create_account.html">
                             Don't have a account? Create one!
                         </a>
                     </small>
