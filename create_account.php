@@ -196,12 +196,6 @@ else if($_POST['account-mode'] == "proprietary"){
             $("#upload-img-input").show();
             $("#default-img").attr("checked", false);
         });
-
-        $(document).scroll(function(){
-            $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".default-btn-header").toggleClass("default-btn-header-scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".opts").toggleClass("opts-scrolled", $(this).scrollTop() > $(".header-container").height());
-        });
     </script>
 </body>
 </html>

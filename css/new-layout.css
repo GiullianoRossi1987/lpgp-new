@@ -416,18 +416,17 @@
     Footer fix
 */
 .footer-container{
-    max-width: 100% !important;
-    position: relative !important;
-    margin-top: 100%;
+    margin-top: 10%;
 }
 
-.footer{
+.footer-main{
     position: relative !important;
     background-color: black;
     height: 150px;
+    margin-top: 10%;
 }
 
-.footer a{
+.footer-main a{
     color: white;
     font-family: Cantarell;
 }

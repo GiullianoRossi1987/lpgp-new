@@ -130,7 +130,7 @@
                                     </div>
                                     <div class="row justify-content-end">
                                         <label class="pti-label help-show btn btn-primary btn-block" data-target="user-help">
-                                            <input type="radio" name="account-mode" value="normal-user" checked style="display: none;">
+                                            <input type="radio" name="account-mode" value="normal-user" style="display: none;" data-toggle="button">
                                             Select
                                         </label>
                                     </div>
@@ -138,8 +138,8 @@
                             </div>
                             <div class="col-md-5 align-items-stretch prof-type-item">
                                 <h1>Proprietary</h1>
-                                <label class="pti-label help-show" data-target="user-help">
-                                    <input type="radio" name="account-mode" value="normal-user" checked>
+                                <label class="pti-label help-show btn btn-block btn-primary active" data-target="user-help">
+                                    <input type="radio" name="account-mode" value="normal-user" checked data-toggle="button" style="display: none;">
                                     <span>Select</span>
                                 </label>
                             </div>
@@ -206,9 +206,9 @@
         </div>
     </div>
     <br>
-    <div class="footer-container container footer">
-        <div class="footer-row row">
-            <div class="footer col-12" style="height: 150px; background-color: black; margin-top: 90%; max-width: 100%; left: 0;">
+    <footer class="footer container-fluid" >
+        <div class="row">
+            <div class="col-md-12 footer-main">
                 <div class="social-options-grp">
                     <div class="social-option">
                         <a href="https://github.com/GiullianoRossi1987" target="_blanck" id="github" class="social-option-footer">
@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </footer>
     <!-- Scripts -->
     <script src="jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
