@@ -11,7 +11,7 @@ use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
 
 $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-if(isset($_GET['id'])) $data = $usr->getUserDataByID(base64_decode($_GET['id']));
+if(isset($_GET['id'])) $data = $usr->getUserDataByID((int)base64_decode($_GET['id']));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +69,7 @@ if(isset($_GET['id'])) $data = $usr->getUserDataByID(base64_decode($_GET['id']))
                                 <div class="main-row row">
                                     <div class="img-cont">
                                         <?php
-											$img = getImgPath($data['vl_img'], true);
+											$img = $data['vl_img'];
 											echo "<img src=\"$img\" alt=\"\" width=\"200px\" height=\"200px\">";
                                         ?>
                                     </div>

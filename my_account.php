@@ -71,9 +71,9 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                         Help
                     </button>
                     <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                        <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
-                        <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
-                        <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
+                        <a href="https://www.lpgpofficial.com/docs/" class="dropdown-item">Documentation</a>
+                        <a href="https://www.lpgpofficial.com/about.html" class="dropdown-item">About Us</a>
+                        <a href="https://www.lpgpofficial.com/contact-us.html" class="dropdown-item">Contact Us</a>
                         <a href="https://www.lpgpofficial.com/report-trouble.html"></a>
                     </div>
                 </div>
@@ -137,16 +137,6 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                                     </div>
                                                 </div>
                                                 <br>
-                                                <?php
-                                                // if($_COOKIE['mode'] == "prop"){
-                                                //     $id = base64_encode($dt['cd_proprietary']);
-                                                //     echo "<a href=\"proprietary.php?id=$id\" role=\"button\" target=\"_blanck\" class=\"btn btn-primary btn-lg\">See as another one</a>";
-                                                // }
-                                                // else{
-                                                //     $id = base64_encode($dt['cd_user']);
-                                                //     echo "<a href=\"user.php?id=$id\" role=\"button\" target=\"_blanck\" class=\"btn  btn-lg btn-primary\">See as another one</a>";
-                                                // }
-                                                ?>
                                             </div>
                                         </div>
                                     </div>

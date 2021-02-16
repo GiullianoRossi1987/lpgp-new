@@ -175,7 +175,7 @@ class UsersCheckHistory extends DatabaseConnection{
             $prop_data = $this->connection->query("SELECT * FROM tb_proprietaries WHERE cd_proprietary = " . $sign_data['id_proprietary'] . ";")->fetch_array();
             $signature_data_html .= "<div class=\"card-header\"><h1 class=\"card-title\">Signature #" . $sig_ref . "</h1>\n";
             $signature_data_html .= "<div class=\"card-body\">";
-            $signature_data_html .= "<div class=\"card-subtitle\"><a href=\"https://localhost/proprietary.php?id=" . $prop_data['cd_proprietary'] . "\">Proprietary: " . $prop_data['nm_proprietary'] . "</a>\n</div>\n";
+            $signature_data_html .= "<div class=\"card-subtitle\"><a href=\"https://www.lpgpofficial.com/proprietary.php?id=" . $prop_data['cd_proprietary'] . "\">Proprietary: " . $prop_data['nm_proprietary'] . "</a>\n</div>\n";
             $signature_data_html .= "<div class=\"card-footer text-muted\"> Created at: " . $sign_data['dt_creation'] . "</div>\n</div>\n";
             $data_html .= $signature_data_html;
         }
@@ -224,7 +224,7 @@ class UsersCheckHistory extends DatabaseConnection{
             $id = base64_encode($prop_dt['cd_proprietary']);
             $prop_data_html = is_null($prop_dt) ? "<div class=\"prop-nf-err\">(We can't find the proprietary, probabily he deleted him account)</div>\n" : "<a href=\"proprietary.php?id=$id\" target=\"_blanck\" class=\"prop-link\">" . $prop_dt['nm_proprietary'] . "</a>\n";
             $card_main .= "Proprietary: " . $prop_data_html;
-            $card_main .= "<a href=\"https://localhost/relatory.php?rel=" . base64_encode($dt['cd_reg']) . "\" target=\"__blanck\" role=\"button\" class=\"btn btn-secondary\">Check the relatory</a>\n";
+            $card_main .= "<a href=\"https://www.lpgpofficial.com/relatory.php?rel=" . base64_encode($dt['cd_reg']) . "\" target=\"__blanck\" role=\"button\" class=\"btn btn-secondary\">Check the relatory</a>\n";
             $card_main .= "<div class=\"card-footer text-muted\">Checked signature at: " . $dt['dt_reg'] . "</div>\n</div>\n<div>\n<div>\n</div>\n</div>\n</div>";
             $main_pg .= $card_main . "<br><br>";
         }

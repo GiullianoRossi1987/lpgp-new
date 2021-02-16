@@ -58,9 +58,9 @@ else{
                     Help
                 </button>
                 <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                    <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
-                    <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
-                    <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
+                    <a href="https://www.lpgpofficial.com/docs/" class="dropdown-item">Documentation</a>
+                    <a href="https://www.lpgpofficial.com/about.html" class="dropdown-item">About Us</a>
+                    <a href="https://www.lpgpofficial.com/contact-us.html" class="dropdown-item">Contact Us</a>
                 </div>
             </div>
         </div>

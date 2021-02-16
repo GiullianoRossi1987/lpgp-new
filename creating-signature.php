@@ -63,8 +63,8 @@ catch(Exception $e){
         <div class="row-main row">
             <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10% !important;">
 				<h1>Your signature was created successfully!</h1>
-                <a href="https://localhost/my_signatures.php" role="button" class="btn btn-lg bt-primary">See my signatures</a>
-				<a href="https://localhost/index.php" role="button" class="btn btn-block btn-success">Get back to the home</a>
+                <a href="https://www.lpgpofficial.com/my_signatures.php" role="button" class="btn btn-lg bt-primary">See my signatures</a>
+				<a href="https://www.lpgpofficial.com/index.php" role="button" class="btn btn-block btn-success">Get back to the home</a>
             </div>
         </div>
     </div>

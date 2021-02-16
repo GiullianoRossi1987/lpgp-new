@@ -70,16 +70,16 @@ function hideOpt(opt_id){
 function applyToA(){
 	var all_a = document.getElementsByTagName("a");
 	for(var item_i = 0; item_i < all_a.length; item_i++){
-		all_a[item_i] = all_a[item_i].href.replace("https://localhost", "https://" + window.location.href);
-		all_a[item_i] = all_a[item_i].href.replace("http://localhost", "https://" + window.location.href);
+		all_a[item_i] = all_a[item_i].href.replace("https://www.lpgpofficial.com", "https://" + window.location.href);
+		all_a[item_i] = all_a[item_i].href.replace("https://www.lpgpofficial.com", "https://" + window.location.href);
 	}
 }
 
 function applyToForms(){
 	var all_a = document.getElementsByTagName("form");
 	for(var item_i = 0; item_i < all_a.length; item_i++){
-		all_a[item_i] = all_a[item_i].action.replace("https://localhost", "https://" + window.location.href);
-		all_a[item_i] = all_a[item_i].action.replace("http://localhost", "https://" + window.location.href);
+		all_a[item_i] = all_a[item_i].action.replace("https://www.lpgpofficial.com", "https://" + window.location.href);
+		all_a[item_i] = all_a[item_i].action.replace("https://www.lpgpofficial.com", "https://" + window.location.href);
 	}
 }
 

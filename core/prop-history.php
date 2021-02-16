@@ -148,7 +148,7 @@ class PropCheckHistory extends DatabaseConnection{
             $card_div .= "<div class=\"card-header\">\n";
             $card_div .= "<h1 class=\"card-title\"> Signature #" . $sig_dt['cd_signature'] . "</h1><span>$i_tag</span>" . "\n<div class=\"message-relatory $extra_cls\">$error_msg</div>";
             $card_div .= "</div>\n<div class=\"card-body\">\n";
-            $card_div .= "<h4 class=\"card-subtitle\"> Proprietary: <a href=\"https://localhost/proprietary.php?id=$id_prop\" target=\"_blanck\"> " . $prop_dt['nm_proprietary'] . "</a></div>\n";
+            $card_div .= "<h4 class=\"card-subtitle\"> Proprietary: <a href=\"https://www.lpgpofficial.com/proprietary.php?id=$id_prop\" target=\"_blanck\"> " . $prop_dt['nm_proprietary'] . "</a></div>\n";
             $card_div .= "<div class=\"card-footer\">Created at: " . $sig_dt['dt_creation'] . "</div>\n</div>\n<div>\n</div>";
             $main_data_html .= $card_div;
         }
@@ -177,7 +177,7 @@ class PropCheckHistory extends DatabaseConnection{
             $dt = $all_hs[$i];
             $sign_data = $this->connection->query("SELECT * FROM tb_signatures WHERE cd_signature = " . $dt['id_signature'] . ";")->fetch_array();
             $i_font = $dt['vl_code'] == 0 ? "<i class=\"fas fa-check\" style=\"color: green;\"></i>" : "<i class=\"fas fa-times\" style=\"color: red;\"></i>";
-            $img_span = $dt['vl_code'] == 0 ? "https://localhost/media/checked-valid.png" : "https://localhost/media/checked-invalid.png";
+            $img_span = $dt['vl_code'] == 0 ? "https://www.lpgpofficial.com/media/checked-valid.png" : "https://www.lpgpofficial.com/media/checked-invalid.png";
             $card_main .= "<h2>Signature #" . $sign_data['cd_signature'] . "</h2><span class=\"badge badge-light\">$i_font\n</span></div>\n";
             $sub_msg = "";
             switch ((int) $dt['vl_code']){
@@ -200,9 +200,9 @@ class PropCheckHistory extends DatabaseConnection{
             $prop_dt = $this->connection->query("SELECT * FROM tb_proprietaries WHERE cd_proprietary = " . $sign_data['id_proprietary'] . ";")->fetch_array();
             $id = $prop_dt['cd_proprietary'];
             $cdId = base64_encode($id);
-            $prop_data_html = is_null($prop_dt) ? "<div class=\"prop-nf-err\">(We can't find the proprietary, probabily he deleted him account)</div>\n" : "<a href=\"https://localhost/proprietary.php?id=$cdId\" target=\"_blanck\" class=\"prop-link\">" . $prop_dt['nm_proprietary'] . "</a>\n";
+            $prop_data_html = is_null($prop_dt) ? "<div class=\"prop-nf-err\">(We can't find the proprietary, probabily he deleted him account)</div>\n" : "<a href=\"https://www.lpgpofficial.com/proprietary.php?id=" . base64_encode($cdId) . "\" target=\"_blanck\" class=\"prop-link\">" . $prop_dt['nm_proprietary'] . "</a>\n";
             $card_main .= "Proprietary: " . $prop_data_html;
-            $card_main .= "<a href=\"https://localhost/relatory.php?rel=" . $dt['cd_reg'] . "\" target=\"__blanck\" role=\"button\" class=\"btn btn-secondary\">Check the relatory</a>\n";
+            $card_main .= "<a href=\"https://www.lpgpofficial.com/relatory.php?rel=" . base64_encode($dt['cd_reg']) . "\" target=\"__blanck\" role=\"button\" class=\"btn btn-secondary\">Check the relatory</a>\n";
             $card_main .= "<div class=\"card-footer text-muted\">Checked signature at: " . $dt['dt_reg'] . "</div>\n</div>\n</div>\n<div>\n</div>";
             $main_pg .= $card_main . "<br>";
         }

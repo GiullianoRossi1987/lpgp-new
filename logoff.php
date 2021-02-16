@@ -4,7 +4,7 @@ use templateSystem\ErrorTemplate;
 // if(session_status() == PHP_SESSION_NONE) session_start();
 
 if($_COOKIE['user-logged'] == "false"){
-    $err = new ErrorTemplate("/core/templates/500-error-internal.html", "There's no user logged!", __FILE__, 7, "<button class=\"default-btn btn darkble-btn\" onclick=\"window.location.replace('http://localhost/')\">Back to the index</button>");
+    $err = new ErrorTemplate("/core/templates/500-error-internal.html", "There's no user logged!", __FILE__, 7, "<button class=\"default-btn btn darkble-btn\" onclick=\"window.location.replace('https://www.lpgpofficial.com/')\">Back to the index</button>");
     die($err->parseFile());
 }
 else{

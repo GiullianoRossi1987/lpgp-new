@@ -1,4 +1,4 @@
-// there's some uses of the http://localhost/ if you don't want it then just change't
+// there's some uses of the https://www.lpgpofficial.com/ if you don't want it then just change't
 
 var swp_cookies = {};
 

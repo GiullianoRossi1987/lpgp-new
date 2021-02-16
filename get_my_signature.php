@@ -2,15 +2,16 @@
 require_once "core/Core.php";
 require_once "core/js-handler.php";
 require_once "core/signatures-data.php";
+require_once "core/control/controllers.php";
+
 
 use Core\SignaturesData;
+use Control\SignaturesController;
 use function JSHandler\sendUserLogged;
 use const LPGP_CONF;
 
 $sign = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,9 +48,9 @@ $sign = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['pa
                     Help
                 </button>
                 <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                    <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
-                    <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
-                    <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
+                    <a href="https://www.lpgpofficial.com/docs/" class="dropdown-item">Documentation</a>
+                    <a href="https://www.lpgpofficial.com/about.html" class="dropdown-item">About Us</a>
+                    <a href="https://www.lpgpofficial.com/contact-us.html" class="dropdown-item">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -61,7 +62,7 @@ $sign = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['pa
         <div class="row-main row">
             <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
 				<?php
-					if(isset($_GET['id'])) echo $sign->createsSignatureFile((int)$_GET['id'], true, $sign->generateFileNm(0));
+					if(isset($_GET['id'])) echo $sign->createsSignatureFile((int)base64_decode($_GET['id']), true, $sign->generateFileNm(0));
 				?>
                 <br>
             </div>
@@ -155,12 +156,6 @@ $sign = new SignaturesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['pa
 
         $(document).on("click", "#default-img", function(){
             $("#upload-img-input").hide();
-        });
-
-        $(document).scroll(function(){
-            $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".default-btn-header").toggleClass("default-btn-header-scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".opts").toggleClass("opts-scrolled", $(this).scrollTop() > $(".header-container").height());
         });
     </script>
 </body>

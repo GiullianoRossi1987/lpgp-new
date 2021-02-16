@@ -2,6 +2,7 @@
 namespace Core;
 require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Exceptions.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/control/controllers.php";
 
 use DatabaseActionsExceptions\AlreadyConnectedError;
 use DatabaseActionsExceptions\NotConnectedError;
@@ -11,6 +12,7 @@ use SignaturesExceptions\SignatureAuthError;
 use SignaturesExceptions\SignatureNotFound;
 use SignaturesExceptions\SignatureFileNotFound;
 use SignaturesExceptions\VersionError;
+use Control\SignaturesController;
 
 use ProprietariesExceptions\ProprietaryNotFound;
 

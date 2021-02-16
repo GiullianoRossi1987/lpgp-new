@@ -2,6 +2,7 @@
 namespace Core;
 require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Exceptions.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/control/controllers.php";
 
 use ClientsExceptions\AccountError;
 use ClientsExceptions\AuthenticationError as ClientAuthenticationError;
@@ -16,6 +17,7 @@ use ProprietariesExceptions\AuthenticationError;
 use ProprietariesExceptions\InvalidProprietaryName;
 use ProprietariesExceptions\ProprietaryNotFound;
 use ProprietariesExceptions\ProprietaryAlreadyExists;
+use Control\ClientsController;
 
 /**
  * That class manages the clients data, creating and authenticating clients files.
@@ -92,7 +94,7 @@ class ClientsData extends DatabaseConnection{
         do{
             $auth_nm = "auth_client_" . $ind2 . ".lpgp";
             $ind2++;
-        }while(file_exists(TMP_GCLIENTS . "/" . $auth_nm) || strlen($auth_nm) == 0);
+        }while(file_exists("g.clients/tmp/" . $auth_nm) || strlen($auth_nm) == 0);
 
         return TMP_GCLIENTS . "$auth_nm";
     }
@@ -136,8 +138,12 @@ class ClientsData extends DatabaseConnection{
         $encoded_ar = [];
         $exp = str_split($dumped_a);
         foreach($exp as $char) $encoded_ar[] = (string)ord($char);
-        $encoded = implode(self::DELIMITER, $encoded_ar);
-        file_put_contents($files, $encoded);
+        $encoded = implode("/", $encoded_ar);
+        // file_put_contents($files, $encoded);
+        system("touch $files");
+        $fl = fopen($files, "w");
+        fwrite($fl, $encoded);
+        fclose($fl);
         $controller->addDownloadRecord($client_pk_ref, $tk, $json_aut['Dt'], true);
         unset($controller);
         $file_n = str_replace($_SERVER['DOCUMENT_ROOT'], "", $files);

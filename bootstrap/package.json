@@ -67,7 +67,7 @@
     "docs-compile": "npm run docs-build",
     "docs-production": "cross-env JEKYLL_ENV=production npm run docs-build",
     "docs-netlify": "cross-env JEKYLL_ENV=netlify npm run docs-build",
-    "docs-linkinator": "linkinator _gh_pages --recurse --silent --skip \"^(?!http://localhost)\"",
+    "docs-linkinator": "linkinator _gh_pages --recurse --silent --skip \"^(?!https://www.lpgpofficial.com)\"",
     "docs-vnu": "node build/vnu-jar.js",
     "docs-lint": "npm-run-all --parallel docs-vnu docs-linkinator",
     "docs-serve": "bundle exec jekyll serve",

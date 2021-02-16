@@ -13,7 +13,7 @@ use const LPGP_CONF;
 
   // Just for fixing a error that i don't know why is going on.
 $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-if(isset($_GET['id'])) $data = $prp->getPropDataByID(base64_decode($_GET['id']));
+if(isset($_GET['id'])) $data = $prp->getPropDataByID((int)base64_decode($_GET['id']));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,7 +71,7 @@ if(isset($_GET['id'])) $data = $prp->getPropDataByID(base64_decode($_GET['id']))
                                 <div class="main-row row">
                                     <div class="img-cont">
                                         <?php
-                                        $img_src = getImgPath($data['vl_img'], true);
+                                        $img_src = $data['vl_img'];
                                         echo "<img src=\"$img_src\" alt=\"\" width=\"200px\" height=\"200px\">";
                                         ?>
                                     </div>
@@ -96,7 +96,7 @@ if(isset($_GET['id'])) $data = $prp->getPropDataByID(base64_decode($_GET['id']))
                             $nm = $data['nm_proprietary'];
                             echo "<h1 class=\"section-title\">Signatures of $nm</h1><br>";
                             $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                            echo lsExtSignatures($_GET['id']);
+                            echo lsExtSignatures((int)base64_decode($_GET['id']));
                         ?>
                         </div>
 					</div>
@@ -137,12 +137,6 @@ if(isset($_GET['id'])) $data = $prp->getPropDataByID(base64_decode($_GET['id']))
         $(document).ready(function(){
             setAccountOpts(true);
             setSignatureOpts();
-        });
-
-        $(document).scroll(function(){
-            $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".default-btn-header").toggleClass("default-btn-header-scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".opts").toggleClass("opts-scrolled", $(this).scrollTop() > $(".header-container").height());
         });
     </script>
 </body>

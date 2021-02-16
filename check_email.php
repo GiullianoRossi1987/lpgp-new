@@ -46,9 +46,9 @@ if(session_status() == PHP_SESSION_NONE) session_start();
                     Help
                 </button>
                 <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                    <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
-                    <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
-                    <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
+                    <a href="https://www.lpgpofficial.com/docs/" class="dropdown-item">Documentation</a>
+                    <a href="https://www.lpgpofficial.com/about.html" class="dropdown-item">About Us</a>
+                    <a href="https://www.lpgpofficial.com/contact-us.html" class="dropdown-item">Contact Us</a>
                 </div>
             </div>
 
@@ -66,23 +66,23 @@ else if(isset($_POST['bt-code'])){
         $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
         if($usr->authUserKey($_COOKIE['user'], $_POST['code'])){
             $usr->setUserChecked($_COOKIE['user'], true);
-            echo "<script>window.location.replace(\"https://localhost/\");</script>";
+            echo "<script>window.location.replace(\"https://www.lpgpofficial.com/\");</script>";
         }
         else{
             echo "<script>showError(\"Invalid Code!\");</script>";
-            echo "<button class=\"darkble-btn btn default-btn\" onclick=\"window.location.replace('https://localhost/check-email-stp1.php');\">Try again!</button>";
+            echo "<button class=\"darkble-btn btn default-btn\" onclick=\"window.location.replace('https://www.lpgpofficial.com/check-email-stp1.php');\">Try again!</button>";
         }
     }
     else{
         $prop = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
         if($prop->authPropKey($_COOKIE['user'], $_POST['code'])){
             $prop->setProprietaryChecked($_COOKIE['user'], true);
-            echo "<script>window.location.replace(\"https://localhost\");</script>";
+            echo "<script>window.location.replace(\"https://www.lpgpofficial.com\");</script>";
         }
         else{
             echo "<script>showError(\"Invalid Code\");</script>";
             echo "<h1>Error</h1>";
-            echo "<button class=\"darkble-btn btn default-btn\" onclick=\"window.location.replace('https://localhost/check-email-stp1.php');\">Return</button>";
+            echo "<button class=\"darkble-btn btn default-btn\" onclick=\"window.location.replace('https://www.lpgpofficial.com/check-email-stp1.php');\">Return</button>";
         }
     }
 }

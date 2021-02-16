@@ -1,5 +1,4 @@
 <?php
-
 require_once "core/Core.php";
 require_once "core/clients-data.php";
 
@@ -7,7 +6,7 @@ use Core\ClientsData;
 use const LPGP_CONF;
 
 if(isset($_GET['client'])){
-	$cl_id = base64_decode($_GET['client']);
+	$cl_id = (int)base64_decode($_GET['client']);
 	$obj = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 	$cl_dt = $obj->getClientData((int)$cl_id);
 
@@ -21,9 +20,9 @@ if(isset($_GET['client'])){
         $opts = '<option value="1">Root</option>' . '<option value="0" selected>Normal</option>';
     }
 	$sel .= $opts .  "</select>";
-	$id = '<input type="hidden" name="client" value="' . $_GET['client'] . '">';
+	$id = '<input type="hidden" name="client" value="' . base64_decode($_GET['client']) . '">';
 	$del = '<a class="btn btn-lg btn-danger" role="button" type="button" href="rm-client.php?client=' . $_GET['client'] . '">Delete this client</a>';
-	$modalLink = '<a href="client-data.php?client=' . $_GET['client'] .'" role="button" class="btn btn-lg btn-success" type="button">
+	$modalLink = '<a href="client-data.php?client=' . base64_decode($_GET['client']) .'" role="button" class="btn btn-lg btn-success" type="button">
 						Click here to download the new authentication file.</a>';
 }
 ?>
@@ -66,9 +65,9 @@ if(isset($_GET['client'])){
                         Help
                     </button>
                     <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                        <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
-                        <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
-                        <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
+                        <a href="https://www.lpgpofficial.com/docs/" class="dropdown-item">Documentation</a>
+                        <a href="https://www.lpgpofficial.com/about.html" class="dropdown-item">About Us</a>
+                        <a href="https://www.lpgpofficial.com/contact-us.html" class="dropdown-item">Contact Us</a>
                     </div>
                 </div>
             </div>

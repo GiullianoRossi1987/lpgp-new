@@ -10,16 +10,16 @@ use const LPGP_CONF;
 
 $relatory_bd = "";
 
-if(isset($_GET['rel'])){
-	if($_COOKIE['mode'] == "prop"){
-		$prp_c = new PropCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-		$relatory_bd = $prp_c->generateRelatory((int) base64_decode($_GET['rel']));
-	}
-	else{
-		$usr_c = new UsersCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-		$relatory_bd = $usr_c->generateRelatory((int) base64_decode($_GET['rel']));
-	}
-}
+// if(isset($_GET['rel'])){
+// 	if($_COOKIE['mode'] == "prop"){
+// 		$prp_c = new PropCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+// 		$relatory_bd = $prp_c->generateRelatory((int) base64_decode($_GET['rel']));
+// 	}
+// 	else{
+// 		$usr_c = new UsersCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
+// 		$relatory_bd = $usr_c->generateRelatory((int) base64_decode($_GET['rel']));
+// 	}
+// }
 
 ?>
 <!DOCTYPE html>
@@ -58,9 +58,9 @@ if(isset($_GET['rel'])){
                     Help
                 </button>
                 <div class="dropdown-menu opts" aria-labelledby="help-opt">
-                    <a href="http://localhost/docs/" class="dropdown-item">Documentation</a>
-                    <a href="http://localhost/about.html" class="dropdown-item">About Us</a>
-                    <a href="http://localhost/contact-us.html" class="dropdown-item">Contact Us</a>
+                    <a href="https://www.lpgpofficial.com/docs/" class="dropdown-item">Documentation</a>
+                    <a href="https://www.lpgpofficial.com/about.html" class="dropdown-item">About Us</a>
+                    <a href="https://www.lpgpofficial.com/contact-us.html" class="dropdown-item">Contact Us</a>
                 </div>
             </div>
         </div>

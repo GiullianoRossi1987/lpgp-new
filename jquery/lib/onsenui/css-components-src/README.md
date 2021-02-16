@@ -23,7 +23,7 @@ $ yarn install --pure-lockfile
 $ yarn run serve
 ```
 
-When you open `http://localhost:4321/` in the browser, a preview of the CSS components is displayed.
+When you open `https://www.lpgpofficial.com:4321/` in the browser, a preview of the CSS components is displayed.
 
 When you edit the cssnext files under the `src` directory, the cssnext files is automatically built into the CSS and the browser is reloaded. The built CSS file is located in `./build/onsen-css-components.css`.
 

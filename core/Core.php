@@ -74,10 +74,10 @@ define("CONTROL_FILE", "core/control/control.json");
 
 
 // Clients constants
-if(!defined("U_CLIENTS_CONF")) define("U_CLIENTS_CONF", "/u.clients/");
-if(!defined("G_CLIENTS_CONF")) define("G_CLIENTS_CONF", "/g.clients/");
-if(!defined("TMP_GCLIENTS")) define("TMP_GCLIENTS", "/g.clients/tmp/");
-if(!defined("TMP_UCLIENTS")) define("TMP_UCLIENTS", "/u.clients/tmp/");
+if(!defined("U_CLIENTS_CONF")) define("U_CLIENTS_CONF", "u.clients/");
+if(!defined("G_CLIENTS_CONF")) define("G_CLIENTS_CONF", "g.clients/");
+if(!defined("TMP_GCLIENTS")) define("TMP_GCLIENTS", "g.clients/tmp/");
+if(!defined("TMP_UCLIENTS")) define("TMP_UCLIENTS", "u.clients/tmp/");
 
 /**
  * That class contains the main connection to the database and him universal actions,
@@ -188,7 +188,7 @@ class ErrorTemplate{
     private $error_message;
     private $file_throwed;
     private $line_error;
-    private $btn_rt = "<button class=\"default-btn btn darkble-btn\" onclick=\"window.location.replace('http://localhost/');\">Return to the index</button>";
+    private $btn_rt = "<button class=\"default-btn btn darkble-btn\" onclick=\"window.location.replace('https://www.lpgpofficial.com/');\">Return to the index</button>";
     private $got_document = false;
     private $content;
 
