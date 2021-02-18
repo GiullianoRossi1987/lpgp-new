@@ -1,5 +1,6 @@
 @import "notifications.css";
 @import "keyframes.css";
+@import "envvars.css";
 
 .header-container{
     background-color: black;
@@ -8,6 +9,10 @@
     opacity: 1;
     margin-top: 0 !important;
     top: 0 !important;
+}
+
+.card{
+    margin-bottom: 5%;
 }
 
 

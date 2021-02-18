@@ -51,19 +51,21 @@
 .client-card h6{ color: #aaa;}
 
 
-.account-separator .content{
+.account-separator .content *{
     padding: 10px 10px;
     font-family: sans-serif;
     text-align: left;
 	width: auto;
 	height: 70px;
 	border-bottom: 1px solid black;
-	transition: border 1.2s ease-in-out, background-color 1.2s ease-out;
+	transition: border 1.2s ease-in-out background-color 1.2s ease-out;
 }
 
-.account-separator .content h2{
-    color: initial;
+.account-separator > .content > h2,
+.account-separator > .content > a{
+    color: initial !important;
     font-family: sans-serif;
+    text-decoration: none !important;
 }
 
 .account-separator .content:hover,
@@ -74,8 +76,8 @@
 	border-bottom: none !important;
 }
 
-.account-separator .selected-separator h2{ color: #fdff00 !important;}
-.account-separator .selected-separator h2::after{ content: "\f0d8" !important; }
+.account-separator .selected-separator .content *{ color: #fdff00 !important;}
+.account-separator .selected-separator .content::after{ content: "\f0d8" !important; }
 .account-separator .selected-separator{ background-color: black; }
 
 .account-separator .content h2::after{

@@ -210,6 +210,7 @@ function genClientAdd(dispose){
 }
 
 function genHistoryCard_p(data, dispose){
+
     var container = document.createElement("div");
     var containerContent = document.createElement("div");
     var header = document.createElement("div");
@@ -227,7 +228,7 @@ function genHistoryCard_p(data, dispose){
     containerContent.classList.add("card-content");
     header.classList.add("card-header");
     signatureTitle.classList.add("card-title");
-    singatureTitle.innerText = "Signature #" + data["id_signature"];
+    signatureTitle.innerText = "Signature #" + data["id_signature"];
     header.appendChild(signatureTitle);
 
     var sig_data = $.post({
@@ -239,9 +240,11 @@ function genHistoryCard_p(data, dispose){
         error: function(error){ alert(error); }
     }).responseJSON;
 
+    console.log(sig_data);
 
-
-    var existsProp = checkUser(sig_data["id_proprietary"], 1);
+    var existsProp = checkUser(parseInt(sig_data[0]["id_proprietary"]), 1);
+    propLink.classList.add("btn");
+    propLink.classList.add("btn-primary");
     propLink.innerText = "Go to proprietary";
     if(existsProp) propLink.href = "proprietary.php?id=" + btoa(sig_data["id_proprietary"]);
     else{
@@ -250,13 +253,27 @@ function genHistoryCard_p(data, dispose){
         propLink.setAttribute("title", "This link is unvailable");
     }
 
+    debugButton.innerText = "See the relatory";
+    debugButton.classList.add("btn");
+    debugButton.classList.add("btn-primary");
+    debugButton.classList.add("relatory-mt");
+    debugButton.setAttribute("data-reg", data["cd_reg"]);
+    debugButton.setAttribute("data-mode", swp_cookies.mode);
+
+    body.appendChild(propLink);
+    body.appendChild(debugButton);
 
     footer.classList.add("card-footer");
     dtChecked.innerText = "Checked signature at: " + data["dt_reg"];
     dtChecked.classList.add("text-muted");
     footer.appendChild(dtChecked);
 
-    document.getElementById(dispose).appendChild()
+    containerContent.appendChild(header);
+    containerContent.appendChild(body);
+    containerContent.appendChild(footer);
+    container.appendChild(containerContent);
+
+    document.getElementById(dispose).appendChild(container);
 }
 /**
  * Generates a card for a relatory; There's some specific data at the data parameter
@@ -269,16 +286,16 @@ function genRelatoryCard(data, dispose){
     // creates the error message
     var message = "";
     switch(data["vl_code"]){
-        case 0:
+        case "0":
             message = "No errors!";
             break;
-        case 1:
+        case "1":
             message = "Invalid file type, expecting .lpgp file";
             break;
-        case 2:
+        case "2":
             message = "The proprietary doesn't exists";
             break;
-        case 3:
+        case "3":
             message = "Invalid signature data, it doesn't matches with the official database";
             break;
         default:

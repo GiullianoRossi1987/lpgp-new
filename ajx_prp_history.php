@@ -3,6 +3,8 @@ require_once "core/prop-history.php";
 require_once "core/Core.php";
 
 use Core\PropCheckHistory;
+use LPGP_CONF;
+
 $obj = new PropCheckHistory(LPGP_CONF["mysql"]["sysuser"], LPGP_CONF["mysql"]["passwd"]);
 
 if(isset($_POST["get"])){

@@ -158,39 +158,16 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                 <a class="account-separator" href="#history-section" data-toggle="collapse" aria-expanded="false" aria-controls="history-section" id="history-sep">
                                     <div class="content">
                                         <h2>
-                                            My History
+                                            My History <a href="my-history.php" role="button" class="btn btn-primary" data-toggle="tooltip" title="See all the history">
+                                                <span>
+                                                    <i class="fas fa-history"></i>
+                                                </span>
+                                            </a>
                                         </h2>
                                     </div>
                                 </a>
+
                                 <div class="collapse section" id="history-section">
-                                    <?php
-                                    // History
-                                    ///////////////////////////////////////////////////////////////////////////////////////////////
-                                    if($_COOKIE['mode'] == "prop"){
-                                        $obj = new PropCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                                        $hist = $obj->getPropHistory($_COOKIE['user']);
-                                        $hist_e = explode("<br>", $hist);
-                                        for($i = 0; $i <= MAX_SIGC; $i++){
-                                            if(isset($hist_e[$i])) echo $hist_e[$i] . "<br>";
-                                            else break;
-                                        }
-                                    }
-                                    else{
-                                        $obj = new UsersCheckHistory(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                                        $hist = $obj->getUsrHistory($_COOKIE['user']);
-                                        $hist_e = explode("<br>", $hist);
-                                        for($i = 0; $i <= MAX_SIGC; $i++){
-                                            if(isset($hist_e[$i])) echo $hist_e[$i] . "<br>";
-                                            else break;
-                                        }
-                                    }
-                                    ?>
-                                    <a href="my-history.php" role="button" class="btn btn-block btn-primary">
-                                        See my history
-                                        <span>
-                                            <i class="fas fa-history"></i>
-                                        </span>
-                                    </a>
                                 </div>
                             </div>
                             <div class="col-12 clients-col" style="margin-top: 10%;">
@@ -201,31 +178,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                                         </h2>
                                     </div>
                                 </a>
-                                <div class="collapse section" id="clients-section">
-                                    <?php
-                                    if($_COOKIE['mode'] == "prop"){
-                                        $obj = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                                        $clients = $obj->getClientsByOwner($_COOKIE['user']);
-                                        $hs = new ClientsAccessData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-                                        $dt = "";
-                                        if(count($clients) == 0){
-                                            echo "<h1>You don't have any clients yet!</h1>";
-                                        }
-                                        else{
-                                            $countLim = 0;
-                                            foreach($clients as $client){
-                                                $accs = $hs->getAccessClient($client['cd_client']);
-                                                $cldt = [$client['cd_client'], $client['nm_client'], count($accs)];
-                                                $dt .= createClientCard($cldt) . '<br>';
-                                                $countLim++;
-                                                if($countLim == 4) break;
-                                            }
-                                        }
-                                        $dt .= '<a href="create-client.php" role="button" class="btn btn-success btn-block">Create a new Client</a>';
-                                        echo $dt;
-                                    }
-                                    ?>
-                                </div>
+                                <div class="collapse section" id="clients-section"></div>
                             </div>
                         </div>
                     </div>
@@ -260,6 +213,17 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
             </div>
         </div>
     </div>
+
+    <div class="relatory-modal modal fade" tabindex="-1" aria-hidden="true" id="rel-modal">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="relatory-dispose">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Scripts -->
     <script src="jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -273,14 +237,40 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         $(document).ready(function(){
             setAccountOpts(true);
             setSignatureOpts();
-            applyToA();
-            applyToForms();
-
         });
 
         $(document).on("click", ".account-separator .content", function(){
             $(this).toggleClass("selected-separator");
         });
+
+        $(document).on("click", ".relatory-mt", function(){
+            var data;
+            if($(this).data("mode") == "prop"){
+                $.post({
+                    url: "ajx_prp_history.php",
+                    data: {get: JSON.stringify({"cd_reg": $(this).data("reg")})},
+                    dataType: "json",
+                    async: false,
+                    success: function(resp){ data = resp; },
+                    error: function(error){ console.error(error)}
+                });
+            }
+            else{
+                $.post({
+                    url: "ajx_usr_history.php",
+                    data: {get: JSON.stringify({"cd_reg": $(this).data("reg")})},
+                    dataType: "json",
+                    async: false,
+                    success: function(resp){ data = resp; },
+                    error: function(error){ console.error(error)}
+                });
+            }
+            console.log(data);
+            $("#relatory-dispose").empty();
+            genRelatoryCard(data[0], "relatory-dispose");
+            $("#rel-modal").modal("show");
+        });
+
         $(document).ready(function(){
             if(swp_cookies.mode == "prop"){
                 var data = {};
@@ -323,7 +313,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     success: function(resp){
                         console.log(data);
                         for(var i = 0; i < 5; ++i){
-                            console.log(resp[i]);
+                            // DEBUG: console.log(resp[i]);
                             if(i > resp.length || resp[i] == undefined) break;
                             else genClientCard(resp[i], "clients-section");
                         }
@@ -335,7 +325,12 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]})},
                     dataType: "json",
                     success: function(resp){
-
+                        console.log(resp);
+                        for(var i = 0; i < 5; ++i){
+                            console.log(resp[i]);
+                            if(i > resp.length || resp[i] == undefined) break;
+                            else genHistoryCard_p(resp[i], "history-section");
+                        }
                     },
                     error: function(xhr, status, error){ alert(xhr); }
                 })
@@ -348,11 +343,11 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     data: {get: JSON.stringify({"nm_user": swp_cookies["user"]})},
                     dataType: 'json',
                     beforeSend: function(xhr){
-                        // console.log("waiting");
+                        // DEBUG: console.log("waiting");
                         $(".test-cover").css("visibility", "visible");
                     },
                     success: function(resp){
-                        // console.log(resp);
+                        // DEBUG: console.log(resp);
                         $("#img-user").attr("src", getLinkedUserIcon());
                     },
                     error: function(error){ alert(error); }
