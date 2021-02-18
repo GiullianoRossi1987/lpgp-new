@@ -1,5 +1,7 @@
 // this file contains the main methods that generate the cards of signatures/clients
 
+
+
 function checkUser(id, mode = 0){
     var tt = undefined;
     if(mode == 0){
@@ -121,7 +123,11 @@ function genSignatureAdd(dispose){
     button.href = "create_signature.php";
     document.getElementById(dispose).appendChild(button);
 }
-
+/**
+ * Generates a new clients card using the client data from the database
+ * @param data The client data from the database
+ * @param dispose The id of the element that'll contain the card, without '#'
+ */
 function genClientCard(data, dispose){
     var container        = document.createElement("div");
     var containerContent = document.createElement("div");
@@ -251,4 +257,96 @@ function genHistoryCard_p(data, dispose){
     footer.appendChild(dtChecked);
 
     document.getElementById(dispose).appendChild()
+}
+/**
+ * Generates a card for a relatory; There's some specific data at the data parameter
+ * @param data =>
+                    'err_code' => The error code if the signature was invalid, otherwise it must be 0
+                    'id_signature' => The primary key reference of the signature in the database
+                    'dt_checked' => When the signature was checked
+ */
+function genRelatoryCard(data, dispose){
+    // creates the error message
+    var message = "";
+    switch(data["vl_code"]){
+        case 0:
+            message = "No errors!";
+            break;
+        case 1:
+            message = "Invalid file type, expecting .lpgp file";
+            break;
+        case 2:
+            message = "The proprietary doesn't exists";
+            break;
+        case 3:
+            message = "Invalid signature data, it doesn't matches with the official database";
+            break;
+        default:
+            console.error("Invalid error code " + data["vl_code"] + ".");
+            break;
+    }
+    // structure
+
+    var container = document.createElement("div");
+    var content   = document.createElement("div");
+    var header    = document.createElement("div");
+    var body      = document.createElement("div");
+    var footer    = document.createElement("div");
+
+    // header items
+    var title = document.createElement("h2");
+    // var subtitle = document.createElement("h4");
+    // var verification = document.createElement("span"); // fas fa-check || fas fa-times
+
+    // body items
+    var propLink = document.createElement("a");
+    var error_cause = document.createElement("h5");
+
+    // footer item
+    var checked_date = document.createElement("h4");
+
+    // classes setup
+    container.classList.add("card");
+    container.classList.add("relatory-card");
+
+    content.classList.add("card-content");
+    header.classList.add("card-header");
+    body.classList.add("card-body");
+    footer.classList.add("card-footer");
+
+    // elements setup
+    title.classList.add("card-title");
+    title.classList.add(data["vl_code"] == 0 ? "valid-rel" : "invalid-rel");
+    title.innerText = "Relatory of verification of signature #" + data["id_signature"];
+
+    propLink.role = "button";
+    propLink.classList.add("btn");
+    propLink.classList.add("btn-secondary");
+
+    error_cause.innerText = message;
+
+    if(data["vl_code"] != 2 ){
+        propdata = getPropDataBySignature(data["id_signature"]);
+        propLink.href = "https://www.lpgpofficial.com/proprietary.php?id=" + btoa(propdata["cd_proprietary"]);
+        propLink.innerText = "Proprietary: " + propdata["nm_proprietary"];
+        propLink.target = "__blanck";
+    }
+    else{
+        propLink.innerText = "The proprietary doesn't exists any more";
+        propLink.classList.add("disabled");
+    }
+
+    checked_date.innerText = "Checked in: " + data["dt_reg"];
+
+    // attaching the elements
+    header.appendChild(title);
+    body.appendChild(error_cause);
+    body.appendChild(propLink);
+    footer.appendChild(checked_date);
+    content.appendChild(header);
+    content.appendChild(body);
+    content.appendChild(footer);
+    container.appendChild(content);
+
+    document.getElementById(dispose).appendChild(container);
 }

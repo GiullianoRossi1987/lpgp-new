@@ -24,6 +24,7 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/cards.css">
 </head>
 <style>
 </style>
@@ -107,6 +108,8 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <script src="./js/main-script.js"></script>
     <script src="js/changelogs.js"></script>
     <script src="./js/actions.js"></script>
+    <script src="./js/requester.js"></script>
+    <script src="./js/generator.js"></script>
     <script>
         $(document).ready(function(){
             //readCookies();

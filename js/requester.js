@@ -147,3 +147,30 @@ function genSessionErrorModal(link_replacement){
     $(mainModal).modal("show");
     $(mainModal).on("hidden.bs.modal", function(e){ window.location.replace(link_replacement); });
 }
+
+function getPropDataBySignature(signature_id){
+    if(signature_id > 0){
+        // just checking
+        var prop_data = {};
+        var signature_data = {};
+        $.post({
+            url: "ajx_signatures.php",
+            data: {"get": JSON.stringify({"cd_signature": signature_id})},
+            async: false,
+            dataType: "json",
+            success: function(resp){ signature_data = resp; },
+            error: function(error){ console.error(error); }
+        });
+        // DEBUG: return signature_data;
+        // now gets the proprietary data
+        $.post({
+            url: "ajx_prop.php",
+            data: {get: JSON.stringify({"cd_proprietary": signature_data[0]["id_proprietary"]})},
+            async: false,
+            dataType: "json",
+            success: function(resp){ prop_data = resp; },
+            error: function(error){ console.error(error); }
+        });
+        return prop_data[0];
+    }
+}

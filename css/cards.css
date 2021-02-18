@@ -17,3 +17,24 @@
     font-family: "Font Awesome 5 Free";
     float: right;
 }
+
+
+.relatory-card{
+    /* TODO creates the main style */
+}
+
+.relatory-card > .card-container > .card-header > .valid-rel::after{
+    content: "\f058";
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    float: right;
+    color: green;
+}
+
+.relatory-card > .card-container > .card-header > .invalid-rel::after{
+    content: "\f057";
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    float: right;
+    color: red;
+}
