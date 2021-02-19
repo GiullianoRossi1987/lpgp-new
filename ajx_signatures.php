@@ -26,6 +26,10 @@ else if(isset($_POST["change"]) && isset($_POST["signature"])){
 else if(isset($_POST["get-opts"])){
     die(json_encode(SignaturesData::CODES));
 }
+else if(isset($_POST["download"])){
+    $path = $obj->createsSignatureFile((int)$_POST["download"], false, $obj->generateFileNm(0));
+    die(json_encode(array("path" => $path)));
+}
 else{
     die("INVALID OPERATION");
 }

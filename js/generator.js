@@ -48,7 +48,7 @@ function genSignatureCard(data, dispose){
     var footerDiv        = document.createElement("div");
     var configBtn        = document.createElement("a");
     var configIcon       = document.createElement("span");
-    var downloadBtn      = document.createElement("a");
+    var downloadBtn      = document.createElement("button");
     var downloadIcon     = document.createElement("span");
 
 
@@ -89,12 +89,13 @@ function genSignatureCard(data, dispose){
 
     downloadIcon.classList.add("fas");
     downloadIcon.classList.add("fa-file-download");
+
     downloadBtn.classList.add("btn");
     downloadBtn.classList.add("btn-lg");
     downloadBtn.classList.add("btn-secondary");
-    downloadBtn.role = "button";
+    downloadBtn.classList.add("dsm-trigger");
     downloadBtn.innerText = "Download Signature File";
-    downloadBtn.href = "get_my_signature.php?id=" + btoa(data["cd_signature"]);
+    downloadBtn.setAttribute("data-id", btoa(data["cd_signature"]));
     downloadBtn.appendChild(downloadIcon);
 
     footerDiv.appendChild(configBtn);

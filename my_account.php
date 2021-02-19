@@ -224,6 +224,25 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" aria-hidden="true" id="dsm-modal">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 id="title-dsm" class="modal-title"></h1>
+                </div>
+                <div class="modal-body">
+                    <a href="#" id="alink-dsm" download="" role="button" class="btn btn-block btn-success"></a>
+                </div>
+                <div class="modal-footer">
+                    <a href="send_report.html">
+                        <span class="fas fa-exclamation-triangle"></span>
+                        Report an error
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Scripts -->
     <script src="jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -232,7 +251,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
     <script src="js/main-script.js"></script>
     <script src="js/actions.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="js/generator.js"></script>
+    <script src="./js/generator.js"></script>
     <script>
         $(document).ready(function(){
             setAccountOpts(true);
@@ -353,6 +372,23 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     error: function(error){ alert(error); }
                 });
             }
+        });
+
+        $(document).on("click", ".dsm-trigger", function(){
+            var id = atob($(this).data("id"));
+            $.post({
+                url: "ajx_signatures.php",
+                data: {download: id},
+                dataType: "json",
+                success: function(resp){
+                    $("#title-dsm").text("Download signature #" + id);
+                    $("#alink-dsm").text("Download signature #" + id);
+                    $("#alink-dsm").attr("href", resp["path"]);
+                    $("#alink-dsm").attr("download", resp["path"]);
+                    $("#dsm-modal").modal("show");
+                },
+                error: function(error){ console.error(error); }
+            });
         });
     </script>
 </body>

@@ -109,7 +109,7 @@ class SignaturesData extends DatabaseConnection{
     public static function generateFileNm(int $initial_counter = 0){
         $local_counter = $initial_counter;
         while(true){
-            if(!file_exists("/signatures.d/signature-file-". $local_counter . ".lpgp"))
+            if(!file_exists("signatures.d/signature-file-". $local_counter . ".lpgp"))
                 break;
             else $local_counter++;
         }
@@ -141,11 +141,10 @@ class SignaturesData extends DatabaseConnection{
         $arr_ord = array();
         for($char = 0; $char < strlen($to_json); $char++) array_push($arr_ord, "" . ord($to_json[$char]));
         $content_file = implode(self::DELIMITER, $arr_ord);
-        $root = $_SERVER['DOCUMENT_ROOT'];
-        file_put_contents("/signatures.d/" . $file_name, $content_file);
+        file_put_contents("signatures.d/" . $file_name, $content_file);
         $controller->addDownloadRecord($signature_id, $dtk, $content['Date-Creation']);
         unset($controller);
-        return $HTML_mode ? "<a href=\"https://lpgpofficial.com/signatures.d/$file_name\" download=\"$file_name\" role=\"button\" class=\"btn btn-lg downloads-btn btn-primary\">Get your signature #$signature_id here!</a>" : "$root/signatures.d/$file_name";
+        return $HTML_mode ? "<a href=\"https://lpgpofficial.com/signatures.d/$file_name\" download=\"$file_name\" role=\"button\" class=\"btn btn-lg downloads-btn btn-primary\">Get your signature #$signature_id here!</a>" : "https://www.lpgpofficial.com/signatures.d/$file_name";
     }
 
 
