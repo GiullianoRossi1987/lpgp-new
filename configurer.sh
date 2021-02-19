@@ -1,4 +1,18 @@
 #!/usr/bin/env bash
+
+function setupFolders(){
+	if [ ! -d ./u.clients ]; then mkdir u.clients; fi
+	if [ ! -d ./g.clients ]; then mkdir g.clients; fi
+	if [ ! -d ./usignatures.d ]; then mkdir usignatures.d; fi
+	if [ ! -d ./signatures.d ]; then mkdir signatures.d; fi
+	if [ ! -d ./media ]; then mkdir media; fi
+	if [ ! -d ./logs ]; then mkdir logs; touch logs/error.log logs/access.log logs/database.log logs/files.log logs/server.log; fi
+	if [ ! -d ./u.images ] then mkdir u.images; fi
+	# setup the permissions
+	chmod 777 -R u.clients g.clients signatures.d usignatures.d media logs u.images
+
+}
+
 procMode=0
 while :
 do
