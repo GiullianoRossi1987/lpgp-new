@@ -3,7 +3,6 @@ g.clients/
 media/
 signatures.d/
 usignatures.d/
-
-
-u.images
+u.images/
+logs/
 
