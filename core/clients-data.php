@@ -120,7 +120,7 @@ class ClientsData extends DatabaseConnection{
      * @throws ClientNotFound If the reference doesn't exist.
      * @return string The zip file with the clients files for downlaod.
      */
-    public function genConfigClient(int $client_pk_ref): string{
+    public function genConfigClient(int $client_pk_ref, bool $html_mode = true): string{
         $this->checkNotConnected();
         if(!$this->ckClientEx($client_pk_ref)) throw new ClientNotFound("There's no client #$client_pk_ref", 1);
         $cldt = $this->connection->query("SELECT tk_client, vl_root, id_proprietary, nm_client, nm_client FROM tb_clients WHERE cd_client = $client_pk_ref;")->fetch_array();
@@ -147,7 +147,7 @@ class ClientsData extends DatabaseConnection{
         $controller->addDownloadRecord($client_pk_ref, $tk, $json_aut['Dt'], true);
         unset($controller);
         $file_n = str_replace($_SERVER['DOCUMENT_ROOT'], "", $files);
-        return $this->passHTML($file_n);
+        return $html_mode ? $this->passHTML($file_n) : $file_n;
     }
 
     /**

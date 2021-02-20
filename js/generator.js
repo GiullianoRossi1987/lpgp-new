@@ -136,7 +136,7 @@ function genClientCard(data, dispose){
     var body             = document.createElement("div");
     var footer           = document.createElement("div");
     var chartBtn         = document.createElement("a"); // body
-    var downloadBtn      = document.createElement("a"); // body
+    var downloadBtn      = document.createElement("button"); // body
     var configBtn        = document.createElement("a"); // body
     var titleCC          = document.createElement("h1"); // header
     var subTitle         = document.createElement("h3"); // header
@@ -169,8 +169,10 @@ function genClientCard(data, dispose){
     downloadBtn.classList.add("btn");
     downloadBtn.classList.add("btn-lg");
     downloadBtn.classList.add("btn-secondary");
-    downloadBtn.role = "button";
-    downloadBtn.href = "client-data.php?client=" + btoa(data["cd_client"]);
+    downloadBtn.classList.add("csm-trigger");
+    // downloadBtn.role = "button";
+    // downloadBtn.href = "client-data.php?client=" + btoa(data["cd_client"]);
+    downloadBtn.setAttribute("data-id", btoa(data["cd_client"]));
     downloadBtn.innerHTML = "<span class=\"fas fa-box\"></span>Download the Client data";
 
     configBtn.classList.add("btn");

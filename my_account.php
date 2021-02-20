@@ -23,7 +23,6 @@ use Core\ClientsAccessData;
 $prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
 
-// TODO: Change the style of the profile page, use card to the main profile data
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -243,6 +242,25 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" aria-hidden="true" id="csm-modal">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 id="title-csm" class="modal-title"></h1>
+                </div>
+                <div class="modal-body">
+                    <a href="#" id="alink-csm" download="" role="button" class="btn btn-block btn-success"></a>
+                </div>
+                <div class="modal-footer">
+                    <a href="send_report.html">
+                        <span class="fas fa-exclamation-triangle"></span>
+                        Report an error
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Scripts -->
     <script src="jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -384,8 +402,25 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                     $("#title-dsm").text("Download signature #" + id);
                     $("#alink-dsm").text("Download signature #" + id);
                     $("#alink-dsm").attr("href", resp["path"]);
-                    $("#alink-dsm").attr("download", resp["path"]);
+                    $("#alink-dsm").attr("download", "signature_" + id + ".lpgp");
                     $("#dsm-modal").modal("show");
+                },
+                error: function(error){ console.error(error); }
+            });
+        });
+
+        $(document).on("click", ".csm-trigger", function(){
+            var id = atob($(this).data("id"));
+            $.post({
+                url: "ajx_clients.php",
+                data: {download: id},
+                dataType: "json",
+                success: function(resp){
+                    $("#title-csm").text("Download client #" + id);
+                    $("#alink-csm").text("Download client #" + id);
+                    $("#alink-csm").attr("href", resp["path"]);
+                    $("#alink-csm").attr("download", "Client_" + id + ".lpgp");
+                    $("#csm-modal").modal("show");
                 },
                 error: function(error){ console.error(error); }
             });

@@ -19,5 +19,9 @@ if(isset($_POST["get"])){
     }
     die(json_encode($results));
 }
+else if(isset($_POST["download"]) && is_numeric($_POST["download"])){
+    $path = $obj->genConfigClient((int)$_POST["download"], false);
+    die(json_encode(array("path" => $path)));
+}
 
 ?>
