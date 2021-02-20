@@ -228,6 +228,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 id="title-dsm" class="modal-title"></h1>
+                    <button type="button" data-dismiss="modal" class="btn">&times;</button>
                 </div>
                 <div class="modal-body">
                     <a href="#" id="alink-dsm" download="" role="button" class="btn btn-block btn-success"></a>
@@ -242,20 +243,59 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         </div>
     </div>
 
-    <div class="modal fade" tabindex="-1" aria-hidden="true" id="csm-modal">
+    <div class="modal fade" tabindex="-1" aria-hidden="true" id="dcm-modal">
         <div class="modal-dialog" role="dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 id="title-csm" class="modal-title"></h1>
+                    <h1 id="title-dcm" class="modal-title"></h1>
+                    <button type="button" data-dismiss="modal" class="btn">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <a href="#" id="alink-csm" download="" role="button" class="btn btn-block btn-success"></a>
+                    <a href="#" id="alink-dcm" download="" role="button" class="btn btn-block btn-success"></a>
                 </div>
                 <div class="modal-footer">
                     <a href="send_report.html">
                         <span class="fas fa-exclamation-triangle"></span>
                         Report an error
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" aria-hidden="true" id="csm-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="title-csm"></h1>
+                    <button type="button" data-dismiss="modal" class="btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="form" id="form-csm">
+                        <div class="form-group" >
+                            <input type="hidden" name="signature-to" value="" id="csm-signature-to">
+                            <br>
+                            <div class="input-group input-group-inline">
+                                <label for="csm-passcode" class="form-label input-group-prepend">The passcode</label>
+                                <input type="text" name="passcode" value="" class="form-control" id="csm-passcode">
+                            </div>
+                            <small class="input-group-append">If you don't want to change the passcode, leave it empty</small>
+                            <br>
+                            <div class="input-group input-group-inline">
+                                <label for="csm-codes" class="form-label input-group-prepend">Select the hash code</label>
+                                <select class="form-control" name="code-sel" id="csm-codes"></select>
+                            </div>
+                            <button type="button" name="btn-tgl" data-toggle="collapse" data-target="#show-hash" aria-controls="show-hash" class="btn btn-primary">Show hased code</button>
+                            <div class="collapse input-group input-group-inline" id="show-hash">
+                                <label for="csm-hashed" class="form-label input-group-prepend">Hash encoded code</label>
+                                <input type="text" value="" id="csm-hased" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="csm-save" class="btn btn-success btn-lg">Save changes</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-secondary btn-lg">Discard</button>
                 </div>
             </div>
         </div>
@@ -409,21 +449,29 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
             });
         });
 
-        $(document).on("click", ".csm-trigger", function(){
+        $(document).on("click", ".dcm-trigger", function(){
             var id = atob($(this).data("id"));
             $.post({
                 url: "ajx_clients.php",
                 data: {download: id},
                 dataType: "json",
                 success: function(resp){
-                    $("#title-csm").text("Download client #" + id);
-                    $("#alink-csm").text("Download client #" + id);
-                    $("#alink-csm").attr("href", resp["path"]);
-                    $("#alink-csm").attr("download", "Client_" + id + ".lpgp");
-                    $("#csm-modal").modal("show");
+                    $("#title-dcm").text("Download client #" + id);
+                    $("#alink-dcm").text("Download client #" + id);
+                    $("#alink-dcm").attr("href", resp["path"]);
+                    $("#alink-dcm").attr("download", "Client_" + id + ".lpgp");
+                    $("#dcm-modal").modal("show");
                 },
                 error: function(error){ console.error(error); }
             });
+        });
+
+        $(document).on("click", ".csm-trigger", function(){
+
+        });
+
+        $(document).on("click", ".ccm-trigger", function(){
+
         });
     </script>
 </body>

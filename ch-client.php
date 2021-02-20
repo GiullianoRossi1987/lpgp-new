@@ -199,11 +199,8 @@ if(isset($_GET['client'])){
 				$("#modal-done").modal('show');
 				show = false;
 			}
-        });
-
-        $(document).ready(function(){
             applyToA();
-		});
+        });
 
 		$(document).on("change", ".al", function(){
 			$("#go").removeClass("disabled");

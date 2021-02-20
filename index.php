@@ -77,12 +77,11 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
         </div>
         <hr>
         <div class="row rowcontentn">
-
         </div>
     </div>
-    <div class="footer-container container" style="max-width: 100% !important; position: relative; margin-left: 0;">
+    <div class="footer container" style="max-width: 100% !important; position: relative">
         <div class="footer-row row">
-            <div class="footer col-12" style="height: 150px; background-color: black; margin-top: 100%; position: relative; max-width: 100% !important; margin-left: 0;">
+            <div class="footer col-12" style="height: 150px; background-color: black; margin-top: 100%; position: absolute; max-width: 100% !important; margin-left: 0;">
                 <div class="social-options-grp">
                     <div class="social-option">
                         <a href="https://github.com/GiullianoRossi1987" target="_blanck" id="github" class="social-option-footer">
@@ -105,6 +104,7 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
             </div>
         </div>
     </div>
+
     <!-- Scripts -->
     <script src="jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
