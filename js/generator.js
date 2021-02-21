@@ -46,7 +46,7 @@ function genSignatureCard(data, dispose){
     var propLink         = document.createElement("a");
     var changelogDispose = document.createElement("div");
     var footerDiv        = document.createElement("div");
-    var configBtn        = document.createElement("a");
+    var configBtn        = document.createElement("button");
     var configIcon       = document.createElement("span");
     var downloadBtn      = document.createElement("button");
     var downloadIcon     = document.createElement("span");
@@ -82,9 +82,11 @@ function genSignatureCard(data, dispose){
     configBtn.classList.add("btn");
     configBtn.classList.add("btn-lg");
     configBtn.classList.add("btn-secondary");
+    configBtn.classList.add("csm-trigger");
     configBtn.innerText = "Configurations";
-    configBtn.role = "button";
-    configBtn.href = "ch_signature_data.php?sig_id=" + btoa(data["cd_signature"]);
+    // configBtn.role = "button";
+    // configBtn.href = "ch_signature_data.php?sig_id=" + btoa(data["cd_signature"]);
+    configBtn.setAttribute("data-id", btoa(data["cd_signature"]));
     configBtn.appendChild(configIcon);
 
     downloadIcon.classList.add("fas");

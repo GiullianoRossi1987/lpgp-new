@@ -264,7 +264,7 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
     </div>
 
     <div class="modal fade" tabindex="-1" aria-hidden="true" id="csm-modal">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title" id="title-csm"></h1>
@@ -275,27 +275,46 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
                         <div class="form-group" >
                             <input type="hidden" name="signature-to" value="" id="csm-signature-to">
                             <br>
-                            <div class="input-group input-group-inline">
-                                <label for="csm-passcode" class="form-label input-group-prepend">The passcode</label>
-                                <input type="text" name="passcode" value="" class="form-control" id="csm-passcode">
+                            <div class="row from-group">
+                                <label for="csm-passcode" class="form-label col-6">The passcode</label>
+                                <input type="password" name="passcode" value="" class="form-control col-6" id="csm-passcode">
                             </div>
+                            <br>
+                            <div class="from-group row">
+                                <label for="csm-confirm" class="form-label col-6">Confirm the code</label>
+                                <input type="password" name="conf-passcode" value="" class="form-control col-6" id="csm-confirm">
+                            </div>
+                            <button type="button" class="btn btn-sm btn-secondary" id="csm-show-code">Show the code</button>
                             <small class="input-group-append">If you don't want to change the passcode, leave it empty</small>
                             <br>
-                            <div class="input-group input-group-inline">
-                                <label for="csm-codes" class="form-label input-group-prepend">Select the hash code</label>
-                                <select class="form-control" name="code-sel" id="csm-codes"></select>
+                            <div class="row form-group">
+                                <label for="csm-codes" class="form-label col-6">Select the hash code</label>
+                                <select class="form-control col-6" name="code-sel" id="csm-codes"></select>
                             </div>
+                            <small>If you change the code, please confirm the password</small>
+                            <br>
                             <button type="button" name="btn-tgl" data-toggle="collapse" data-target="#show-hash" aria-controls="show-hash" class="btn btn-primary">Show hased code</button>
                             <div class="collapse input-group input-group-inline" id="show-hash">
                                 <label for="csm-hashed" class="form-label input-group-prepend">Hash encoded code</label>
-                                <input type="text" value="" id="csm-hased" readonly>
+                                <input type="text" value="" id="csm-hased" readonly class="form-control">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="csm-save" class="btn btn-success btn-lg">Save changes</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-secondary btn-lg">Discard</button>
+                    <div class="row">
+                        <button type="button" data-toggle="collapse" data-target="#confirm-coll" class="btn btn-success btn-lg" aria-controls="confirm-coll">
+                            Save changes
+                        </button>
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary btn-lg">Discard</button>
+                    </div>
+                    <div class="collapse row confirm-row" id="confirm-coll">
+                        <h4 class="col-12">Confirm the changes?</h4>
+                        <button type="button" id="csm-save" class="btn btn-success btn-lg col-6">Confirm and save</button>
+                        <button type="button" data-toggle="collapse" data-target="#confirm-coll" aria-controls="confirm-coll" class="btn btn-danger btn-lg col-6">
+                            Don't confirm
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -311,9 +330,39 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="./js/generator.js"></script>
     <script>
+        var csm_data = {};
+        var csm_error = false;
+
         $(document).ready(function(){
             setAccountOpts(true);
             setSignatureOpts();
+            $.post({
+                url: "ajx_signatures.php",
+                data: {"get-opts": true},
+                dataType: "json",
+                success: function(resp){
+                    resp.forEach((item, i) => {
+                        var opt = document.createElement("option");
+                        opt.value = i;
+                        opt.innerText = item;
+                        $("#csm-codes").append(opt);
+                    });
+                },
+                error: function(error){ alert(error); }
+            });
+        });
+
+        $(document).on("change keyup keydown", "#csm-passcode #csm-confirm", function(){
+            if($(this).val() != $("#passcode").val() && $("#passcode").val().length > 0){
+                err_pc = true;
+                $("#csm-passcode").addClass("field-error");
+                $("#csm-confirm").addClass("field-error");
+            }
+            else{
+                err_pc = false;
+                $("#csm-passcode").removeClass("field-error");
+                $("#csm-confirm").removeClass("field-error");
+            }
         });
 
         $(document).on("click", ".account-separator .content", function(){
@@ -467,11 +516,47 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         });
 
         $(document).on("click", ".csm-trigger", function(){
+            var id = atob($(this).data("id"));
+            // var sig_data = {};
+            $("#csm-signature-to").val(id);
+            $.post({
+                url: "ajx_signatures.php",
+                data: {get: JSON.stringify({cd_signature: $("#sig_id").val()})},
+                dataType: "json",
+                async: false,
+                success: function(resp){
+                    csm_data = resp[0];
+                },
+                error: function(error){ alert(error); }
+            });
+            $("#csm-hased").val(csm_data["vl_password"]);
+            $("#csm-codes").val(csm_data["vl_code"]);
+            $("#title-csm").text("Configurations of signature #" + id);
+            $("#csm-modal").modal("show");
+        });
 
+        $(document).on("click", "#csm-save", function(){
+            var to_save = {};
+            if($("#csm-passcode").val().length > 0 && !csm_error){
+                to_save["vl_password"] = $("#csm-passcode").val();
+            }
+            if($("#csm-codes").val() != csm_data["vl_code"] && !csm_error){
+                 to_save["vl_code"] = parseInt($("#csm-codes").val());
+            }
+            console.log(to_save);
+            $.post({
+                url: "ajx_signatures.php",
+                data: {change: JSON.stringify(to_save), "signature": $("#csm-signature-to").val()},
+                dataType: "json",
+                success: function(resp){
+                    $("#csm-modal").modal("hide");
+                },
+                error: function(error){ console.error(error); }
+            });
         });
 
         $(document).on("click", ".ccm-trigger", function(){
-
+            
         });
     </script>
 </body>
