@@ -13,16 +13,6 @@
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/new-features.css">
 </head>
-<style>
-    #img-user{
-        border-radius: 50%;
-    }
-
-    .prop-img{
-        border: 5px solid green;
-        background-color: green;
-    }
-</style>
 <body>
     <div class="test-cover" style="visibility: hidden"></div>
     <div class="container-fluid header-container" role="banner" style="position: fixed;">

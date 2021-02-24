@@ -98,3 +98,12 @@
     padding: 10px 12px;
     border: 1px solid black;
 }
+
+#img-user{
+    border-radius: 50%;
+}
+
+.prop-img{
+    border: 5px solid green;
+    background-color: green;
+}
