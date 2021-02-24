@@ -1,29 +1,3 @@
-<?php
-if(session_status() == PHP_SESSION_NONE) session_start();
-require_once "core/js-handler.php";
-require_once "core/Core.php";
-require_once "core/users-data.php";
-require_once "core/proprietaries-data.php";
-require_once "core/clients-data.php";
-require_once "core/prop-history.php";
-require_once "core/clients-access-data.php";
-require_once "core/usr-history.php";
-
-use function JSHandler\lsSignaturesMA;
-use function JSHandler\sendUserLogged;
-use function JSHandler\createClientCard;
-
-use Core\ProprietariesData;
-use Core\UsersData;
-use Core\PropCheckHistory;
-use Core\UsersCheckHistory;
-use Core\ClientsData;
-use Core\ClientsAccessData;
-
-$prp = new ProprietariesData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-$usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
