@@ -138,8 +138,8 @@ function genClientCard(data, dispose){
     var body             = document.createElement("div");
     var footer           = document.createElement("div");
     var chartBtn         = document.createElement("a"); // body
-    var downloadBtn      = document.createElement("button"); // body
-    var configBtn        = document.createElement("a"); // body
+    var downloadBtn      = document.createElement("a"); // body
+    var configBtn        = document.createElement("button"); // body
     var titleCC          = document.createElement("h1"); // header
     var subTitle         = document.createElement("h3"); // header
     var accTitle         = document.createElement("h5"); // footer
@@ -171,7 +171,7 @@ function genClientCard(data, dispose){
     downloadBtn.classList.add("btn");
     downloadBtn.classList.add("btn-lg");
     downloadBtn.classList.add("btn-secondary");
-    downloadBtn.classList.add("csm-trigger");
+    downloadBtn.classList.add("dcm-trigger");
     // downloadBtn.role = "button";
     // downloadBtn.href = "client-data.php?client=" + btoa(data["cd_client"]);
     downloadBtn.setAttribute("data-id", btoa(data["cd_client"]));
@@ -180,8 +180,10 @@ function genClientCard(data, dispose){
     configBtn.classList.add("btn");
     configBtn.classList.add("btn-lg");
     configBtn.classList.add("btn-secondary");
-    configBtn.role = "button";
-    configBtn.href = "ch_client.php?client=" + btoa(data["cd_client"]);
+    configBtn.classList.add("ccm-trigger");
+    // configBtn.role = "button";
+    configBtn.setAttribute("data-id", btoa(data["cd_client"]));
+    // configBtn.href = "ch_client.php?client=" + btoa(data["cd_client"]);
     configBtn.innerHTML = "<span class=\"fas fa-cog\"></span>Configurations";
 
     body.appendChild(chartBtn);

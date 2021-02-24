@@ -320,6 +320,57 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" id="ccm-modal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="ccm-title"></h1>
+                    <button type="button" class="btn" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="form">
+                        <input type="hidden" id="ccm-client" value="" class="form-control">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="ccm-name" class="form-label col-6">Client name</label>
+                                <input type="text" id="ccm-name" value="" class="form-control col-6">
+                            </div>
+                            <div class="row">
+                                <label for="ccm-token" class="form-label col-6">Client Token</label>
+                                <input type="text" id="ccm-token" value="" readonly class="form-control col-6">
+                            </div>
+                            <div class="row">
+                                <label for="ccm-permissions" class="form-label col-4">Client Permissions</label>
+                                <div class="col-8 input-group input-group-inline">
+                                    <select class="form-control col-6" id="ccm-permissions">
+                                        <option value="0">Normal</option>
+                                        <option value="1">Root</option>
+                                    </select>
+                                    <button type="button" class="btn btn-sm input-group-append" data-toggle="collapse" data-target="#ccm-help" aria-controls="ccm-help">
+                                        <span class="fas fa-question-circle"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-toggle="collapse" data-target="#conf-coll" aria-controls="conf-coll" aria-expanded="false" class="btn btn-lg btn-success">
+                        Save
+                    </button>
+                    <br>
+                    <button type="button" data-dismiss="modal" class="btn btn-lg btn-secondary">Discard</button>
+                    <div class="row collapse" id="conf-coll">
+                        <button type="button" class="btn btn-lg btn-success" id="ccm-save">Confirm & Save</button>
+                        <button type="button" data-toggle="collapse" data-target="#conf-coll" aria-controls="conf-coll" class="btn btn-lg btn-danger">
+                            Don't Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Scripts -->
     <script src="jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -556,7 +607,42 @@ $usr = new UsersData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']
         });
 
         $(document).on("click", ".ccm-trigger", function(){
-            
+            var id = atob($(this).data("id"));
+            $.post({
+                url: "ajx_clients.php",
+                data: {get: JSON.stringify({"cd_client": id})},
+                dataType: "json",
+                async: false,
+                success: function(resp){
+                    // DEBUG: console.log(resp[0]);
+                    $("#ccm-title").text("Configurations of client #" + id);
+                    $("#ccm-client").val(id);
+                    $("#ccm-name").val(resp[0]["nm_client"]);
+                    $("#ccm-token").val(resp[0]["tk_client"]);
+                    $("#ccm-permissions").val(resp[0]["vl_root"]);
+                    $("#ccm-modal").modal("show");
+                },
+                error: function(error){ console.error(error);}
+            });
+        });
+
+        $(document).on("click", "#ccm-save", function(){
+            var data = {
+                "nm_client": $("#ccm-name").val(),
+                "vl_permissions": $("#ccm-permissions").val()
+            };
+            $.post({
+                url: "ajx_clients.php",
+                data: {update: JSON.stringify(data), client: $("#ccm-client").val()},
+                dataType: "json",
+                async: false,
+                success: function(resp){
+                    if(resp[0] == 0){
+                        $("#ccm-modal").modal("hide");
+                    }
+                },
+                error: function(error){ console.error(error); }
+            });
         });
     </script>
 </body>
