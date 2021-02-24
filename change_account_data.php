@@ -49,6 +49,6 @@ else{
 		$_COOKIE['user-icon'] = "/u.images/" . $_FILES['new-img']['name'][0];
 	}
 }
-header("Location: my_account.php");
+header("Location: my_account.html");
 
 ?>

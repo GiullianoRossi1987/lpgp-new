@@ -32,7 +32,7 @@ if(isset($_GET['confirm'])){
         echo "<script>resetVals();</script>";
 	}
 	else{
-		echo "<script>window.location.replace(\"https://www.lpgpofficial.com/my_account.php\");</script>";
+		echo "<script>window.location.replace(\"https://www.lpgpofficial.com/my_account.html\");</script>";
 	}
 }
 ?>

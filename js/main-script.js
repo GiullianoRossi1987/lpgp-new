@@ -87,7 +87,7 @@ function setAccountOpts(ext_fls = false){
 
         config_opt.href = "https://" + window.location.hostname + "/ch_my_data.php";
         logoff_opt.href = "https://" + window.location.hostname + "/logoff.php";
-        account_opt.href = "https://"+ window.location.hostname + "/my_account.php";
+        account_opt.href = "https://"+ window.location.hostname + "/my_account.html";
 
         // classes
         config_opt.classList.add("dropdown-item");

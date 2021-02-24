@@ -17,7 +17,7 @@ use Configurations\ConfigManager;
 
 $gblConfig = new ConfigManager($_SERVER["DOCUMENT_ROOT"] . "/config/mainvars.json");
 if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
-if(!defined("MAX_SIGC")) define("MAX_SIGC", 5);   // the max number of the signatures checked card displayed at the my_account.php page
+if(!defined("MAX_SIGC")) define("MAX_SIGC", 5);   // the max number of the signatures checked card displayed at the my_account.html page
 
 /**
  * That method sends the $_COOKIE vars about the logged user to the localStorage. In a inexisting session

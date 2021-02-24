@@ -10,6 +10,6 @@ if(isset($_GET['client'])){
 	$obj = new ClientsData("giulliano_php", "");
 	$obj->rmClient((int)$cl_id);
 
-	header("Location: my_account.php");
+	header("Location: my_account.html");
 
 }

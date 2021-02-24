@@ -135,7 +135,7 @@ if(isset($_GET['client'])){
 					<br>
 					<?php echo $del; ?>
 					<button type="submit" class="btn btn-lg btn-success disabled" id="go" name="submit">Save changes</button>
-					<a href="my_account.php" role="button" type="button" class="btn btn-lg btn-secondary">Cancel</a>
+					<a href="my_account.html" role="button" type="button" class="btn btn-lg btn-secondary">Cancel</a>
 					<!-- Modal Saved Changes -->
 					<div class="modal fade" id="modal-done" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 						<div class="modal-dialog" role="document">

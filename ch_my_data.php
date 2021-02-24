@@ -144,7 +144,7 @@ else{
 					</div>
 					<br>
 					<button class="btn btn-lg btn-success" type="button" id="save">Save configurations</button>
-					<button class="btn btn-lg btn-secondary" type="submit" onclick="window.location.replace('./my_account.php');">Cancel</button>
+					<button class="btn btn-lg btn-secondary" type="submit" onclick="window.location.replace('./my_account.html');">Cancel</button>
 					<button type="button" id="reset" class="btn btn-lg btn-warning">Restore default</button>
 				</form>
             </div>
@@ -289,7 +289,7 @@ else{
                     if(response == "success"){
                         readCookies();
                         alert("Account data changed");
-                        window.location.replace("my_account.php");
+                        window.location.replace("my_account.html");
                     }
                     else console.error("ERROR: " + response);
                 },

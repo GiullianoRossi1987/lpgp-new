@@ -117,7 +117,7 @@ if(isset($_POST['submit'])){
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Create more clients</button>
-                                    <button type="button" class="btn btn-primary" onclick="window.location.replace('my_account.php');">Go back to my account</button>
+                                    <button type="button" class="btn btn-primary" onclick="window.location.replace('my_account.html');">Go back to my account</button>
                                 </div>
                             </div>
                         </div>

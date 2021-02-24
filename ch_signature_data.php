@@ -208,7 +208,7 @@
                 success: function(resp){
                     // console.log(resp);
                     alert("Data changed"); // TODO: change the alert methods by the modal creator method
-                    setTimeout(function(){window.location.replace("my_account.php");}, 200);
+                    setTimeout(function(){window.location.replace("my_account.html");}, 200);
                 },
                 error: function(error){ console.error(error); }
             })
