@@ -138,7 +138,7 @@ function genClientCard(data, dispose){
     var body             = document.createElement("div");
     var footer           = document.createElement("div");
     var chartBtn         = document.createElement("a"); // body
-    var downloadBtn      = document.createElement("a"); // body
+    var downloadBtn      = document.createElement("button"); // body
     var configBtn        = document.createElement("button"); // body
     var titleCC          = document.createElement("h1"); // header
     var subTitle         = document.createElement("h3"); // header
