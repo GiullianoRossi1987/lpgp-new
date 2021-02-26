@@ -1,3 +1,8 @@
 :root{
     --bgColor: #fdf000;
+    --fontColor: #000000;
+    --whiteReplace: #ccc5e8;
+    --dmBackground: #4a2194;
+    --dmFontColor: #ffd515;
+    --BannerColor: #4a2194;
 }

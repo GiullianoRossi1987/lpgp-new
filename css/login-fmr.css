@@ -1,3 +1,4 @@
+@import "envvars.css";
 input{
 	border: none !important;
 	border-bottom: 1px black solid !important;
@@ -62,7 +63,7 @@ input{
 .rd-type  input[type="radio"]:checked ~ .new-opt-lb + .base i{
 	opacity: 1 !important;
 	color: white;
-	
+
 }
 
 #prop-opt{

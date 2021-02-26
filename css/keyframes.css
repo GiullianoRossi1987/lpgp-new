@@ -34,3 +34,8 @@
     from{ font-size: inherit; }
     to{ font-size: 7px; }
 }
+
+@keyframes zeppeli7 {
+    0%{ transform: rotate(0deg);}
+    100%{ transform: rotate(360deg);}
+}

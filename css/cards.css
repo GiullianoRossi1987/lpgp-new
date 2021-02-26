@@ -1,5 +1,7 @@
 /* Signature auth cards */
 
+@import "envvars.css";
+
 .signature-vl-card{
 	padding: 10px 11px;
 }

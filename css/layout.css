@@ -1,4 +1,5 @@
-.side-bar{ 
+@import "envvars.css";
+.side-bar{
     background-color: rgb(51, 173, 177);
     height: 100px;
     position: fixed !important;
@@ -48,7 +49,7 @@
     padding: 12px 14px;
 }
 
-.side-bar{ 
+.side-bar{
     background-color: purple;
     height: 1000px;
 }

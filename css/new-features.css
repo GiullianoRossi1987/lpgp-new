@@ -1,7 +1,5 @@
-@keyframes zeppeli7 {
-    0%{ transform: rotate(0deg);}
-    100%{ transform: rotate(360deg);}
-}
+@import "envvars.css";
+@import "keyframes.css";
 
 .loader{
     width: 120px;
