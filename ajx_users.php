@@ -1,6 +1,6 @@
 <?php
-require_once "core/users-data.php";
-require_once "core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/users-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
 
 use Core\UsersData;
 $obj = new UsersData(LPGP_CONF["mysql"]["sysuser"], LPGP_CONF["mysql"]["passwd"]);

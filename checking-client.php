@@ -1,9 +1,9 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once "core/Core.php";
-require_once "core/js-handler.php";
-require_once "core/Exceptions.php";
-require_once "core/clients-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/js-handler.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Exceptions.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/clients-data.php";
 
 use Core\ClientsData;
 use ClientsExceptions\AuthenticationError;

@@ -1,6 +1,6 @@
 <?php
-require_once "core/proprietaries-data.php";
-require_once "core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/proprietaries-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
 
 use Core\ProprietariesData;
 $obj = new ProprietariesData(LPGP_CONF["mysql"]["sysuser"], LPGP_CONF["mysql"]["passwd"]);

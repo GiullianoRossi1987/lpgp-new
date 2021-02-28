@@ -1,6 +1,6 @@
 <?php
-require_once "core/Core.php";
-require_once "core/signatures-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/signatures-data.php";
 
 use Core\SignaturesData;
 $obj = new SignaturesData(LPGP_CONF["mysql"]["sysuser"], LPGP_CONF["mysql"]["passwd"]);

@@ -1,10 +1,10 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once "core/Core.php";
-require_once "core/js-handler.php";
-require_once "core/logs-system.php";
-require_once "core/users-data.php";
-require_once "core/proprietaries-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/js-handler.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/logs-system.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/users-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/proprietaries-data.php";
 
 use Core\ProprietariesData;
 use Core\UsersData;

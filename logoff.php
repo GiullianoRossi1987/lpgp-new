@@ -1,5 +1,5 @@
 <?php
-require_once "core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
 use templateSystem\ErrorTemplate;
 // if(session_status() == PHP_SESSION_NONE) session_start();
 

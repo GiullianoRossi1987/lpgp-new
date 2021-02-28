@@ -1,8 +1,8 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once "core/Core.php";
-require_once "core/charts.php";
-require_once "core/proprietaries-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/charts.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/proprietaries-data.php";
 
 use Core\ProprietariesData;
 use Charts_Plots\AccessPlot;

@@ -1,7 +1,7 @@
 <?php
-require_once "core/js-handler.php";
-require_once "core/Core.php";
-require_once "config/configmanager.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/js-handler.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config/configmanager.php";
 
 use function JSHandler\sendUserLogged;
 use function JSHandler\setCon1Links;

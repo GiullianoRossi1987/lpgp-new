@@ -1,6 +1,6 @@
 <?php
-require_once "core/usr-history.php";
-require_once "core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/usr-history.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
 
 use Core\UsersCheckHistory;
 $obj = new UsersCheckHistory(LPGP_CONF["mysql"]["sysuser"], LPGP_CONF["mysql"]["passwd"]);

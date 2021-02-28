@@ -1,8 +1,8 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
-require_once "core/Core.php";
-require_once "core/usr-history.php";
-require_once "core/prop-history.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/usr-history.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/prop-history.php";
 
 use Core\UsersCheckHistory;
 use Core\PropCheckHistory;

@@ -1,7 +1,7 @@
 <?php
-require_once "core/Core.php";
-require_once "core/changelog-core.php";
-require_once "core/Exceptions.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/changelog-core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Exceptions.php";
 
 use Core\SignaturesChangeLogs;
 use Core\ClientsChangeLogs;

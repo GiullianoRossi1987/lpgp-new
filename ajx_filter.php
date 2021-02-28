@@ -1,9 +1,9 @@
 <?php
-require_once "core/Core.php";
-require_once "core/js-handler.php";
-require_once "core/proprietaries-data.php";
-require_once "core/signatures-data.php";
-require_once "core/clients-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/js-handler.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/proprietaries-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/signatures-data.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/clients-data.php";
 
 use Core\SignaturesData;
 use Core\ClientsData;

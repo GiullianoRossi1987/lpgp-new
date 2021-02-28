@@ -2,7 +2,7 @@
 namespace Core;
 use Exception;
 try{
-    require_once  "core/Exceptions.php";
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Exceptions.php";
     require_once  "config/configmanager.php";
     require_once  "core/control/controllers.php";
 }
@@ -150,7 +150,7 @@ class DatabaseConnection{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace templateSystem;
-require_once "core/Exceptions.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Exceptions.php";
 
 use ExctemplateSystem\AlreadyLoadedFile;
 use ExctemplateSystem\InvalidFileType;

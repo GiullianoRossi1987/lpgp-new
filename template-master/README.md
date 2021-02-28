@@ -880,7 +880,7 @@ Vamos então modificar o arquivo PHP para carregar um produto, e usar o suporte 
 <?php
 
   # Bootstrap da Doctrine2
-  require_once "bootstrap.php";
+  require_once $_SERVER["DOCUMENT_ROOT"] . "/bootstrap.php";
 
   require_once("lib/raelgc/view/Template.php");
   use raelgc\view\Template;

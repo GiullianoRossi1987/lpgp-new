@@ -1,6 +1,6 @@
 <?php
-require_once "core/prop-history.php";
-require_once "core/Core.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/prop-history.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/core/Core.php";
 
 use Core\PropCheckHistory;
 use LPGP_CONF;
