@@ -117,7 +117,6 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <script src="./js/generator.js"></script>
     <script>
         $(document).ready(function(){
-            //readCookies();
             readCookies();
             setAccountOpts();
             setSignatureOpts();

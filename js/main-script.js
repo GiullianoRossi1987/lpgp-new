@@ -63,7 +63,7 @@ function getChartHead(){
     mainObj.appendChild(scriptObj);
 }
 
-function setAccountOpts(ext_fls = false){
+function setAccountOpts(){
     /**
      *
      */
@@ -103,12 +103,14 @@ function setAccountOpts(ext_fls = false){
         local_opts.appendChild(account_opt);
         setClientsDrop();
         var img = document.createElement("img");
+        img.id = "usr-icon-bar";
         img.width = 30;
         img.height = 30;
         var local_opt_btn = document.querySelector("#account-opts");
         img.src = getLinkedUserIcon();
         img.classList.add("user-icon");
-        document.querySelector("#account-opts span").remove();
+        try { document.querySelector("#account-opts > span").remove(); }
+        catch(e){}
         local_opt_btn.appendChild(img);
     }
     else{
@@ -255,7 +257,7 @@ function hideError(){
 
 function getLinkedUserIcon(){
     readCookies();
-    var ls  = swp_cookies["user-icon"];
+    var ls  = swp_cookies["user-icon"] == "default-img" ? "media/usr-icon.png" : swp_cookies["user-icon"];
     return "https://" + window.location.hostname + "/" + ls;
 }
 

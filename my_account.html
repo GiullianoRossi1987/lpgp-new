@@ -427,11 +427,12 @@
                     success: function(resp){
                         // console.log(resp);
                         data = resp;
+                        var img = getLinkedUserIcon() == "https://www.lpgpofficial.com/default-img" ? "media/usr-icon.png" : getLinkedUserIcon();
                         setTimeout(function(){ $(".test-cover").css("visibility", "hidden"); }, 3600);
                         $("#username-ttl").html(resp[0]["nm_proprietary"] + "<span class=\"badge badge-success badge-account\">Proprietary</span>");
                         $("#email-ttl").text(resp[0]["vl_email"]);
                         $("#date-creation-ttl").text(resp[0]["dt_creation"]);
-                        $("#img-user").css("background-image", "url(" + getLinkedUserIcon() + ")");
+                        $("#img-user").css("background-image", "url(" + img + ")");
                     },
                     error: function(error){ alert(error); }
                 });
