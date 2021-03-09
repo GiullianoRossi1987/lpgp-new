@@ -1,7 +1,7 @@
 -- MySQL
 -- @author Giulliano Rossi <giulliano.scatalon.rossi@gmail.com>
 
-create database if not exists LPGP_WEB;
+create database  LPGP_WEB;
 use LPGP_WEB;
 
 create table if not exists tb_users(

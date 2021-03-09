@@ -23,7 +23,7 @@ use ProprietariesExceptions\ProprietaryAlreadyExists;
 class ProprietariesData extends DatabaseConnection{
 
     const DATETIME_FORMAT = "H:m:i Y-M-d";
-    const EMAIL_USING     = "lpgp@gmail.com";
+    const EMAIL_USING     = "lpgpofficial@gmail.com";
 
     /**
      * Checks if a proprietary account exists in the database.

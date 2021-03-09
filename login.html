@@ -193,7 +193,7 @@
             if(mce_type == "proprietary"){
                 $.post({
                     url: "ajx_prop.php",
-                    data: {check: JSON.stringify({user: $("#username").val(), code: $("#mce-code-i").val()})},
+                    data: {"verify": JSON.stringify({user: $("#username").val(), code: $("#mce-code-i").val()})},
                     dataType: "json",
                     success: function(resp){
                         switch(resp["success"]){
