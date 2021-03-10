@@ -22,6 +22,10 @@ if(isset($_POST["get"])){
 else if(isset($_POST["add"])){
     // TODO: add method to AJAX
 }
+else if(isset($_POST["del"]) && isset($_POST["client"])){
+    $obj->rmClient((int)$_POST["client"]);
+    die(json_encode(array("success" => "0")));
+}
 else if(isset($_POST["update"]) && isset($_POST["client"])){
     $params = json_decode($_POST["update"], true);
     $obj->fastUpdate($params, (int)$_POST["client"]);
@@ -31,5 +35,8 @@ else if(isset($_POST["download"]) && is_numeric($_POST["download"])){
     $path = $obj->genConfigClient((int)$_POST["download"], false);
     die(json_encode(array("path" => $path)));
 }
-
+else if(isset($_POST["getenc"]) && isset($_POST["client"])){
+    $data = $obj->getEncodedClient((int)$_POST["client"]);
+    die(json_encode(array("encoded" => $data)));
+}
 ?>

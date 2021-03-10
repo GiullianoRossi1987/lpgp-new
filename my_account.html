@@ -271,12 +271,20 @@
                             Save changes
                         </button>
                         <button type="button" data-dismiss="modal" class="btn btn-secondary btn-lg">Discard</button>
+                        <button type="button" data-toggle="collapse" data-target="#confirm-del" class="btn btn-danger btn-lg" aria-controls="confirm-del">Delete</button>
                     </div>
                     <div class="collapse row confirm-row" id="confirm-coll">
                         <h4 class="col-12">Confirm the changes?</h4>
                         <button type="button" id="csm-save" class="btn btn-success btn-lg col-6">Confirm and save</button>
                         <button type="button" data-toggle="collapse" data-target="#confirm-coll" aria-controls="confirm-coll" class="btn btn-danger btn-lg col-6">
                             Don't confirm
+                        </button>
+                    </div>
+                    <div class="collapse row confirm-row" id="confirm-del">
+                        <h4 class="col-12">Delete the signtature??</h4>
+                        <button type="button" id="csm-del" class="btn btn-danger btn-lg col-6">Delete</button>
+                        <button type="button" data-toggle="collapse" data-target="#confirm-coll" aria-controls="confirm-coll" class="btn btn-danger btn-lg col-6">
+                            Cancel
                         </button>
                     </div>
                 </div>
@@ -304,6 +312,13 @@
                                 <input type="text" id="ccm-token" value="" readonly class="form-control col-6">
                             </div>
                             <div class="row">
+                                <label for="ccm-enc" class="form-label col-6">Client enconded access</label>
+                                <input type="text" id="ccm-enc" readonly class="form-control col-5">
+                                <button type="button" id="ccm-cp-enc" class="btn btn-primary col-1">
+                                    <span class="fas fa-clipboard"></span>
+                                </button>
+                            </div>
+                            <div class="row">
                                 <label for="ccm-permissions" class="form-label col-4">Client Permissions</label>
                                 <div class="col-8 input-group input-group-inline">
                                     <select class="form-control col-6" id="ccm-permissions">
@@ -324,10 +339,17 @@
                     </button>
                     <br>
                     <button type="button" data-dismiss="modal" class="btn btn-lg btn-secondary">Discard</button>
+                    <button type="button" data-toggle="collapse" data-target="#conf-del" aria-controls="conf-del" class="btn btn-danger btn-lg">Delete </button>
                     <div class="row collapse" id="conf-coll">
                         <button type="button" class="btn btn-lg btn-success" id="ccm-save">Confirm & Save</button>
                         <button type="button" data-toggle="collapse" data-target="#conf-coll" aria-controls="conf-coll" class="btn btn-lg btn-danger">
                             Don't Save
+                        </button>
+                    </div>
+                    <div class="row collapse" id="conf-del">
+                        <button type="button" class="btn btn-lg btn-danger" id="ccm-del">Delete</button>
+                        <button type="button" data-toggle="collapse" data-target="#conf-id" aria-controls="conf-coll" class="btn btn-lg btn-danger">
+                            Cancel
                         </button>
                     </div>
                 </div>
@@ -441,6 +463,7 @@
                     data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]})},
                     dataType: "json",
                     success: function(resp){
+                        $("#signatures-section").empty();
                         for(var i = 0; i < 5; ++i){
                             if(i > resp.length || resp[i] == undefined) break;
                             else genSignatureCard(resp[i], "signatures-section");
@@ -571,6 +594,32 @@
             });
         });
 
+        $(document).on("click", "#ccm-cp-enc", function(){
+            // var data = document.getElementById("ccm-cp-enc");
+            // data.select();''
+            $("#ccm-enc").select();
+            // $(this).select();
+            document.execCommand("copy");
+            // $temp.remove();
+            $(this).attr("data-toggle", "tooltip");
+            $(this).attr("title", "copied!");
+            $(this).tooltip("show");
+            setTimeout(function(){$("#ccm-cp-enc").tooltip("hide"); }, 300);
+        });
+
+        $(document).on("click", "#csm-del", function(){
+            $.post({
+                url: "ajx_signatures.php",
+                data: {"del": "t", "signature": $("#csm-signature-to").val()},
+                dataType: "json",
+                success: function(resp){
+                    $("#csm-modal").modal("hide");
+                    window.location.reload();
+                },
+                error: function(error){ console.error(error); }
+            });
+        });
+
         $(document).on("click", ".ccm-trigger", function(){
             var id = atob($(this).data("id"));
             $.post({
@@ -586,8 +635,29 @@
                     $("#ccm-token").val(resp[0]["tk_client"]);
                     $("#ccm-permissions").val(resp[0]["vl_root"]);
                     $("#ccm-modal").modal("show");
+                    $.post({
+                        url: "ajx_clients.php",
+                        data: {getenc: "t", client: 1},
+                        dataType: "json",
+                        async: false,
+                        success: function(resp){ $("#ccm-enc").val(resp["encoded"]); },
+                        error: function(error){ alert(error); }
+                    });
                 },
                 error: function(error){ console.error(error);}
+            });
+        });
+
+        $(document).on("click", "#ccm-del", function(){
+            $.post({
+                url: "ajx_clients.php",
+                data: {"del": "t", "client": $("#ccm-client").val()},
+                dataType: "json",
+                success: function(resp){
+                    $("#ccm-modal").modal("hide");
+                    window.location.reload();
+                },
+                error: function(error){ console.error(error); }
             });
         });
 

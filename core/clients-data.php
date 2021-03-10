@@ -112,6 +112,35 @@ class ClientsData extends DatabaseConnection{
     }
 
     /**
+     * Generates the content of the client authentication file, but returns it on a string,
+     * making the client able to securaly connect to the API without downloading the file it self.
+     * It's used for web applications and when the proprietary don't want to download the file.
+     * @param integer $client The client primary key reference
+     * @throws ClientNotFound If there client primary key isn't valid.
+     * @return string
+     */
+    public function getEncodedClient(int $client): string{
+        $this->checkNotConnected();
+        if(!$this->ckClientEx($client)) throw new ClientNotFound("There's no client #$client", 1);
+        $cldt = $this->connection->query("SELECT tk_client, vl_root, id_proprietary, nm_client, nm_client FROM tb_clients WHERE cd_client = $client;")->fetch_array();
+        $files = $this->pathZipGen();
+        $controller = new ClientsController(CONTROL_FILE);
+        $tk = $controller->generateDownloadToken();
+        $json_aut = array(
+            "Client" => $client,
+            "Proprietary" => (int)$cldt['id_proprietary'],
+            "Token" => $cldt['tk_client'],
+            "Dt" => date("Y-m-d H:i:s"),
+            "cdtk" => $tk
+        );
+        $dumped_a = json_encode($json_aut);
+        $encoded_ar = [];
+        $exp = str_split($dumped_a);
+        foreach($exp as $char) $encoded_ar[] = (string)ord($char);
+        return implode("/", $encoded_ar);
+    }
+
+    /**
      * That method generates two clients files, the client configurations file and the .lpgp authentication file.
      * The difference between those files is the use for the system, the configurations file is used by the client
      * (SDK) to him know what kind of client account it isit is.
