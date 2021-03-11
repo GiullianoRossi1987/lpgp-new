@@ -6,10 +6,6 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/core/clients-data.php";
 
 use Core\ClientsData;
 use const LPGP_CONF;
-
-$obj_main = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['passwd']);
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,15 +19,9 @@ $obj_main = new ClientsData(LPGP_CONF['mysql']['sysuser'], LPGP_CONF['mysql']['p
     <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
 </head>
 <body>
-<?php
-if(isset($_POST['submit'])){
-	$isroot = $_POST['root_permissions'] == "root";
-	$obj_main->addClient($_POST['client-name'], $_COOKIE['user'], $isroot);
-    echo '<script>show = true</script>';
-}
-?>
     <div class="container-fluid header-container" role="banner" style="position: relative;">
         <div class="col-md-12 header col-sm-12" style="height: 71px;">
             <div class="opt-dropdown dropdown login-dropdown">
@@ -59,12 +49,12 @@ if(isset($_POST['submit'])){
             <br>
         </div>
     </div>
-	<div class="content1 container content">
-        <div class="row rowcontent">
-            <div class="col-12 col-md-12 col-sm-12 content-nrm" id="con2" style="margin-top: 15%;">
-                <form action="./create-client.php" method="post">
-					<h1 style="margin-left: 35%">Client creation</h1>
-					<h5 style="margin-left: 35%;">Here you can create your own clients.</h5>
+	<div class="container container-fluid" style="margin-top: 10%;">
+        <div class="row ">
+            <div class="col-12 col-md-12 col-sm-12 content-nrm">
+                <form>
+					<h1 >Client creation</h1>
+					<h5 >Here you can create your own clients.</h5>
 					<hr>
 					<label for="client-nm-inp" class="form-label">Type a client name</label>
 					<br>
@@ -100,23 +90,21 @@ if(isset($_POST['submit'])){
                         <option value="root">Root client</option>
                     </select>
                     <br>
-                    <button class="btn btn-success btn-block" type="submit" name="submit">Create Client</button>
+                    <button class="btn btn-success btn-block" type="button" id="create-client-bt">Create Client</button>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal fade" id="finalModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
                                 </div>
                                 <div class="modal-body">
-                                    Body
+                                    Want to create another client or just go to your profile page?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Create more clients</button>
+                                    <button type="button" class="btn btn-secondary" id="create-more-bt">Create more clients</button>
                                     <button type="button" class="btn btn-primary" onclick="window.location.replace('my_account.html');">Go back to my account</button>
                                 </div>
                             </div>
@@ -169,6 +157,29 @@ if(isset($_POST['submit'])){
         $(document).ready(function(){
             $(".contitle").css("opacity", "1");
             $(".headtitle").css("opacity", "1");
+        });
+
+        $(document).on("click", "#create-client-bt", function(){
+            $.post({
+                url: "ajx_clients.php",
+                data: {add: JSON.stringify({
+                    "name": $("#client-nm-inp").val(),
+                    "root": $("#client-permissions").val()
+                })},
+                dataType: "json",
+                success: function(response){
+                    if(response["success"] == 0){
+                        $("#finalModal").modal("show");
+                    }
+                },
+                error: function(error){ console.error(error); }
+            });
+        });
+
+        $(document).on("click", "#create-more-bt", function(){
+            $("#client-nm-inp").val("");
+            $("#client-permissions").val("normal");
+            $("#finalModal").modal("hide");
         });
     </script>
 </body>

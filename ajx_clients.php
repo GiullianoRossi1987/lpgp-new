@@ -20,7 +20,9 @@ if(isset($_POST["get"])){
     die(json_encode($results));
 }
 else if(isset($_POST["add"])){
-    // TODO: add method to AJAX
+    $params = json_decode($_POST["add"], true);
+    $obj->addClient($params["name"], $_COOKIE["user"], $params["root"] == "root");
+    die(json_encode(array("success" => 0)));
 }
 else if(isset($_POST["del"]) && isset($_POST["client"])){
     $obj->rmClient((int)$_POST["client"]);
