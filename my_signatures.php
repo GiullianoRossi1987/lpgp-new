@@ -121,6 +121,7 @@ $id = $prp->getPropID($_COOKIE['user']);
     <script src="js/autoload.js" charset="utf-8"></script>
     <script src="js/main-script.js"></script>
     <script src="js/actions.js"></script>
+    <script src="js/requester.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script>
         $(document).ready(function(){
@@ -183,12 +184,6 @@ $id = $prp->getPropID($_COOKIE['user']);
 
         $(document).on("click", "#default-img", function(){
             $("#upload-img-input").hide();
-        });
-
-        $(document).scroll(function(){
-            $(".header-container").toggleClass("scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".default-btn-header").toggleClass("default-btn-header-scrolled", $(this).scrollTop() > $(".header-container").height());
-            $(".opts").toggleClass("opts-scrolled", $(this).scrollTop() > $(".header-container").height());
         });
 
         $(document).on("change", "#filter-main", function(){
