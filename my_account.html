@@ -251,6 +251,14 @@
                             <button type="button" class="btn btn-sm btn-secondary" id="csm-show-code">Show the code</button>
                             <small class="input-group-append">If you don't want to change the passcode, leave it empty</small>
                             <br>
+                            <div class="form-group row">
+                                <label for="csm-encoded" class="form-label col-4">Access string</label>
+                                <input type="text" id="csm-encoded" readonly class="form-control col-6">
+                                <button type="button" class="btn btn-primary col-2" data-toggle="tooltip" id="cp-enc-csm">
+                                    <span class="fas fa-clipboard"></span>
+                                </button>
+                            </div>
+                            <br>
                             <div class="row form-group">
                                 <label for="csm-codes" class="form-label col-6">Select the hash code</label>
                                 <select class="form-control col-6" name="code-sel" id="csm-codes"></select>
@@ -560,7 +568,7 @@
             $("#csm-signature-to").val(id);
             $.post({
                 url: "ajx_signatures.php",
-                data: {get: JSON.stringify({cd_signature: $("#sig_id").val()})},
+                data: {get: JSON.stringify({cd_signature: id})},
                 dataType: "json",
                 async: false,
                 success: function(resp){
@@ -568,10 +576,26 @@
                 },
                 error: function(error){ alert(error); }
             });
+            $.post({
+                url: "ajx_signatures.php",
+                data: {"get-encoded": id},
+                dataType: "json",
+                async: false,
+                success: function(response){ $("#csm-encoded").val(response["encoded"]); },
+                error: function(error){ console.error(error); }
+            });
             $("#csm-hased").val(csm_data["vl_password"]);
             $("#csm-codes").val(csm_data["vl_code"]);
             $("#title-csm").text("Configurations of signature #" + id);
             $("#csm-modal").modal("show");
+        });
+
+        $(document).on("click", "#cp-enc-csm", function(){
+            $("#csm-encoded").select();
+            document.execCommand("copy");
+            $(this).attr("title", "copied");
+            $(this).tooltip("show");
+            setTimeout(function(){ $("#cp-enc-csm").tooltip("hide"); }, 1000);
         });
 
         $(document).on("click", "#csm-save", function(){

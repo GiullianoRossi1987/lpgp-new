@@ -117,17 +117,16 @@ class SignaturesData extends DatabaseConnection{
     }
 
     /**
-     * Creates a signature file and return it link to the file.
-     *
-     * @param string $signature_id The PK on the database.
-     * @param bool $HTML_mode If the method will return a HTML <a>
-     * @throws SignatureNotFound If there's no such PK in the database.
+     * Returns the content of the signature encoded file in a string to be used
+     * with the API without downloading the signature file.
+     * @param int $signature The primary key reference of the selected signature
+     * @throws SignatureNotFound If the primary key isn't valid
      * @return string
      */
-    public function createsSignatureFile(int $signature_id, bool $HTML_mode = true, string $file_name){
+    public function getEncodedSignature(int $signature): string{
         $this->checkNotConnected();
-        if(!$this->checkSignatureExists($signature_id)) throw new SignatureNotFound("There's no signature #$signature_id !", 1);
-        $sig_dt = $this->connection->query("SELECT prop.nm_proprietary, sig.vl_password, sig.vl_code FROM tb_signatures as sig INNER JOIN tb_proprietaries AS prop ON prop.cd_proprietary = sig.id_proprietary WHERE sig.cd_signature = $signature_id;")->fetch_array();
+        if(!$this->checkSignatureExists($signature)) throw new SignatureNotFound("There's no signature #$signature !", 1);
+        $sig_dt = $this->connection->query("SELECT prop.nm_proprietary, sig.vl_password, sig.vl_code FROM tb_signatures as sig INNER JOIN tb_proprietaries AS prop ON prop.cd_proprietary = sig.id_proprietary WHERE sig.cd_signature = $signature;")->fetch_array();
         $controller = new SignaturesController(CONTROL_FILE);
         $dtk = $controller->generateDownloadToken();
         $content = array(
@@ -140,7 +139,21 @@ class SignaturesData extends DatabaseConnection{
         $to_json = json_encode($content);
         $arr_ord = array();
         for($char = 0; $char < strlen($to_json); $char++) array_push($arr_ord, "" . ord($to_json[$char]));
-        $content_file = implode(self::DELIMITER, $arr_ord);
+        return implode(self::DELIMITER, $arr_ord);
+    }
+
+    /**
+     * Creates a signature file and return it link to the file.
+     *
+     * @param string $signature_id The PK on the database.
+     * @param bool $HTML_mode If the method will return a HTML <a>
+     * @throws SignatureNotFound If there's no such PK in the database.
+     * @return string
+     */
+    public function createsSignatureFile(int $signature_id, bool $HTML_mode = true, string $file_name){
+        $this->checkNotConnected();
+        if(!$this->checkSignatureExists($signature_id)) throw new SignatureNotFound("There's no signature #$signature_id !", 1);
+        $content_file = $this->getEncodedSignature($signature_id);
         file_put_contents("signatures.d/" . $file_name, $content_file);
         $controller->addDownloadRecord($signature_id, $dtk, $content['Date-Creation']);
         unset($controller);

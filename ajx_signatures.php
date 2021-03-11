@@ -30,6 +30,10 @@ else if(isset($_POST["download"])){
     $path = $obj->createsSignatureFile((int)$_POST["download"], false, $obj->generateFileNm(0));
     die(json_encode(array("path" => $path)));
 }
+else if(isset($_POST["get-encoded"])) {
+    $encoded = $obj->getEncodedSignature((int)$_POST["get-encoded"]);
+    die(json_encode(array("encoded" => $encoded)));
+}
 else{
     die("INVALID OPERATION");
 }
