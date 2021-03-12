@@ -85,7 +85,7 @@
     content: "\f0d7";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    padding-right: 20px;
+    /* padding-right: 20px; */
     float: right;
 	transition: content 1.3s ease-in-out;
 }
@@ -107,4 +107,8 @@
 .prop-img{
     border: 5px solid green;
     background-color: green;
+}
+
+.separator{
+    margin-bottom: 10%;
 }
