@@ -62,6 +62,12 @@
 	transition: border 1.2s ease-in-out background-color 1.2s ease-out;
 }
 
+.separator .content .row .bt-caret .toggler-caret::before{
+    content: "\f0d7";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
 .account-separator > .content > h2,
 .account-separator > .content > a{
     color: initial !important;
@@ -77,14 +83,12 @@
 	border-bottom: none !important;
 }
 
-.account-separator .selected-separator .content *{ color: #fdff00 !important;}
-.account-separator .selected-separator .content::after{ content: "\f0d8" !important; }
-.account-separator .selected-separator{ background-color: black; }
+.selected-separator .content .row .text-data{ color: #fdff00 !important;}
+.selected-separator .content .row .bt-caret .toggler-caret::before{ content: "\f0d8" !important; }
+.selected-separator .content{ background-color: black; }
 
 .account-separator .content h2::after{
-    content: "\f0d7";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
+
     /* padding-right: 20px; */
     float: right;
 	transition: content 1.3s ease-in-out;
@@ -96,8 +100,19 @@
 
 
 .section{
-    padding: 10px 12px;
+    /* padding: 10px 12px; */
     border: 1px solid black;
+    align-content: center;
+    background-color: #ccc;
+}
+
+.section > *{
+    width: 700px;
+    height: auto;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
 }
 
 #img-user{

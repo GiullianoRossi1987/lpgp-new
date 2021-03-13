@@ -50,10 +50,10 @@
             <div class="col-12 clear-content">
                 <div class="container user-data-con" >
 					<div class="main-row row">
-                        <div class="main-col col-12 card" style="; border: none;">
+                        <div class="main-col col-12 card">
                             <div class="container data-container">
                                 <div class="main-row row card-header">
-                                    <div class="img-cont card-img-top" style="margin-left: 35%; padding: 20px 21px;">
+                                    <div class="img-cont card-img-top" style="margin-left: auto; margin-right: auto; padding: 20px 21px;">
                                         <div id="img-user"></div>
                                     </div>
                                     <br>
@@ -106,13 +106,16 @@
                         <div class="row separator">
                             <div class="content col-sm-12 col-md-12">
                                 <div class="row">
-                                    <h2 class="col-md-10">My Signatures</h2>
+                                    <h2 class="col-md-10 text-data">My Signatures</h2>
                                     <div class="col-md-2 btn-group">
                                         <a href="#" class="btn btn-lg btn-success" role="button">
                                             <span class="fas fa-plus"></span>
                                         </a>
-                                        <a href="#signatures-section" class="btn btn-lg bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
-                                            <span class="fas fa-caret-down"></span>
+                                        <a href="my_signatures.php" class="btn btn-primary btn-lg" role="button">
+                                            <span class="fas fa-eye"></span>
+                                        </a>
+                                        <a href="#signatures-section" class="btn btn-lg  bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
+                                            <span class="toggler-caret"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -126,13 +129,13 @@
                         <div class="row separator">
                             <div class="content col-sm-12 col-md-12">
                                 <div class="row">
-                                    <h2 class="col-md-10">My Hystory</h2>
+                                    <h2 class="col-md-10 text-data">My Hystory</h2>
                                     <div class="col-md-2 btn-group">
-                                        <a href="my-history.php" class="btn btn-lg btn-success" role="button">
+                                        <a href="my-history.php" class="btn btn-lg btn-primary" role="button">
                                             <span class="fas fa-history"></span>
                                         </a>
                                         <a href="#history-section" class="btn btn-lg bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
-                                            <span class="fas fa-caret-down"></span>
+                                            <span class="toggler-caret"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -146,13 +149,16 @@
                         <div class="row separator">
                             <div class="content col-sm-12 col-md-12">
                                 <div class="row">
-                                    <h2 class="col-md-10">My Clients</h2>
+                                    <h2 class="col-md-10 text-data">My Clients</h2>
                                     <div class="col-md-2 btn-group">
-                                        <a href="my-history.php" class="btn btn-lg btn-success" role="button">
-                                            <span class="fas fa-history"></span>
+                                        <a href="create-client.php" class="btn btn-lg btn-success" role="button">
+                                            <span class="fas fa-plus"></span>
+                                        </a>
+                                        <a href="my-clients.php" class="btn btn-lg btn-primary" role="button">
+                                            <span class="fas fa-eye"></span>
                                         </a>
                                         <a href="#clients-section" class="btn btn-lg bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
-                                            <span class="fas fa-caret-down"></span>
+                                            <span class="toggler-caret"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -426,7 +432,7 @@
             }
         });
 
-        $(document).on("click", ".account-separator .content", function(){
+        $(document).on("click", ".separator", function(){
             $(this).toggleClass("selected-separator");
         });
 
@@ -487,10 +493,15 @@
                     data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]})},
                     dataType: "json",
                     success: function(resp){
-                        $("#signatures-section").empty();
-                        for(var i = 0; i < 5; ++i){
-                            if(i > resp.length || resp[i] == undefined) break;
-                            else genSignatureCard(resp[i], "signatures-section");
+                        if(resp.length == 0){
+
+                        }
+                        else{
+                            $("#signatures-section").empty();
+                            for(var i = 0; i < 5; ++i){
+                                if(i > resp.length || resp[i] == undefined) break;
+                                else genSignatureCard(resp[i], "signatures-section");
+                            }
                         }
                     },
                     error: function(xhr, status, error){ console.error(error); }
@@ -500,11 +511,16 @@
                     data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]}), acesses: true},
                     dataType: "json",
                     success: function(resp){
-                        console.log(data);
-                        for(var i = 0; i < 5; ++i){
-                            // DEBUG: console.log(resp[i]);
-                            if(i > resp.length || resp[i] == undefined) break;
-                            else genClientCard(resp[i], "clients-section");
+                        if(resp.length == 0){
+                            $("#clients-section").html("<h1>You don't have any clients!</h1>");
+                        }
+                        else{
+                            $("#clients-section").empty();
+                            for(var i = 0; i < 5; ++i){
+                                // DEBUG: console.log(resp[i]);
+                                if(i > resp.length || resp[i] == undefined) break;
+                                else genClientCard(resp[i], "clients-section");
+                            }
                         }
                     },
                     error: function(xhr, status, error){ alert(error); }
@@ -514,11 +530,15 @@
                     data: {get: JSON.stringify({id_proprietary: data["cd_proprietary"]})},
                     dataType: "json",
                     success: function(resp){
-                        console.log(resp);
-                        for(var i = 0; i < 5; ++i){
-                            console.log(resp[i]);
-                            if(i > resp.length || resp[i] == undefined) break;
-                            else genHistoryCard_p(resp[i], "history-section");
+                        if(resp.length == 0){
+                            $("#history-section").html("<h1>You don't checked any signature yet!</h1>");
+                        }
+                        else{
+                            for(var i = 0; i < 5; ++i){
+                                console.log(resp[i]);
+                                if(i > resp.length || resp[i] == undefined) break;
+                                else genHistoryCard_p(resp[i], "history-section");
+                            }
                         }
                     },
                     error: function(xhr, status, error){ alert(xhr); }
