@@ -53,9 +53,6 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
                     <a href="./contact-us.html" class="dropdown-item">Contact Us</a>
                 </div>
             </div>
-            <div id="notification-container">
-
-            </div>
         </div>
     </div>
     <div class="content1 container content">

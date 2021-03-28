@@ -132,7 +132,7 @@ class SignaturesData extends DatabaseConnection{
         $content = array(
             "Date-Creation" => date(DEFAULT_DATETIME_F),
             "Proprietary" => $sig_dt['nm_proprietary'],
-            "ID" => $signature_id,
+            "ID" => $signature,
             "Signature" => $sig_dt['vl_password'],
             "DToken" => $dtk
         );

@@ -40,7 +40,7 @@
     color: white;
     background-color: black;
     margin-left: 90%;
-    margin-top: -40px !important;
+    margin-top: -70px !important;
     border: 1px solid white;
     border-radius: 100%;
     transition: background-color 1.1s ease-in;
@@ -461,7 +461,7 @@
     margin-left: 48.7%;
     border: 2px #ffdd00 solid;
     border-radius: 10%;
-    background-color: black;
+    background-color: transparent;
     margin-top: -10% !important;
     background-image: url("../media/new-logo.png");
     background-size: cover;
