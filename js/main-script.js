@@ -78,7 +78,7 @@ function setAccountOpts(){
     linkHome.id = "home-link";
     linkHome.href = "https://" + window.location.hostname + "/";
 
-    gbl_opts.appendChild(linkHome);
+    // gbl_opts.appendChild(linkHome);
 
     if(swp_cookies["user-logged"] == "true"){
         var account_opt = document.createElement("a");
@@ -262,16 +262,16 @@ function getLinkedUserIcon(){
 }
 
 function setBtnSolutions(locale){
-    var localeNode = document.querySelector(locale);
-    var link = document.createElement("a");
-    link.href = "https://" + window.location.hostname + "/solutions.html";
-    link.id = "solutions";
-    link.setAttribute("role", "button");
-    link.classList.add("btn");
-    link.classList.add("default-btn-header");
-    link.classList.add("btn-lg");
-    link.innerText = "Solutions";
-    localeNode.appendChild(link);
+    // var localeNode = document.querySelector(locale);
+    // var link = document.createElement("a");
+    // link.href = "https://" + window.location.hostname + "/solutions.html";
+    // link.id = "solutions";
+    // link.setAttribute("role", "button");
+    // link.classList.add("btn");
+    // link.classList.add("default-btn-header");
+    // link.classList.add("btn-lg");
+    // link.innerText = "Solutions";
+    // localeNode.appendChild(link);
 }
 
 function parseLogin(){

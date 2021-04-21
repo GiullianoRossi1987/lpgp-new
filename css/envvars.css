@@ -1,8 +1,9 @@
 :root{
-    --bgColor: #fdf000;
+    --bgColor: #01010101;
     --fontColor: #000000;
     --whiteReplace: #ccc5e8;
     --dmBackground: #4a2194;
     --dmFontColor: #ffd515;
-    --BannerColor: #4a2194;
+    --BannerColor: #01010101;
+    --borderColor: #bf8c2c;
 }

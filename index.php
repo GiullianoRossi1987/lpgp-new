@@ -31,6 +31,7 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
 <body>
     <div class="container-fluid header-container" role="banner" style="position: relative;">
         <div class="col-md-12 header col-sm-12" style="height: 71px;">
+            <a href="https://www.lpgpofficial.com/" id="home-link"></a>
             <div class="opt-dropdown dropdown login-dropdown">
                 <button type="button" class="btn btn-lg default-btn-header dropdown-toggle" data-toggle="dropdown" id="account-opts" aria-haspopup="true" aria-expanded="false">
                     <span class="nm-tmp">Account</span>
@@ -114,8 +115,8 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <script src="./js/generator.js"></script>
     <script>
         $(document).ready(function(){
-            readCookies();
             setAccountOpts();
+            readCookies();
             setSignatureOpts();
             applyToA();
             loadSearchButton();

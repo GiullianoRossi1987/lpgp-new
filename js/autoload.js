@@ -17,7 +17,7 @@ function loadSearchButton(){
     mainBtn.href = "https://" + window.location.hostname + "/main-query.php";
     mainBtn.role = "button";
 
-    document.querySelector(".header-container .header").appendChild(mainBtn);
+    document.querySelector(".header-container > .header").appendChild(mainBtn);
 }
 
 function loadJSLibs(){
