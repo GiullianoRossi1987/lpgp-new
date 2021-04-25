@@ -1,0 +1,40 @@
+.login-col{
+    position: relative;
+    margin-left: 32% !important;
+    margin-top: 5% !important;
+    border-radius: 6%;
+    border: 2px solid #1f3da2;
+    padding: 20px 20px;
+    background-color: #1b1b1b;
+}
+
+body{ background-color: #000000;}
+
+label, h1, h2, h3, span{ color: white;}
+
+input.form-control{
+    background-color: #000000;
+    color: #ffffff;
+}
+
+input.form-control:focus, input.form-control:hover{
+    background-color: #525252;
+    color: #ffffff;
+}
+
+#show-passwd{
+    color: white;
+}
+
+.btn-group > *{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#main-title{
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: underline;
+    text-align: center;
+    font-family: sans-serif;
+}

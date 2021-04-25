@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/new-features.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <style>
     .mce-code-error{
@@ -27,10 +28,10 @@
 <body>
     <div class="container-fluid container-content" style="position: relative;">
         <div class="row-main row">
-            <div class="col-4 clear-content center-content" style="position: relative; margin-left: 32% !important; margin-top: 5% !important; border-radius: 6%;">
+            <div class="col-4 clear-content center-content login-col" style="">
                 <div id="logo-ex" style="margin-left: 42% !important;"></div>
                 <form id="login-frm">
-                    <h1 style="margin-left: 42%;" class="masthead-heading mb-0">Login</h1>
+                    <h1 class="masthead-heading mb-0" id="main-title">Login</h1>
                     <br>
                     <label for="username">
                         <h5>Your name</h5>
@@ -57,16 +58,15 @@
                     <br>
                     <hr>
                     <h3>Account type</h3>
-                    <div class="collapse" id="acc-help">
-                        <h1>Teste</h1>
-                    </div>
-                    <br>
                     <div class="btn-group">
                         <button type="button" class="btn btn-lg btn-success btn-opt-login" id="btn-login-p" data-type="proprietary">Proprietary Login</button>
                         <button type="button" class="btn btn-lg btn-primary btn-opt-login" id="btn-login-n" data-type="normal">Normal User Login</button>
                         <button type="button" class="btn" data-target="#acc-help" aria-expanded="false" aria-controls="acc-help" data-toggle="collapse">
                             <span class="fas fa-question-circle"></span>
                         </button>
+                    </div>
+                    <div class="collapse" id="acc-help">
+                        <h1>Teste</h1>
                     </div>
                     <br>
                     <small>
