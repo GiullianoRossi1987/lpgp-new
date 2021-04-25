@@ -8,10 +8,6 @@
 	max-width: 100% !important;
 }
 
-/*
-index.php content styles
-*/
-
 .content1{
 	background-attachment: fixed;
 	width: 100%;
@@ -19,9 +15,7 @@ index.php content styles
 	background-repeat: no-repeat;
 	max-width: 100% !important;
 	margin-bottom: 10%;
-	background-color: rgb(51, 51, 71);
 	text-align: center;
-
 }
 
 .content1 *{
@@ -66,17 +60,29 @@ index.php content styles
 }
 
 #logo-ex{
-	background-image: url("../media/new-logo.png");
+	background-image: url("../media/cropped-logo.png");
 	background-size: cover;
 	background-repeat: no-repeat;
 	max-width: 250px;
 	max-height: 250px;
 	width: 100px;
 	height: 100px;
-	background-color: black;
 	position: relative;
 	margin-left: 47%;
 	border-radius: 10%;
 	margin-bottom: 50px;
-	border: 2px  #ded600 solid;
+}
+
+#logo-ex-login{
+	background-image: url("../media/cropped-logo.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	max-width: 250px;
+	max-height: 250px;
+	width: 100px;
+	height: 100px;
+	position: relative;
+	margin-left: 47%;
+	border-radius: 10%;
+	margin-bottom: 50px;
 }

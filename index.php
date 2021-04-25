@@ -58,12 +58,12 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     </div>
     <div class="content1 container content">
         <div class="row rowcontent">
-            <div class="col-12 col-md-12 col-sm-12 col-ls-12 main-header" >
+            <div class="col-12 col-md-12 col-sm-12 col-lg-12 main-header">
                 <h1 class="anim-appear masthead-heading text-uppercase mb-0" style="color: black; margin-top: 12%;"><u>LPGP</u></h1>
                 <h1 class="masthead-heading text-uppercase mb-0" style="color: black; text-align: center; margin-top: 1%;">Let the golden raven lead you</h1>
             </div>
         </div>
-        <div class="row rowcontentn">
+        <div class="row rowcontent">
             <div class="col-12 col-md-12 col-sm-12 content-nrm" id="con2">
                 <div id="logo-ex"></div>
                 <h1>What's LPGP?</h1>
@@ -77,9 +77,9 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
         <div class="row rowcontentn">
         </div>
     </div>
-    <div class="footer container" style="max-width: 100% !important; position: relative">
+    <div class="container-fluid container" style="max-width: 100% !important; position: relative">
         <div class="footer-row row">
-            <div class="footer col-12" style="height: 150px; background-color: black; margin-top: 100%; position: absolute; max-width: 100% !important; margin-left: 0;">
+            <div class="footer col-12 col-md-12 col-sm-12 col-lg-12" style="">
                 <div class="social-options-grp">
                     <div class="social-option">
                         <a href="https://github.com/GiullianoRossi1987" target="_blanck" id="github" class="social-option-footer">

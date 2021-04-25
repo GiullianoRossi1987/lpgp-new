@@ -3,12 +3,11 @@
 @import "envvars.css";
 
 .header-container{
-    background-color: black;
-    position: fixed !important;
+    background-color: #1b1b1b;
+    position: sticky !important;
     z-index: 99;
     opacity: 1;
-    margin-top: 0 !important;
-    top: 0 !important;
+    top: 0;
 }
 
 .card{
@@ -28,10 +27,9 @@
     top: 5px;
 }
 
-/* default values*/
 .default-btn-header{
     background-color: transparent;
-    color: #26447d !important;
+    color: #414bb4 !important;
     transition: background-color .8s ease-in;
     transition: color .8s ease;
     border-radius: 5% !important;
@@ -40,8 +38,8 @@
 }
 
 #qr-btn{
-    color: #bf8c2c;
-    background-color: transparent;
+    color: #000;
+    background-color: #bf8c2c;
     border: 1px solid #bf8c2c;
     border-radius: 100%;
     transition: background-color .4s ease-in;
@@ -50,9 +48,9 @@
 }
 
 #qr-btn:hover{
-    background-color: #ffffff;
-    color: #000000;
-    border-color: #000000;
+    background-color: #012a40;
+    color: #fff;
+    border-color: #012a40;
 }
 
 .user-icon{
@@ -60,24 +58,12 @@
     border: 1px white solid;
 }
 
-.default-btn-header-scrolled{
-    background-color: black;
-    border-color: rgb(51, 51, 71);
-    color: white !important;
-}
-
-
-.default-btn-header-scrolled:hover{
-    color: rgb(222, 214, 0) !important;
-    border: 1px white solid !important;
-    transition: background-color 200ms linear;
-}
 
 
 .default-btn-header:hover{
-    background-color: #ffffff;
-    border-color: rgb(51, 51, 71);
-    color: black !important;
+    background-color: transparent;
+    border-color: #1f3da2;
+    color: #1f3da2;
 }
 
 .default-btn-header-split{
@@ -88,21 +74,19 @@
 .after-opt{ margin-left: 15px;}
 
 .opts{
-    background-color: black !important;
+    background-color: #1b1b1b !important;
 }
 
 .opts .dropdown-item{
-    color: #ded600;
+    color: #1f3da2;
     font-family: Arial;
-    background-color:  black;
-
+    background-color:  #1b1b1b;
 }
 
-.opts .dropdown-item:hover{
-    background-color: white;
-    color: black;
-    transition: background-color 200ms linear;
+.dropdown-item:hover, .dropdown-item:focus{
+    color: #fff !important;
     transition: color 200ms linear;
+    background-color: #525252 !important;
 }
 
 .opts-scrolled .dropdown-item{
@@ -111,9 +95,7 @@
 }
 
 .opts-scrolled .dropdown-item:hover{
-    background-color: white;
     color: black;
-    transition: background-color 200ms linear;
     transition: color 200ms linear;
 }
 
@@ -365,24 +347,18 @@
 /**
     Footer fix
 */
-.footer-container{
-    margin-top: 10%;
-}
 
-.footer-main{
-    position: relative !important;
-    background-color: black;
-    height: 150px;
-    margin-top: 10%;
-}
-
-.footer-main a{
-    color: white;
-    font-family: Cantarell;
-}
 
 .container-default{
     max-width: 100% !important;
+}
+
+.footer{
+    height: 150px;
+    background-color: #1b1b1b;
+    margin-top: 100%;
+    position: absolute;
+    margin-left: 0;
 
 }
 
@@ -409,7 +385,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     opacity: .76;
-    margin-right: 20px;
+    margin-right: 80px;
 }
 
 #home-link:hover{
