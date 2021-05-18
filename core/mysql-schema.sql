@@ -169,6 +169,11 @@ create user 'client_normal'@'localhost' identified with mysql_native_password;
 grant select on LPGP_WEB.* to client_normal@localhost;
 
 create user 'client_root'@'localhost' identified with mysql_native_password;
+
+create use 'api_sys'@'localhost' identified with mysql_native_password;
+
+
+grant select on LPGP_WEB.* to api_sys@localhost;
 grant insert update delete select on LPGP_WEB.tb_proprietaries to client_root@localhost;
 grant insert update delete select on LPGP_WEB.tb_signatures to client_root@localhsot;
 grant insert update delete select on LPGP_WEB.tb_clients to client_root@localhost;
