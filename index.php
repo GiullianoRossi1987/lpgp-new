@@ -25,6 +25,7 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/typer.css">
 </head>
 <style>
 </style>
@@ -59,8 +60,8 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <div class="content1 container content">
         <div class="row rowcontent">
             <div class="col-12 col-md-12 col-sm-12 col-lg-12 main-header">
-                <h1 class="anim-appear masthead-heading text-uppercase mb-0" style="color: black; margin-top: 12%;"><u>LPGP</u></h1>
-                <h1 class="masthead-heading text-uppercase mb-0" style="color: black; text-align: center; margin-top: 1%;">Let the golden raven lead you</h1>
+                <h1 class="typer anim-appear masthead-heading font-weight-bold text-uppercase mb-0" id="post-text-1" style="color: #414bb4; margin-top: 12%;"></h1>
+                <h1 class="typer masthead-heading text-uppercase mb-0" id="post-text-2" style="color: #414bb4; text-align: center; margin-top: 1%;"></h1>
             </div>
         </div>
         <div class="row rowcontent">
@@ -125,6 +126,31 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
         $(document).ready(function(){
             $(".contitle").css("opacity", "1");
             $(".headtitle").css("opacity", "1");
+            // writing effect for text 1, without underline
+            var msg1 = "lpgp";
+            var msg2 = "follow the raven";
+            console.log(msg1.length);
+            var posT2 = 0;
+            posT = 0;
+            function write_fx(){
+                if(posT < msg1.length){
+                    $("#post-text-1").text($("#post-text-1").text() + msg1.charAt(posT));
+                    console.log($("#post-text-1").text());
+                    posT++;
+                    var tm = setTimeout(function(){write_fx()}, 500);
+                    // if(posT == msg1.length) clearTimeout(tm);
+                }
+                else{
+                    if(posT2 < msg2.length){
+                        $("#post-text-2").text($("#post-text-2").text() + msg2.charAt(posT2));
+                        console.log($("#post-text-2").text());
+                        posT2++;
+                        var tm = setTimeout(function(){write_fx()}, 250);
+                        if(posT2 == msg2.length) clearTimeout(tm);
+                    }
+                }
+            }
+            write_fx();
         });
 
     </script>

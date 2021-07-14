@@ -1,0 +1,25 @@
+.typer::after{
+    content: "";
+    border-right: 5px solid #414bb4;
+    animation: blinkCursor 1s  infinite normal;
+}
+
+/* .typer{
+    width: 0;
+    animation: writingfx 1s 1 normal both
+}
+
+@keyframes writingfx{
+    from{width: 0;}
+    to{width: auto;}
+} */
+
+@keyframes blinkCursor{
+    0%{border-right-color: #414bb4;}
+    100%{border-right-color: transparent;}
+}
+
+@-webkit-keyframes blinkCursor{
+    0%{border-right-color: #414bb4;}
+    100%{border-right-color: transparent;}
+}

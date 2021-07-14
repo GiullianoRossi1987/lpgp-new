@@ -115,3 +115,15 @@ function notificate(msg, mode){
 	}
 	document.querySelector(".header-container .header #notification-container").appendChild(parent);
 }
+
+function typingEffect(msg, dispose){
+    var posT = 0;
+    var tmw = 200; // ms
+    function typing(){
+        document.getElementById(dispose).text = msg[posT]
+    }
+    for(i = 0; i < len(msg); i++){
+        setTimeout(typing, tmw);
+        posT = i;
+    }
+}
