@@ -1,7 +1,7 @@
 .typer::after{
     content: "";
     border-right: 5px solid #414bb4;
-    animation: blinkCursor 1s  infinite normal;
+    /* animation: blinkCursor 1s  infinite normal; */
 }
 
 /* .typer{

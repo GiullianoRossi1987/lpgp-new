@@ -25,18 +25,21 @@
         color: red;
         font-size: 10px;
     }
+
+    #bt-cra{
+        border: 1px solid cyan;
+        color: cyan;
+        margin-top: 20px;
+    }
 </style>
 <body>
+    <div class="stars-bg"></div>
     <div class="container-fluid container-content" style="position: relative;">
-        <!-- Design shit -->
-        <div class="login-circle">
-
-        </div>
         <div class="row-main row">
-            <div class="col-4 clear-content center-content login-col" style="">
+            <div class="col-5 clear-content center-content login-col" style="">
                 <div id="logo-ex" style="margin-left: 42% !important;"></div>
                 <form id="login-frm">
-                    <h1 class="masthead-heading mb-0" id="main-title">Login</h1>
+                    <h1 class="masthead-heading mb-0" id="main-title">Welcome back</h1>
                     <br>
                     <label for="username">
                         <h5>Your name</h5>
@@ -62,23 +65,18 @@
                     </label>
                     <br>
                     <hr>
-                    <h3>Account type</h3>
+                    <!-- <h3>Account type</h3> -->
                     <div class="btn-group">
                         <button type="button" class="btn btn-lg btn-success btn-opt-login" id="btn-login-p" data-type="proprietary">Proprietary Login</button>
                         <button type="button" class="btn btn-lg btn-primary btn-opt-login" id="btn-login-n" data-type="normal">Normal User Login</button>
-                        <button type="button" class="btn" data-target="#acc-help" aria-expanded="false" aria-controls="acc-help" data-toggle="collapse">
+                        <button type="button" class="btn" data-target="#m-login-info" data-toggle="modal">
                             <span class="fas fa-question-circle"></span>
                         </button>
                     </div>
-                    <div class="collapse" id="acc-help">
-                        <h1>Teste</h1>
-                    </div>
                     <br>
-                    <small>
-                        <a href="create_account.html">
-                            Don't have a account? Create one!
-                        </a>
-                    </small>
+                    <a role="button" href="create_account.html" type="button" class="btn btn-primary-outline btn-lg" id="bt-cra">
+                        Don't have a account? Create one!
+                    </a>
                     <br>
                 </form>
                 <!-- Modal Check -->
@@ -108,6 +106,34 @@
                             <div class="modal-header">
                                 <h1 class="modal-title">Login Error!</h1>
                                 <h3 class="modal-subtitle">Invalid username </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Info modal -->
+                <div class="modal fade" tabindex="-1" id="m-login-info" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title">
+                                    <span class="fas fa-info-circle"></span>
+                                    About the profile types
+                                </h1>
+                                <button type="button" data-dismiss="modal" class="btn">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <h1><u>Proprietary profiles</u></h1>
+                                <p>
+                                    A profile used by programmers and enterprises to manage the signatures/keys and clients
+                                    that they have, choose this kind of profile if you work in a big enterprise. Contact your
+                                    enterprise leaders for more information
+                                </p>
+                                <br>
+                                <h1><u>Normal profile</u></h1>
+                                <p>
+                                    A normal profile only access the profile of a specific proprietary for contacting him or his
+                                    enterprise if something with the developed product that the normal user buyed went wrong.
+                                </p>
                             </div>
                         </div>
                     </div>

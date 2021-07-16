@@ -60,8 +60,8 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <div class="content1 container content">
         <div class="row rowcontent">
             <div class="col-12 col-md-12 col-sm-12 col-lg-12 main-header">
-                <h1 class="typer anim-appear masthead-heading font-weight-bold text-uppercase mb-0" id="post-text-1" style="color: #414bb4; margin-top: 12%;"></h1>
-                <h1 class="typer masthead-heading text-uppercase mb-0" id="post-text-2" style="color: #414bb4; text-align: center; margin-top: 1%;"></h1>
+                <h1 class="anim-appear masthead-heading font-weight-bold text-uppercase mb-0" id="post-text-1" style="color: #414bb4; margin-top: 12%;"></h1>
+                <h1 class=" masthead-heading text-uppercase mb-0" id="post-text-2" style="color: #414bb4; text-align: center; margin-top: 1%;"></h1>
             </div>
         </div>
         <div class="row rowcontent">

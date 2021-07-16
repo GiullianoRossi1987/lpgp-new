@@ -1,29 +1,34 @@
 .login-col{
-    position: relative;
-    margin-left: 32% !important;
-    margin-top: 5% !important;
-    border-radius: 6%;
-    border: 2px solid #1f3da2;
+    /* display: block; */
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    border-radius: 3%;
+    border: 5px solid #000000;
     padding: 20px 20px;
     background-color: #1b1b1b;
 }
 
-body{ background-color: #000000;}
+body{ background-color: #3e3d3d;}
 
-label, h1, h2, h3, span{ color: white;}
+h1{ color: whitesmoke; }
+
+label, h2, h3, span, p{ color: #ded2d2;}
 
 input.form-control{
     background-color: #000000;
-    color: #ffffff;
+    color: #ded2d2;
 }
 
 input.form-control:focus, input.form-control:hover{
     background-color: #525252;
-    color: #ffffff;
+    color: #ded2d2;
 }
 
 #show-passwd{
     color: white;
+    border: 1px solid #ded2d2;
 }
 
 .btn-group > *{
@@ -37,4 +42,15 @@ input.form-control:focus, input.form-control:hover{
     text-decoration: underline;
     text-align: center;
     font-family: sans-serif;
+}
+
+/* Modals configuration */
+.modal > .modal-dialog > .modal-content{
+    background-color: #1b1b1b;
+    border: 1px solid #ded2d2;
+    border-radius: 2%;
+}
+
+.modal > .modal-dialog > .modal-content > .modal-header > button[data-dismiss="modal"]{
+    color: #ded2d2;
 }
