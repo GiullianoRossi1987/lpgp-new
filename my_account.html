@@ -16,6 +16,7 @@
 <body>
     <div class="test-cover" style="visibility: hidden"></div>
     <div class="container-fluid header-container" role="banner" style="position: fixed;">
+        <a href="https://www.lpgpofficial.com/" id="home-link"></a>
         <div class="col-12 header" style="height: 71px; transition: background-color 200ms linear;">
             <div class="opt-dropdown dropdown login-dropdown">
                     <button type="button" class="btn btn-lg default-btn-header dropdown-toggle" data-toggle="dropdown" id="account-opts" aria-haspopup="true" aria-expanded="false">
@@ -43,135 +44,105 @@
             </div>
         </div>
     </div>
-    <br>
-    <hr>
     <div class="container-fluid container-content" style="position: relative; margin-top: 5%;">
         <div class="row-main row">
-            <div class="col-12 clear-content">
-                <div class="container user-data-con" >
-					<div class="main-row row">
-                        <div class="main-col col-12 card">
-                            <div class="container data-container">
-                                <div class="main-row row card-header">
-                                    <div class="img-cont card-img-top" style="margin-left: auto; margin-right: auto; padding: 20px 21px;">
-                                        <div id="img-user"></div>
-                                    </div>
-                                    <br>
-                                    <div class="col-12 data-usr">
-                                        <br>
-                                        <h1 id="username-ttl"></h1>
-                                        <h3 id="email-ttl"></h3>
-                                        <h3 id="date-creation-ttl"></h3>
-                                        <div class="btn-group" style="margin-left: 7%;">
-                                            <a class="img-settings btn btn-lg btn-dark" href="ch_my_data.php" role="button">
-                                                Edit Account
-                                                <span>
-                                                    <i class="fas fa-cog"></i>
-                                                </span>
-                                            </a>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete" type="button">
-                                                Remove account
-                                                <span>
-                                                    <i class="fas fa-times"></i>
-                                                </span>
-                                            </button>
-                                            <!-- Modal -->
-                                            <div class="modal" id="modal-delete" tabindex="-1" aria-labelledby="del-btn" aria-hidden="true" role="dialog">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title">Are you sure about delete your account?</h3>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="modal-body">
-                                                            <h3>That action can't be undone!</h3>
-                                                            <a href="del_account.php?confirm=y" role="button" class="btn btn-lg btn-danger">Yes, delete my account</a>
-                                                            <a href="#" role="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Cancel</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div class="col-md-4">
+                <div class="card profile-card">
+                    <div class="card-header justify-content-center">
+                        <div id="img-user" class="card-img-top"></div>
+                    </div>
+                    <div class="">
+                        <h1 id="username-ttl"></h1>
+                        <h2 id="email-ttl"></h2>
+                        <h2 id="date-creation-ttl"></h2>
+                    </div>
+                    <div class="card-footer">
+                        <a class="img-settings btn btn-lg btn-dark" href="ch_my_data.php" role="button">
+                            Edit Account
+                            <span>
+                                <i class="fas fa-cog"></i>
+                            </span>
+                        </a>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete" type="button">
+                            Remove account
+                            <span>
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-8" id="options-container">
+                <div class="container" id="signatures-con">
+                    <div class="row separator">
+                        <div class="content col-sm-12 col-md-12">
+                            <div class="row">
+                                <h2 class="col-md-10 text-data">My Signatures</h2>
+                                <div class="col-md-2 btn-group">
+                                    <a href="#" class="btn btn-lg btn-success" role="button">
+                                        <span class="fas fa-plus"></span>
+                                    </a>
+                                    <a href="my_signatures.php" class="btn btn-primary btn-lg" role="button">
+                                        <span class="fas fa-eye"></span>
+                                    </a>
+                                    <a href="#signatures-section" class="btn btn-lg  bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
+                                        <span class="toggler-caret"></span>
+                                    </a>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div id="signatures-section" class="collapse section col-md-12 col-12"></div>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    </div>
-                    <div class="container" id="signatures-con">
-                        <div class="row separator">
-                            <div class="content col-sm-12 col-md-12">
-                                <div class="row">
-                                    <h2 class="col-md-10 text-data">My Signatures</h2>
-                                    <div class="col-md-2 btn-group">
-                                        <a href="#" class="btn btn-lg btn-success" role="button">
-                                            <span class="fas fa-plus"></span>
-                                        </a>
-                                        <a href="my_signatures.php" class="btn btn-primary btn-lg" role="button">
-                                            <span class="fas fa-eye"></span>
-                                        </a>
-                                        <a href="#signatures-section" class="btn btn-lg  bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
-                                            <span class="toggler-caret"></span>
-                                        </a>
-                                    </div>
+                </div>
+                <div class="container" id="history-con">
+                    <div class="row separator">
+                        <div class="content col-sm-12 col-md-12">
+                            <div class="row">
+                                <h2 class="col-md-10 text-data">My Hystory</h2>
+                                <div class="col-md-2 btn-group">
+                                    <a href="my-history.php" class="btn btn-lg btn-primary" role="button">
+                                        <span class="fas fa-history"></span>
+                                    </a>
+                                    <a href="#history-section" class="btn btn-lg bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
+                                        <span class="toggler-caret"></span>
+                                    </a>
                                 </div>
-                                <div class="row">
-                                    <div id="signatures-section" class="collapse section col-md-12 col-12"></div>
-                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="history-section" class="collapse section col-md-12 col-12"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="container" id="history-con">
-                        <div class="row separator">
-                            <div class="content col-sm-12 col-md-12">
-                                <div class="row">
-                                    <h2 class="col-md-10 text-data">My Hystory</h2>
-                                    <div class="col-md-2 btn-group">
-                                        <a href="my-history.php" class="btn btn-lg btn-primary" role="button">
-                                            <span class="fas fa-history"></span>
-                                        </a>
-                                        <a href="#history-section" class="btn btn-lg bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
-                                            <span class="toggler-caret"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div id="history-section" class="collapse section col-md-12 col-12"></div>
+                </div>
+                <div class="container" id="clients-con">
+                    <div class="row separator">
+                        <div class="content col-sm-12 col-md-12">
+                            <div class="row">
+                                <h2 class="col-md-10 text-data">My Clients</h2>
+                                <div class="col-md-2 btn-group">
+                                    <a href="create-client.php" class="btn btn-lg btn-success" role="button">
+                                        <span class="fas fa-plus"></span>
+                                    </a>
+                                    <a href="my-clients.php" class="btn btn-lg btn-primary" role="button">
+                                        <span class="fas fa-eye"></span>
+                                    </a>
+                                    <a href="#clients-section" class="btn btn-lg bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
+                                        <span class="toggler-caret"></span>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="container" id="clients-con">
-                        <div class="row separator">
-                            <div class="content col-sm-12 col-md-12">
-                                <div class="row">
-                                    <h2 class="col-md-10 text-data">My Clients</h2>
-                                    <div class="col-md-2 btn-group">
-                                        <a href="create-client.php" class="btn btn-lg btn-success" role="button">
-                                            <span class="fas fa-plus"></span>
-                                        </a>
-                                        <a href="my-clients.php" class="btn btn-lg btn-primary" role="button">
-                                            <span class="fas fa-eye"></span>
-                                        </a>
-                                        <a href="#clients-section" class="btn btn-lg bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
-                                            <span class="toggler-caret"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div id="clients-section" class="collapse section col-md-12 col-12"></div>
-                                </div>
+                            <div class="row">
+                                <div id="clients-section" class="collapse section col-md-12 col-12"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
+
     <br>
     <div class="footer-container container" style="max-width: 100% !important; position: relative; margin-left: 0;">
         <div class="footer-row row">
@@ -386,6 +357,25 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal" id="modal-delete" tabindex="-1" aria-labelledby="del-btn" aria-hidden="true" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Are you sure about delete your account?</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <hr>
+                <div class="modal-body">
+                    <h3>That action can't be undone!</h3>
+                    <a href="del_account.php?confirm=y" role="button" class="btn btn-lg btn-danger">Yes, delete my account</a>
+                    <a href="#" role="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--Scripts -->
     <script src="jquery/lib/jquery-3.4.1.min.js"></script>
@@ -568,7 +558,7 @@
 			    $("#signatures-con").css("visibility", "hidden");
 	                    $("#clients-con").css("visibility", "hidden");
 			}, 260);
-                        
+
                     },
                     error: function(error){ alert(error); }
                 });
