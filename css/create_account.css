@@ -1,10 +1,11 @@
 @import "envvars.css";
 .img-opt{
-    display: inline-grid;
-    margin-bottom: 10%;
+    display: inline-block;
+    /* margin-bottom: 10%; */
     margin-right: 5%;
-    width: 270px;
-    height: 390px;
+    width: 300px;
+    height: 400px;
+    padding: 20px 10px;
 }
 
 .display-img{
@@ -24,9 +25,43 @@
     display: none;
 }
 
-.prof-type-item{
-    /* display: inline-block; */
-    height: 300px;
-    border: 1px solid gray;
-    margin: 0 10px auto auto;
+body{ background-color: #3e3d3d; }
+
+/* Card for the body itself */
+#cp-content{
+    border: 2px solid #000000;
+    background-color: #1b1b1b;
+    border-radius: 2%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    padding: 20px 20px;
+    /* width: 50%; */
+}
+
+h1,h2,h3,h4,p{
+    color: #ded2d2;
+}
+
+
+.card{
+    background-color: #1b1b1b;
+    border: 1px solid #ded2d2;
+}
+/* Cards for profile types */
+.sel{
+    border: 6px solid green !important;
+}
+
+input{
+    background-color: #3e3d3d !important;
+    border-color: #ded2d2 !important;
+    color: whitesmoke !important;
+}
+
+
+.ps-bt{
+    border-color: whitesmoke !important;
+    color: #ded2d2;
 }

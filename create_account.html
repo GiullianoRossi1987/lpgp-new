@@ -12,13 +12,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/create_account.css">
+    <link rel="stylesheet" href="css/shapes.css">
 </head>
-<style>
-
-</style>
 <body>
     <div class="container-fluid header-container" role="banner" style="position: relative !important">
-        <div class="col-12 header" style="height: 71px; transition: background-color 200ms linear;">
+        <a href="https://www.lpgpofficial.com/" id="home-link"></a>
+        <div class="col-12 header" style="height: 71px;">
             <div class="opt-dropdown dropdown login-dropdown">
                 <button type="button" class="btn btn-lg default-btn-header dropdown-toggle" data-toggle="dropdown" id="account-opts" aria-haspopup="true" aria-expanded="false">
                     Account
@@ -46,8 +45,8 @@
     <br>
     <div class="container-fluid container-content" style="position: relative;">
         <div class="row-main row">
-            <div class="col-6 clear-content" style="position: relative; margin-left: 24%; margin-top: 5%;">
-                <br>
+            <div class="col-8 clear-content" id="cp-content">
+                <!-- <br> -->
                 <div class="page-title-container container">
                     <div class="row">
                         <div class="col-12 page-title-ns">
@@ -90,7 +89,7 @@
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" name="password1" id="password1" placeholder="Password">
                         <div class="input-group-append">
-                            <button class="btn" id="show-passwd1" type="button" >
+                            <button class="btn ps-bt" id="show-passwd1" type="button" >
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
@@ -107,7 +106,7 @@
                     <div class="input-group mb-3">
                         <input type="password" name="password2" class="form-control" id="password2" placeholder="Confirm the password">
                         <div class="input-group-append">
-                            <button class="btn" id="show-passwd2" type="button">
+                            <button class="btn ps-bt" id="show-passwd2" type="button">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
@@ -116,41 +115,96 @@
                     <hr>
                     <h4>Choose a account type: </h4>
                     <br>
-                    <div class="container container">
+                    <div class="container container-fluid">
                         <div class="row justify-content-center">
-                            <div class="col-md-5 align-items-stretch prof-type-item">
-                                <div class="container">
-                                    <div class="row justify-content-start">
-                                        <div class="col-md-12 col-sm-12 col-lg-12">
-                                            <h1>Normal User</h1>
-                                        </div>
+                            <div class="col-md align-items-center justify-content-center" style="display: inline-flex;">
+
+                                <div class="card prof-opt" style="margin-right: 20px;" id="opt-usr">
+                                    <div class="card-header">
+                                        <h1 class="card-title">Normal profile</h1>
                                     </div>
-                                    <div class="row justify-content-center">
-                                        Testing content
+                                    <div class="card-body">
                                     </div>
-                                    <div class="row justify-content-end">
+                                    <div class="card-footer justify-content-end">
                                         <label class="pti-label help-show btn btn-primary btn-block" data-target="user-help">
-                                            <input type="radio" name="account-mode" value="normal-user" style="display: none;" data-toggle="button">
+                                            <input type="radio" name="account-mode" value="normal-user" style="display: none;" data-toggle="button" id="po-usr">
+                                            Select
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="card prof-opt sel" id="opt-prop">
+                                    <div class="card-header">
+                                        <h1 class="card-title">Proprietary profile</h1>
+                                    </div>
+                                    <div class="card-body">
+                                    </div>
+                                    <div class="card-footer justify-content-end">
+                                        <label class="pti-label help-show btn btn-primary btn-block active">
+                                            <input type="radio" style="display: none" name="account-mode" value="proprietary" checked autocomplete="off">
                                             Select
                                         </label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5 align-items-stretch prof-type-item">
-                                <h1>Proprietary</h1>
-                                <label class="pti-label help-show btn btn-block btn-primary active" data-target="user-help">
-                                    <input type="radio" name="account-mode" value="proprietary" checked data-toggle="button" style="display: none;">
-                                    <span>Select</span>
-                                </label>
+                        </div>
+                        <div class="row justify-content-start" id="col-pay">
+                            <div class="col-md-12">
+                                <h1>Select a plan as a proprietary</h1>
+                            </div>
+                            <div class="col-md align-items-center justify-content-center" style="display: inline-flex;">
+                                <div class="card plan-opt sel" style="margin-right: 20px" id="free-opt">
+                                    <div class="card-header">
+                                        <h1 class="card-title">Simple</h1>
+                                    </div>
+                                    <div class="card-body">
+
+                                    </div>
+                                    <div class="card-footer justify-content-center">
+                                        <label class="pti-label help-show btn btn-outline-success btn-block disabled">
+                                            <input type="radio" style="display: none" name="plan" value="default" checked autocomplete="off">
+                                            Free
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="card plan-opt disabled" style="margin-right: 20px">
+                                    <div class="card-header">
+                                        <h1 class="card-title">Professional</h1>
+                                    </div>
+                                    <div class="card-body">
+
+                                    </div>
+                                    <div class="card-footer justify-content-center">
+                                        <label class="pti-label help-show btn btn-outline-primary btn-block disabled">
+                                            <input type="radio" style="display: none" name="plan" value="default" checked autocomplete="off">
+                                            US$ 9,99/month
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="card plan-opt disabled" style="margin-right: 20px">
+                                    <div class="card-header">
+                                        <h1 class="card-title">Enterprise</h1>
+                                    </div>
+                                    <div class="card-body">
+
+                                    </div>
+                                    <div class="card-footer justify-content-center">
+                                        <label class="pti-label help-show btn btn-outline-primary btn-block disabled">
+                                            <input type="radio" style="display: none" name="plan" value="default" checked autocomplete="off">
+                                            US$ 29,99/month
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <br>
                     <h4>Choose your profile image</h4>
                     <br>
                     <div class="img-select-container">
-                        <div class="options-img d-inline" style="display: inline-block;">
-                            <div class="card img-opt">
+                        <div class="options-img justify-content-center align-items-center">
+                            <div class="card img-opt sel" id="dft-img">
                                 <div class="card-header">
                                     <img src="media/usr-icon.png" alt="default avatar" class="card-img-top" width="200" height="200">
                                     <h2 class="card-title">Default image</h2>
@@ -162,9 +216,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card img-opt">
+                            <div class="card img-opt" id="upl-img">
                                 <div class="card-header">
-                                    <img src="media/upload-img-opt.png" alt="default avatar" class="card-img-top" width="200" height="200">
+                                    <!-- <img src="media/upload-img-opt.png" alt="default avatar" class="card-img-top" width="200" height="200"> -->
+                                    <div class="outline-circle"></div>
                                     <h2 class="card-title">Upload a image</h2>
                                 </div>
                                 <div class="card-body collapse">
@@ -178,6 +233,7 @@
                                     </label>
                                 </div>
                             </div>
+                        </div>
                     </div>
                     <br>
                     <button type="button" class="btn btn-block btn-success" id="bt-create">Create account</button>
@@ -206,26 +262,31 @@
         </div>
     </div>
     <br>
-    <footer class="footer container-fluid" >
-        <div class="row">
-            <div class="col-md-12 footer-main">
+    <div class="container-fluid container" style="max-width: 100% !important; position: relative;">
+        <div class="footer-row row">
+            <div class="footer col-12 col-md-12 col-sm-12 col-lg-12">
                 <div class="social-options-grp">
                     <div class="social-option">
                         <a href="https://github.com/GiullianoRossi1987" target="_blanck" id="github" class="social-option-footer">
-                        <span><i class="fab fa-github"></i></span>Visit our GitHub</a>
-                    </div>
-                    <div class="social-option-footer">
-                        <a href="https://" target='_blanck' id="facebook">
-
+                            <span><i class="fab fa-github"></i></span>
+                            Visit our github!
                         </a>
                     </div>
+                    <br>
+                    <div class="social-option-footer">
+                        <a href="https://" target='_blanck' id="facebook">
+                            <span><i class="fab fa-facebook"></i></span>
+                            Visit our facebook!
+                        </a>
+                    </div>
+                    <br>
                     <div class="social-option-footer">
                         <a href="https://" target='_blanck' id="twitter"></a>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
     <!-- Scripts -->
     <script src="jquery/lib/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -234,6 +295,7 @@
     <script src="js/main-script.js"></script>
     <script src="js/actions.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
     <script>
         $(document).ready(function(){
             setAccountOpts();
@@ -328,10 +390,14 @@
 
         $(document).on("click", "#default-img", function(){
             $("#upload-img-input").hide();
+            $("#dft-img").addClas("sel");
+            $("#upl-img").removeClass("sel");
         });
 
         $(document).on("click", "#upload-img-btn", function(){
             $(".img-radio-dft input").prop("checked", false);
+            $("#dft-img").removeClas("sel");
+            $("#upl-img").addClass("sel");
             $("#upload-img-input").show();
         });
 
@@ -370,6 +436,29 @@
                     },
                     error: function(error){ console.error(error); }
                 });
+            }
+        });
+
+        $(document).on("change", "input[name=\"account-mode\"]:checked", function(){
+            // DEBUG: console.log($(this).val());
+            if($(this).val() == "normal-user"){
+                $("#opt-usr").addClass("sel");
+                $("#opt-prop").removeClass("sel");
+                $("#opt-prop > .card-footer > label").removeClass("active");
+                $("#opt-usr > .card-footer > label").addClass("active");
+                $("#free-opt > .card-footer > label > input").prop("checked", false);
+                $("#free-opt").removeClass("sel");
+                $("#col-pay").css("visibility", "hidden");
+            }
+            else{
+                // proprietary then
+                $("#opt-usr").removeClass("sel");
+                $("#opt-prop").addClass("sel");
+                $("#opt-prop > card-footer > label").addClass("active");
+                $("#opt-usr > card-footer > label").removeClass("active");
+                $("#free-opt > .card-footer > label > input").prop("checked", true);
+                $("#free-opt").addClass("sel");
+                $("#col-pay").css("visibility", "visible");
             }
         });
 

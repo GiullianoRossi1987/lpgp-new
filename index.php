@@ -78,7 +78,7 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
         <div class="row rowcontentn">
         </div>
     </div>
-    <div class="container-fluid container" style="max-width: 100% !important; position: relative">
+    <div class="container-fluid container" style="max-width: 100% !important; position: relative;">
         <div class="footer-row row">
             <div class="footer col-12 col-md-12 col-sm-12 col-lg-12" style="">
                 <div class="social-options-grp">
