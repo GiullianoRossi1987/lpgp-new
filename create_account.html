@@ -124,6 +124,11 @@
                                         <h1 class="card-title">Normal profile</h1>
                                     </div>
                                     <div class="card-body">
+                                        <p>
+                                            Profile type only used to contact developers if something went wrong with their
+                                            application. It's directed to customers of a software that want to contact the
+                                            developer(s)
+                                        </p>
                                     </div>
                                     <div class="card-footer justify-content-end">
                                         <label class="pti-label help-show btn btn-primary btn-block" data-target="user-help">
@@ -138,6 +143,11 @@
                                         <h1 class="card-title">Proprietary profile</h1>
                                     </div>
                                     <div class="card-body">
+                                        <p>
+                                            With this profile type you can manage your signature-keys and clients<br>
+                                            used by programmers and enterprise acesses. In any case, contact your Enterprise
+                                            manager about the acount, if you don't have one or work by yourself, select this one.
+                                        </p>
                                     </div>
                                     <div class="card-footer justify-content-end">
                                         <label class="pti-label help-show btn btn-primary btn-block active">
@@ -148,54 +158,82 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-start" id="col-pay">
+                        <div class="row justify-content-start collapse show in" id="col-pay">
                             <div class="col-md-12">
                                 <h1>Select a plan as a proprietary</h1>
                             </div>
-                            <div class="col-md align-items-center justify-content-center" style="display: inline-flex;">
-                                <div class="card plan-opt sel" style="margin-right: 20px" id="free-opt">
-                                    <div class="card-header">
-                                        <h1 class="card-title">Simple</h1>
-                                    </div>
-                                    <div class="card-body">
-
-                                    </div>
-                                    <div class="card-footer justify-content-center">
-                                        <label class="pti-label help-show btn btn-outline-success btn-block disabled">
-                                            <input type="radio" style="display: none" name="plan" value="default" checked autocomplete="off">
-                                            Free
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="card plan-opt disabled" style="margin-right: 20px">
-                                    <div class="card-header">
-                                        <h1 class="card-title">Professional</h1>
-                                    </div>
-                                    <div class="card-body">
-
-                                    </div>
-                                    <div class="card-footer justify-content-center">
-                                        <label class="pti-label help-show btn btn-outline-primary btn-block disabled">
-                                            <input type="radio" style="display: none" name="plan" value="default" checked autocomplete="off">
-                                            US$ 9,99/month
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="card plan-opt disabled" style="margin-right: 20px">
-                                    <div class="card-header">
-                                        <h1 class="card-title">Enterprise</h1>
-                                    </div>
-                                    <div class="card-body">
-
-                                    </div>
-                                    <div class="card-footer justify-content-center">
-                                        <label class="pti-label help-show btn btn-outline-primary btn-block disabled">
-                                            <input type="radio" style="display: none" name="plan" value="default" checked autocomplete="off">
-                                            US$ 29,99/month
-                                        </label>
-                                    </div>
-                                </div>
+                            <div class="col-md-12">
+                                <table class="table table-dark table-hover table-bordered">
+                                    <thead>
+                                        <th>Features</th>
+                                        <th>Simple Plan</th>
+                                        <th>Professional Plan</th>
+                                        <th>Enterprise Plan</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Clients and signatures Limit</td>
+                                            <td>5</td>
+                                            <td>15</td>
+                                            <td>Unlimited</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Custom Support</td>
+                                            <td>No support</td>
+                                            <td>Simple support</td>
+                                            <td>Full custom support</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Download Counter</td>
+                                            <td><span class="fas fa-times"></span></td>
+                                            <td><span class="fas fa-check"></span></td>
+                                            <td><span class="fas fa-check"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Access to API source</td>
+                                            <td><span class="fas fa-times"></span></td>
+                                            <td><span class="fas fa-times"></span></td>
+                                            <td><span class="fas fa-check"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Community Access (via Discord, Skype, etc.)</td>
+                                            <td><span class="fas fa-times"></span></td>
+                                            <td><span class="fas fa-times"></span></td>
+                                            <td><span class="fas fa-check"></span></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>Select the plan</td>
+                                            <td>
+                                                <label class="pti-label help-show btn btn-outline-success btn-block active">
+                                                    <input type="radio" style="display: none" name="plan" value="default" checked autocomplete="off">
+                                                    Free
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <span data-toggle="tooltip" title="Comming soon" data-placement="bottom">
+                                                    <label class="pti-label help-show btn btn-outline-primary btn-block disabled" data-toggle="tooltip" title="Comming soon" data-placement="bottom">
+                                                        <input type="radio" style="display: none" name="plan" value="default" checked autocomplete="off">
+                                                        US$ 9,99/month
+                                                    </label>
+                                                    <small>Unavailable for now</small>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span data-toggle="tooltip" title="Comming soon" data-placement="bottom">
+                                                    <label class="pti-label help-show btn btn-outline-primary btn-block disabled">
+                                                        <input type="radio" style="display: none" name="plan" value="default" checked autocomplete="off">
+                                                        US$ 29,99/month
+                                                    </label>
+                                                    <small>Unavailable for now</small>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
+                            <!-- table test -->
                         </div>
                     </div>
 
@@ -448,7 +486,7 @@
                 $("#opt-usr > .card-footer > label").addClass("active");
                 $("#free-opt > .card-footer > label > input").prop("checked", false);
                 $("#free-opt").removeClass("sel");
-                $("#col-pay").css("visibility", "hidden");
+                $("#col-pay").collapse("hide");
             }
             else{
                 // proprietary then
@@ -458,7 +496,7 @@
                 $("#opt-usr > card-footer > label").removeClass("active");
                 $("#free-opt > .card-footer > label > input").prop("checked", true);
                 $("#free-opt").addClass("sel");
-                $("#col-pay").css("visibility", "visible");
+                $("#col-pay").collapse("show");
             }
         });
 

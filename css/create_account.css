@@ -49,6 +49,9 @@ h1,h2,h3,h4,p{
     background-color: #1b1b1b;
     border: 1px solid #ded2d2;
 }
+.card-body{
+    color: #ded2d2;
+}
 /* Cards for profile types */
 .sel{
     border: 6px solid green !important;
