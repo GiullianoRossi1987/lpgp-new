@@ -26,9 +26,8 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/typer.css">
+    <link rel="stylesheet" href="./css/notifications.css">
 </head>
-<style>
-</style>
 <body>
     <div class="container-fluid header-container" role="banner" style="position: relative;">
         <div class="col-md-12 header col-sm-12" style="height: 71px;">
@@ -114,7 +113,9 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <script src="./js/actions.js"></script>
     <script src="./js/requester.js"></script>
     <script src="./js/generator.js"></script>
+    <script src="js/notifications.js" charset="utf-8"></script>
     <script>
+
         $(document).ready(function(){
             setAccountOpts();
             readCookies();
@@ -129,13 +130,13 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
             // writing effect for text 1, without underline
             var msg1 = "lpgp";
             var msg2 = "follow the raven";
-            console.log(msg1.length);
+            // console.log(msg1.length);
             var posT2 = 0;
             posT = 0;
             function write_fx(){
                 if(posT < msg1.length){
                     $("#post-text-1").text($("#post-text-1").text() + msg1.charAt(posT));
-                    console.log($("#post-text-1").text());
+                    // console.log($("#post-text-1").text());
                     posT++;
                     var tm = setTimeout(function(){write_fx()}, 500);
                     // if(posT == msg1.length) clearTimeout(tm);
@@ -143,7 +144,7 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
                 else{
                     if(posT2 < msg2.length){
                         $("#post-text-2").text($("#post-text-2").text() + msg2.charAt(posT2));
-                        console.log($("#post-text-2").text());
+                        // console.log($("#post-text-2").text());
                         posT2++;
                         var tm = setTimeout(function(){write_fx()}, 250);
                         if(posT2 == msg2.length) clearTimeout(tm);

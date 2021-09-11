@@ -24,15 +24,8 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <link rel="shortcut icon" href="media/new-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main-query.css">
 </head>
-<style>
-    .main-container{
-        margin-top: 8% !important;
-        border: 1px solid black;
-        padding: 20px 21px;
-        border-radius: 10px;
-    }
-</style>
 <body>
     <div class="container-fluid header-container" role="banner" style="position: relative;">
         <div class="col-md-12 header col-sm-12" style="height: 71px;">

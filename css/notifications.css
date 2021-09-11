@@ -1,6 +1,7 @@
 @import "envvars.css";
+@import "keyframes.css";
 
-#notification-container{
+/* #notification-container{
     position: fixed;
     top: 80px;
     left: 73%;
@@ -85,4 +86,112 @@
     border: 1px solid red;
 }
 
-.notification-warning p{ color: white; }
+.notification-warning p{ color: white; } */
+
+
+/* Improved and minimalist notifications */
+
+
+@keyframes notification-up {
+    0%{opacity: 0;}
+    50%{opacity: .5;}
+    100%{opacity: .9;}
+}
+
+@keyframes notification-slide-left{
+    from{transform: translateX(-100%);}
+    to{transform: translateX(3%);}
+}
+
+@keyframes notification-slide-left-out {
+    from{transform: translateX(0%);}
+    to{transform: translateX(-100%);}
+}
+
+
+.notification-min{
+    width: 50% !important;
+    height: auto;
+    position: fixed !important;
+    opacity: .9 !important;
+    padding: 20px 20px;
+    margin-left: auto;
+    animation: notification-slide-left .8s;
+    border-radius: 2%;
+    top: 60%;
+}
+
+.notification-bottom, .notification-cookie{
+    background-color: #1b1b1b !important;
+
+}
+
+.notification-dismiss{
+    float: right;
+}
+
+.notification-title, .notification-content{
+    align-self: flex-start;
+    color: #ffff;
+}
+
+
+.notification-min-out{
+    width: 80% !important
+    position: fixed !important;
+    padding: 20px 20px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    animation: notification-slide-left-out .8s;
+    border-radius: 2%;
+    top: 60%;
+}
+
+.notification-info{
+    background-color: blue;
+    border: 1px #ffff solid;
+}
+
+.notification-warning{
+    background-color: yellow;
+    border: 1px #0000 solid;
+}
+
+.notification-error{
+    background-color: red;
+    border: 1px solid red;
+}
+
+.notification-cookie > .notification-title::before{
+    content: "\f564";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+    font-size: 80px;
+}
+
+.notification-info > .notification-title:before{
+    content: "\f05a";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+    font-size: 80px;
+}
+
+.notification-warning > .notification-title::before{
+    content: "\f071";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+    font-size: 80px;
+}
+
+.notification-error > .notification-title::before{
+    content: "\f00d";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+    font-size: 80px;
+}
