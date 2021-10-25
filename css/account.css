@@ -1,4 +1,5 @@
 @import "envvars.css";
+body, .container{ background-color: #3e3d3d !important;}
 .signature-card{
 	padding: 10px 20px;
 	border: 1px solid black;
@@ -27,26 +28,30 @@
 	font-size: 20px;
 }
 
-.signature-card h4{padding: 15px 22px;
+.signature-card h4{
+    padding: 15px 22px;
 	margin-left: 10px;
 }
 
-
 .sig-card{
-	border: 1px solid black;
+	background-color: #1b1b1b !important;
 }
 
 .sig-card .card-body a{
 	font-size: 20px;
-	color: black;
-	padding: 4px 6px;
+	color: #414bb4;
+	padding: 14px 16px;
 	margin-bottom: 5px !important;
 	margin-top: 5px !important;
+    border: 1px solid #414bb4;
+}
 
+.sig-card .card-content h1, h2, h3, h4{
+    color: #ded2d2;
 }
 
 .sig-card .card-body a:hover{
-	background-color: #ddd;
+	border-style: dashed;
 }
 
 .client-card h6{ color: #aaa;}
@@ -58,7 +63,7 @@
     text-align: left;
 	width: auto;
 	height: 70px;
-	border-bottom: 1px solid black;
+	/* border: 1px solid black; */
 	transition: border 1.2s ease-in-out background-color 1.2s ease-out;
 }
 
@@ -77,18 +82,17 @@
 
 .account-separator .content:hover,
 .selected-separator{
-	border-top: 1px solid black;
+	/* border-top: 1px solid black;
 	border-right: 1px solid black;
 	border-left: 1px solid black;
-	border-bottom: none !important;
+	border-bottom: none !important; */
 }
 
-.selected-separator .content .row .text-data{ color: #fdff00 !important;}
+.selected-separator .content .row .text-data{ color: #414bb4 !important;}
 .selected-separator .content .row .bt-caret .toggler-caret::before{ content: "\f0d8" !important; }
-.selected-separator .content{ background-color: black; }
+.selected-separator .content > .row{ background-color: #1b1b1b; }
 
 .account-separator .content h2::after{
-
     /* padding-right: 20px; */
     float: right;
 	transition: content 1.3s ease-in-out;
@@ -101,9 +105,9 @@
 
 .section{
     /* padding: 10px 12px; */
-    border: 1px solid black;
+    /* border: 1px solid black; */
     align-content: center;
-    background-color: #ccc;
+    background-color: #3e3d3d;
 }
 
 .section > *{
@@ -119,6 +123,7 @@
     border-radius: 50%;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid #414bb4;
 }
 
 .prop-img{
@@ -128,4 +133,23 @@
 
 .separator{
     margin-bottom: 10%;
+}
+
+.profile-card{
+    background-color: #061228 !important;
+    border: 1px solid #000000;
+    border-radius: 4%;
+    padding: 20px 20px;
+}
+
+.profile-card > .card-body{
+    justify-content: center;
+}
+
+.profile-card h1, h2, h3, h4, p, a, span{ color: #ded2d2;}
+
+.acs > .separator > .content > .row{
+    background-color: #4d4c4c;
+    border-radius: 3%;
+    padding: 5px 5px;
 }

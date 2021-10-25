@@ -1,0 +1,14 @@
+.left-content{
+    float: left;
+    margin-left: 10px;
+    border-left: 1px solid whitesmoke;
+}
+
+.left-content, .right-content, .content{
+    color: whitesmoke;
+}
+
+.footer{
+    max-width: 100% !important;
+    position: relative !important;
+}

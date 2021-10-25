@@ -64,7 +64,6 @@ else{
 	}
 </style>
 <body>
-
     <div class="container-fluid header-container" role="banner" style="position: fixed;">
         <div class="col-12 header" style="height: 71px; transition: background-color 200ms linear;">
             <div class="opt-dropdown dropdown login-dropdown">
@@ -93,8 +92,6 @@ else{
 			</div>
 		</div>
 	</div>
-    <br>
-    <hr>
     <div class="container-fluid container-content" style="position: relative;">
         <div class="row-main row">
             <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
@@ -146,6 +143,12 @@ else{
 					<button class="btn btn-lg btn-success" type="button" id="save">Save configurations</button>
 					<button class="btn btn-lg btn-secondary" type="submit" onclick="window.location.replace('./my_account.html');">Cancel</button>
 					<button type="button" id="reset" class="btn btn-lg btn-warning">Restore default</button>
+                    <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modal-delete" type="button">
+                        Remove account
+                        <span>
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </button>
 				</form>
             </div>
 		</div>
@@ -167,6 +170,26 @@ else{
                     <div class="social-option-footer">
                         <a href="https://" target='_blanck' id="twitter"></a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Remove -->
+    <div class="modal" id="modal-delete" tabindex="-1" aria-labelledby="del-btn" aria-hidden="true" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Are you sure about delete your account?</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <hr>
+                <div class="modal-body">
+                    <h3>That action can't be undone!</h3>
+                    <a href="del_account.php?confirm=y" role="button" class="btn btn-lg btn-danger">Yes, delete my account</a>
+                    <a href="#" role="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Cancel</a>
                 </div>
             </div>
         </div>

@@ -57,32 +57,20 @@
                         <h2 id="date-creation-ttl"></h2>
                     </div>
                     <div class="card-footer">
-                        <a class="img-settings btn btn-lg btn-dark" href="ch_my_data.php" role="button">
-                            Edit Account
-                            <span>
-                                <i class="fas fa-cog"></i>
-                            </span>
-                        </a>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete" type="button">
-                            Remove account
-                            <span>
-                                <i class="fas fa-times"></i>
-                            </span>
-                        </button>
                     </div>
                 </div>
             </div>
             <div class="col-md-8 col-sm-8" id="options-container">
-                <div class="container" id="signatures-con">
+                <div class="container acs" id="signatures-con">
                     <div class="row separator">
                         <div class="content col-sm-12 col-md-12">
                             <div class="row">
                                 <h2 class="col-md-10 text-data">My Signatures</h2>
                                 <div class="col-md-2 btn-group">
-                                    <a href="#" class="btn btn-lg btn-success" role="button">
+                                    <a href="create_signature.php" class="btn btn-lg btn-success" role="button" data-toggle="tooltip" title="Create Signature">
                                         <span class="fas fa-plus"></span>
                                     </a>
-                                    <a href="my_signatures.php" class="btn btn-primary btn-lg" role="button">
+                                    <a href="my_signatures.php" class="btn btn-primary btn-lg" role="button" data-toggle="tolltip" title="See my signatures">
                                         <span class="fas fa-eye"></span>
                                     </a>
                                     <a href="#signatures-section" class="btn btn-lg  bt-caret btn-secondary" data-toggle="collapse" aria-controls="signatures-section" aria-expanded="false">
@@ -96,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container" id="history-con">
+                <div class="container acs" id="history-con">
                     <div class="row separator">
                         <div class="content col-sm-12 col-md-12">
                             <div class="row">
@@ -116,7 +104,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container" id="clients-con">
+                <div class="container acs" id="clients-con">
                     <div class="row separator">
                         <div class="content col-sm-12 col-md-12">
                             <div class="row">
@@ -357,25 +345,6 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal" id="modal-delete" tabindex="-1" aria-labelledby="del-btn" aria-hidden="true" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Are you sure about delete your account?</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <hr>
-                <div class="modal-body">
-                    <h3>That action can't be undone!</h3>
-                    <a href="del_account.php?confirm=y" role="button" class="btn btn-lg btn-danger">Yes, delete my account</a>
-                    <a href="#" role="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Cancel</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!--Scripts -->
     <script src="jquery/lib/jquery-3.4.1.min.js"></script>
@@ -471,7 +440,7 @@
                         data = resp;
                         var img = getLinkedUserIcon() == "https://www.lpgpofficial.com/default-img" ? "media/usr-icon.png" : getLinkedUserIcon();
                         setTimeout(function(){ $(".test-cover").css("visibility", "hidden"); }, 3600);
-                        $("#username-ttl").html(resp[0]["nm_proprietary"] + "<span class=\"badge badge-success badge-account\">Proprietary</span>");
+                        $("#username-ttl").html(resp[0]["nm_proprietary"] + "<span class=\"badge badge-success badge-account\">Proprietary</span><a class=\"img-settings btn\" href=\"ch_my_data.php\" role=\"button\"><span><i class=\"fas fa-cog\"></i></span></a>");
                         $("#email-ttl").text(resp[0]["vl_email"]);
                         $("#date-creation-ttl").text(resp[0]["dt_creation"]);
                         $("#img-user").css("background-image", "url(" + img + ")");
@@ -547,17 +516,17 @@
                     },
                     success: function(resp){
                         // DEBUG: console.log(resp);
-			var data = resp;
+			            var data = resp;
                         var img = getLinkedUserIcon() == "https://www.lpgpofficial.com/default-img" ? "media/usr-icon.png" : getLinkedUserIcon();
                         setTimeout(function(){ $(".test-cover").css("visibility", "hidden"); }, 3600);
-                        $("#username-ttl").html(resp[0]["nm_user"] + "<span class=\"badge badge-primary badge-account\">Normal User</span>");
+                        $("#username-ttl").html(resp[0]["nm_proprietary"] + "<span class=\"badge badge-primary badge-account\">Normal User</span><a class=\"img-settings btn\" href=\"ch_my_data.php\" role=\"button\"><span><i class=\"fas fa-cog\"></i></span></a>");
                         $("#email-ttl").text(resp[0]["vl_email"]);
                         $("#date-creation-ttl").text(resp[0]["dt_creation"]);
                         $("#img-user").css("background-image", "url(" + img + ")");
-			setTimeout(function(){
-			    $("#signatures-con").css("visibility", "hidden");
-	                    $("#clients-con").css("visibility", "hidden");
-			}, 260);
+            			setTimeout(function(){
+            			    $("#signatures-con").css("visibility", "hidden");
+            	                    $("#clients-con").css("visibility", "hidden");
+            			}, 260);
 
                     },
                     error: function(error){ alert(error); }

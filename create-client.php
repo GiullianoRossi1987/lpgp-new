@@ -21,6 +21,26 @@ use const LPGP_CONF;
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
 </head>
+<style media="screen">
+    body{ background-color: #3e3d3d;}
+    .form-control{
+        background-color: #000000;
+        color: #ded2d2;
+    }
+
+    .form-control:focus, .form-control:hover{
+        background-color: #525252;
+        color: #ded2d2;
+    }
+
+    h1, .form-label, h5{ color: whitesmoke; }
+
+    #help-txt > *{
+        color: whitesmoke;
+    }
+
+    #help-bt{ padding-left: 10px; float: right;}
+</style>
 <body>
     <div class="container-fluid header-container" role="banner" style="position: relative;">
         <div class="col-md-12 header col-sm-12" style="height: 71px;">
@@ -51,18 +71,20 @@ use const LPGP_CONF;
     </div>
 	<div class="container container-fluid" style="margin-top: 10%;">
         <div class="row ">
-            <div class="col-12 col-md-12 col-sm-12 content-nrm">
+            <div class="col-12 col-md-12 col-sm-12">
                 <form>
-					<h1 >Client creation</h1>
-					<h5 >Here you can create your own clients.</h5>
-					<hr>
+					<center>
+                        <h1 >Client creation</h1>
+	                   <h5 >Here you can create your own clients.</h5>
+                   </center>
+					<br>
 					<label for="client-nm-inp" class="form-label">Type a client name</label>
 					<br>
 					<input type="text" class="form-control" id="client-nm-inp" name="client-name">
 					<br>
 					<label for="client-permissions" class="form-label">
 						Choose the client Type
-						<button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#help-txt" aria-expanded="false" aria-controls="help-txt" type="button">
+						<button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#help-txt" aria-expanded="false" aria-controls="help-txt" type="button" id="help-bt">
 							Help
 							<span>
 								<i class="fas fa-info"></i>

@@ -39,3 +39,14 @@
     0%{ transform: rotate(0deg);}
     100%{ transform: rotate(360deg);}
 }
+
+@keyframes notification-up {
+    0%{opacity: 0;}
+    50%{opacity: .5;}
+    100%{opacity: .9;}
+}
+
+@keyframes notification-slide-left{
+    from{margin-left: 200%;}
+    to{margin-left: auto;}
+}

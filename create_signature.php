@@ -27,6 +27,18 @@ $inpt = "<input type=\"hidden\" name=\"prop-id\" value=\"$id\">";
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <style>
+    .form-control{
+        background-color: #000000;
+        color: #ded2d2;
+    }
+
+    .form-control:focus, .form-control:hover{
+        background-color: #525252;
+        color: #ded2d2;
+    }
+
+    h1, .form-label{ color: whitesmoke; }
+
 </style>
 <body>
     <div class="container-fluid header-container" role="banner" style="position: fixed;">
@@ -54,16 +66,14 @@ $inpt = "<input type=\"hidden\" name=\"prop-id\" value=\"$id\">";
                 </div>
             </div>
         </div>
-
     </div>
     <br>
-    <hr>
     <div class="container-fluid container-content" style="position: relative;">
         <div class="row-main row">
-            <div class="col-7 clear-content" style="position: relative; margin-left: 21%; margin-top: 10%;">
+            <div class="col-7" style="position: relative; margin-left: 21%; margin-top: 10%;">
                 <form action="./creating-signature.php" method="POST">
                     <label for="passcode" class="form-label">Type the code</label>
-                    <input type="password" id="passcode" name="password" class="form-control">
+                    <input type="password" id="passcode" name="password" class="form-control usr-inpt">
                     <label for="passcode" class="form-label">
                         <button class="btn btn-secondary" id="show-passcode" type="button">Show code</button>
                     </label>

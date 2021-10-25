@@ -2,6 +2,8 @@
 @import "keyframes.css";
 @import "envvars.css";
 
+body{overflow-x: hidden;} /* don't touch */
+
 .header-container{
     background-color: #1b1b1b;
     position: sticky !important;
@@ -467,4 +469,8 @@
 
 .disabled{
     cursor: not-allowed;
+}
+
+.modal-lpgp > .modal-dialog > .modal-content{
+    background-color: #1b1b1b;
 }
