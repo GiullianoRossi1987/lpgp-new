@@ -29,8 +29,8 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <link rel="stylesheet" href="./css/notifications.css">
 </head>
 <body>
-    <div class="container-fluid header-container" role="banner" style="position: relative;">
-        <div class="col-md-12 header col-sm-12" style="height: 71px;">
+    <div class="container-fluid header-container" role="banner">
+        <div class="col-md-12 header col-sm-12">
             <a href="https://www.lpgpofficial.com/" id="home-link"></a>
             <div class="opt-dropdown dropdown login-dropdown">
                 <button type="button" class="btn btn-lg default-btn-header dropdown-toggle" data-toggle="dropdown" id="account-opts" aria-haspopup="true" aria-expanded="false">
@@ -56,15 +56,15 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
             </div>
         </div>
     </div>
-    <div class="content1 container content">
-        <div class="row rowcontent">
+    <div class="container-fluid full-width">
+        <div class="row">
             <div class="col-12 col-md-12 col-sm-12 col-lg-12 main-header">
-                <h1 class="anim-appear masthead-heading font-weight-bold text-uppercase mb-0" id="post-text-1" style="color: #414bb4; margin-top: 12%;"></h1>
+                <h1 class="anim-appear masthead-heading font-weight-bold text-uppercase mb-0" id="post-text-1" style="color: #414bb4; margin-top: 12%; text-align: center"></h1>
                 <h1 class=" masthead-heading text-uppercase mb-0" id="post-text-2" style="color: #414bb4; text-align: center; margin-top: 1%;"></h1>
             </div>
         </div>
-        <div class="row rowcontent">
-            <div class="col-12 col-md-12 col-sm-12 content-nrm" id="con2">
+        <div class="row">
+            <div class="col-12 clear-content" id="con2" style="text-align: center">
                 <div id="logo-ex"></div>
                 <h1>What's LPGP?</h1>
                 <p>
@@ -74,12 +74,13 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
             </div>
         </div>
         <hr>
-        <div class="row rowcontentn">
+        <div class="row">
         </div>
     </div>
-    <div class="container-fluid container" style="max-width: 100% !important; position: relative;">
+    <br>
+    <div class="container-fluid full-width">
         <div class="footer-row row">
-            <div class="footer col-12 col-md-12 col-sm-12 col-lg-12" style="">
+            <div class="footer col-12">
                 <div class="social-options-grp">
                     <div class="social-option">
                         <a href="https://github.com/GiullianoRossi1987" target="_blanck" id="github" class="social-option-footer">

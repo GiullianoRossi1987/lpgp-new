@@ -103,9 +103,6 @@ body{overflow-x: hidden;} /* don't touch */
     transition: color 200ms linear;
 }
 
-.container-content{
-    position: relative !important;
-}
 
 .clear-content{
     background-color: white;
@@ -116,11 +113,6 @@ body{overflow-x: hidden;} /* don't touch */
     margin-top: 10px;
     margin-left: 5px;
     margin-right: 5px;
-}
-
-.common-content{
-    background-color: #ffffff;
-    border: none;
 }
 
 /* Separators default*/
