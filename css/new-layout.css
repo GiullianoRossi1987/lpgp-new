@@ -1,6 +1,7 @@
 @import "notifications.css";
 @import "keyframes.css";
 @import "envvars.css";
+@import "footer.css";
 
 body{overflow-x: hidden;} /* don't touch */
 
@@ -357,12 +358,10 @@ body{overflow-x: hidden;} /* don't touch */
 }
 
 .footer{
-    height: 150px;
+    min-height: 150px;
     background-color: #1b1b1b;
-    margin-top: 100%;
-    position: absolute;
-    margin-left: 0;
-
+    margin-top: 10%;
+    padding: 20px 20px;
 }
 
 .data-container{
@@ -469,8 +468,4 @@ body{overflow-x: hidden;} /* don't touch */
 
 .disabled{
     cursor: not-allowed;
-}
-
-.modal-lpgp > .modal-dialog > .modal-content{
-    background-color: #1b1b1b;
 }

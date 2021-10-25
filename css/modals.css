@@ -1,0 +1,22 @@
+.modal-lpgp > .modal-dialog > .modal-content{
+    background-color: #1b1b1b;
+}
+
+.modal-lpgp > .modal-dialog > .modal-content h1{ color: whitesmoke; }
+
+.modal-lpgp > .modal-dialog > .modal-content label,
+.modal-lpgp > .modal-dialog > .modal-content h2,
+.modal-lpgp > .modal-dialog > .modal-content h3, span, p, small{ 
+    color: #ded2d2;
+}
+
+.modal-lpgp > .modal-dialog > .modal-content .form-control{
+    background-color: #000000;
+    color: #ded2d2;
+}
+
+.modal-lpgp > .modal-dialog > .modal-content  .form-control:focus,
+.modal-lpgp > .modal-dialog > .modal-content  .form-control:hover{
+    background-color: #525252;
+    color: #ded2d2;
+}
