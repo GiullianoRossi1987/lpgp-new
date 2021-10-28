@@ -26,7 +26,8 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/typer.css">
-    <link rel="stylesheet" href="./css/notifications.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <div class="container-fluid header-container" role="banner">
@@ -64,20 +65,38 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
             </div>
         </div>
         <div class="row">
-            <div class="col-12 clear-content" id="con2" style="text-align: center">
+            <div class="col-6 clear-content" id="con2" style="text-align: center; margin-left: auto; margin-right: auto;">
                 <div id="logo-ex"></div>
                 <h1>What's LPGP?</h1>
                 <p>
-                    LPGP is a online authenticated certificate. There're so many
-                    other
+                    LPGP is a online authenticated certificate. We're the first team to create
+                    such service to help developers and security professionals.
                 </p>
             </div>
         </div>
         <hr>
-        <div class="row">
+    </div>
+    <div class="container-fluid full-width">
+        <div class="row content-image-box-dark in-fade-on-scroll">
+            <div class="box-image-left col-7" id="stock-1"></div>
+            <div class="content-right col-2">
+                <h1>
+                    We have many ways and tools to help you and your team to get the job done
+                </h1>
+            </div>
         </div>
     </div>
-    <br>
+    <div class="container-fluid full-width">
+        <div class="row content-image-box">
+            <div class="content-left col-2">
+                <h1>
+                    Syncronize and manage
+                    all your project's updates with simple click's
+                </h1>
+            </div>
+            <div class="box-image-right col-7" id="code-stock-1"></div>
+        </div>
+    </div>
     <div class="container-fluid full-width">
         <div class="footer-row row">
             <div class="footer col-12">
@@ -115,6 +134,7 @@ if(!defined("LPGP_CONF")) define("LPGP_CONF", $gblConfig->getConfig());
     <script src="./js/requester.js"></script>
     <script src="./js/generator.js"></script>
     <script src="js/notifications.js" charset="utf-8"></script>
+    <script src="js/animations.js" charset="utf-8"></script>
     <script>
 
         $(document).ready(function(){

@@ -92,19 +92,24 @@ $inpt = "<input type=\"hidden\" name=\"prop-id\" value=\"$id\">";
         </div>
     </div>
     <br>
-    <div class="footer-container container">
+    <div class="footer-container container-fluid full-width">
         <div class="footer-row row">
             <div class="footer col-12" style="height: 150px; background-color: black; top: 190%; position: relative; max-width: 100%; left: 0;">
                 <div class="social-options-grp">
                     <div class="social-option">
                         <a href="https://github.com/GiullianoRossi1987" target="_blanck" id="github" class="social-option-footer">
-                        <span><i class="fab fa-github"></i></span></a>
-                    </div>
-                    <div class="social-option-footer">
-                        <a href="https://" target='_blanck' id="facebook">
-
+                            <span><i class="fab fa-github"></i></span>
+                            Visit our github!
                         </a>
                     </div>
+                    <br>
+                    <div class="social-option-footer">
+                        <a href="https://" target='_blanck' id="facebook">
+                            <span><i class="fab fa-facebook"></i></span>
+                            Visit our facebook!
+                        </a>
+                    </div>
+                    <br>
                     <div class="social-option-footer">
                         <a href="https://" target='_blanck' id="twitter"></a>
                     </div>
